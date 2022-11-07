@@ -1,0 +1,27 @@
+login
+
+dashboard
+dashboard/reviews
+    dashboard/reviews/published
+    dashboard/reviews/archived
+
+bookings
+bookings/guest
+
+rooms
+    rooms/active
+    rooms/inactive
+rooms/room/:idroom
+room/newroom
+
+contact
+
+users
+    users/pending
+    users/booked
+    users/canceled
+    users/refund
+users/newuser
+users/user/:iduser
+
+
