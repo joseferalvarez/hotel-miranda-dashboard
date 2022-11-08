@@ -1,9 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
-import { Route, Routes, HashRouter } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { useState } from 'react';
 
 import Dashboard from "./pages/dashboard"
-import Reviews from "./pages/reviews"
 import Bookings from "./pages/bookings"
 import Guest from "./pages/guest"
 import Rooms from "./pages/rooms"
@@ -12,27 +12,85 @@ import Room from "./pages/room"
 import Users from "./pages/users"
 import Newuser from './pages/newuser'
 import User from "./pages/user"
+import Login from './pages/login';
 
 function App() {
+
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Dashboard />} />
-        <Route path="/reviews" element={<Reviews />} />
 
-        <Route path="/bookings" element={<Bookings />} />
-        <Route path="/bookings/guest" element={<Guest />} />
+        {/* login and dashboard */}
+        <Route path='/' element={
+          <AuthProvider>
+            <Dashboard />
+          </AuthProvider>}
+        />
+        <Route path='/login' element={<Login />} />
 
-        <Route path='/rooms' element={<Rooms />} />
-        <Route path="/rooms/newroom" element={<Newroom />} />
-        <Route path="/rooms/room/:idroom" element={<Room />} />
+        {/* bookings */}
+        <Route path="/bookings" element={
+          <AuthProvider>
+            <Bookings />
+          </AuthProvider>
+        } />
+        <Route path='/bookings/:idguest' action={({ params }) => { }} element={
+          <AuthProvider>
+            <Guest />
+          </AuthProvider>}
+        />
 
-        <Route path="/users" element={<Users />} />
-        <Route path="/users/newuser" element={<Newuser />} />
-        <Route path="/users/user/:iduser" element={<User />} />
+        {/* rooms */}
+        <Route path='/rooms' element={
+          <AuthProvider>
+            <Rooms />
+          </AuthProvider>}
+        />
+        <Route path='/rooms/newroom' element={
+          <AuthProvider>
+            <Newroom />
+          </AuthProvider>}
+        />
+        <Route path="/rooms/:idroom" action={({ params }) => { }} element={
+          <AuthProvider>
+            <Room />
+          </AuthProvider>}
+        />
+
+        {/* users */}
+        <Route path="/users" element={
+          <AuthProvider>
+            <Users />
+          </AuthProvider>}
+        />
+        <Route path="/users/newuser" element={
+          <AuthProvider>
+            <Newuser />
+          </AuthProvider>} />
+        <Route path="/users/:iduser" action={({ params }) => { }} element={
+          <AuthProvider>
+            <User />
+          </AuthProvider>}
+        />
+
       </Routes>
-    </HashRouter>
+
+    </BrowserRouter>
   );
+}
+
+const AuthProvider = ({ children }: { children: JSX.Element }) => {
+  const [loged] = useState(localStorage.getItem("login"));
+
+  if (loged) {
+    return (
+      children
+    )
+  } else {
+    return (
+      <Navigate to="/login"></Navigate>
+    )
+  }
 }
 
 export default App;

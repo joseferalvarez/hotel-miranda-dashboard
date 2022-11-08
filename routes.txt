@@ -1,12 +1,9 @@
 login
 
 dashboard
-dashboard/reviews
-    dashboard/reviews/published
-    dashboard/reviews/archived
 
 bookings
-bookings/guest
+bookings/guest/:idguest
 
 rooms
     rooms/active
@@ -15,6 +12,8 @@ rooms/room/:idroom
 room/newroom
 
 contact
+    contact/published
+    contact/archived
 
 users
     users/pending

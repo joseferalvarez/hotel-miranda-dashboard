@@ -1,9 +1,12 @@
 import React from 'react';
+import { useParams } from 'react-router';
 
-const Room = (props) => {
+const Room = () => {
+    let params = useParams();
+
     return (
         <div>
-            <h1>room {props.room.id}</h1>
+            <h1>room nº{params.idroom}</h1>
         </div>
     );
 }
