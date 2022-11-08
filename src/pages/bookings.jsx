@@ -1,9 +1,11 @@
 import React from 'react';
+import GuestsTable from '../components/guestsTable';
+import data from "../db/guest.json"
 
 const Bookings = () => {
     return (
         <div>
-            <h1>bookings</h1>
+            <GuestsTable data={data}></GuestsTable>
         </div>
     );
 }
