@@ -66,6 +66,22 @@ const GuestText = styled.p`
     padding-left: 30px;
 `;
 
+const NotesButton = styled.button`
+    ${(props) => {
+        if (props.$enabled) {
+            return css`
+                background-color: green;
+            `;
+        } else {
+            return css`
+                background-color: red;
+                pointer-events: none;
+            `;
+        }
+    }
+    }
+`;
+
 const Status = styled.p`
 
     ${(props) => {
@@ -96,8 +112,8 @@ const Status = styled.p`
     padding: 13px 25px;
     border-radius: 12px;
     text-align: center;
-    margin-left: 30px; */
-`;
+    margin-left: 30px; * /
+    `;
 
 const GuestsTable = (props) => {
     return (
@@ -127,7 +143,7 @@ const GuestsTable = (props) => {
                     <td><GuestText>{obj.order}</GuestText></td>
                     <td><GuestText>{obj.checkin}</GuestText></td>
                     <td><GuestText>{obj.checkout}</GuestText></td>
-                    <td>View Notes</td>
+                    <td><NotesButton $enabled={obj.description}>View Notes</NotesButton></td>
                     <td>
                         <GuestText>{obj.typeroom} - {obj.numroom}</GuestText>
                     </td>
