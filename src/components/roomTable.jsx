@@ -83,13 +83,17 @@ const RoomStatus = styled.p`
 `;
 
 const DataContainer = styled.td`
-vertical-align: bottom;
+    vertical-align: bottom;
+`;
+const DataContainerButton = styled.td`
+    vertical-align: top;
 `;
 
 const Button = styled.button`
     background-color: transparent;
     border: none;
     margin-left: 60px;
+    margin-top: 15px;
 `;
 
 const RoomTable = ({ data }) => {
@@ -132,7 +136,9 @@ const RoomTable = ({ data }) => {
                             <RoomPrice>${obj.offer}<RoomPriceSpan>/night</RoomPriceSpan></RoomPrice>
                         </DataContainer>
                         <td><RoomStatus status={obj.status ? "#5AD07A" : "#E23428"}>{obj.status ? "Available" : "Booked"}</RoomStatus></td>
-                        <td><Button><BsThreeDotsVertical /></Button></td>
+                        <DataContainerButton>
+                            <Button><BsThreeDotsVertical /></Button>
+                        </DataContainerButton>
                     </Row>
                 ))}
             </tbody>
