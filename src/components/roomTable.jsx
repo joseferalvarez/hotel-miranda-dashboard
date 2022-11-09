@@ -1,32 +1,71 @@
 import React from 'react';
+import styled from 'styled-components';
 
-const RoomTable = (props) => {
+const HeaderTitle = styled.th`
+    text-align: start;
+`;
 
-    const data = props.data;
+const RoomNameContainer = styled.div`
+        display: flex;
+        gap: 28px;
+    `;
 
+const RoomId = styled.p`
+        color: #799283;
+        font-size: 14px;
+    `;
+
+const RoomNumber = styled.p`
+        color: #393939;
+        font-size: 16px;
+    `;
+
+const RoomImg = styled.img`
+        width: 150px;
+        height: 77px;
+        object-fit: cover;
+    `;
+
+const RoomNameData = styled.div`
+        text-align: center;
+    `;
+
+
+const RoomTable = ({ data }) => {
     return (
-        <table className='room-table'>
-            <tr>
-                <th>Room Name</th>
-                <th>Room Type</th>
-                <th>Amenities</th>
-                <th>Rate</th>
-                <th>Offer Price</th>
-                <th>Status</th>
-            </tr>
-            {data.map((obj) => (
+        <table>
+            <thead>
                 <tr>
-                    <td>{obj.id}</td>
-                    <td>{obj.type}</td>
-                    <td>{obj.amenities.map((amenitie) => (
-                        <span>{amenitie}, </span>
-                    ))}</td>
-                    <td>{obj.price}</td>
-                    <td>{obj.offer}</td>
-                    <td>{obj.status ? "Available" : "Booked"}</td>
+                    <HeaderTitle>Room Name</HeaderTitle>
+                    <HeaderTitle>Room Type</HeaderTitle>
+                    <HeaderTitle>Amenities</HeaderTitle>
+                    <HeaderTitle>Rate</HeaderTitle>
+                    <HeaderTitle>Offer Price</HeaderTitle>
+                    <HeaderTitle>Status</HeaderTitle>
                 </tr>
-            ))}
-
+            </thead>
+            <tbody>
+                {data.map((obj) => (
+                    <tr key={obj.id}>
+                        <td>
+                            <RoomNameContainer>
+                                <RoomImg src={obj.photo} />
+                                <RoomNameData>
+                                    <RoomId>#{obj.id}</RoomId>
+                                    <RoomNumber>{obj.number}</RoomNumber>
+                                </RoomNameData>
+                            </RoomNameContainer>
+                        </td>
+                        <td>{obj.type}</td>
+                        <td>{obj.amenities.map((amenitie) => (
+                            <span>{amenitie}, </span>
+                        ))}</td>
+                        <td>{obj.price}</td>
+                        <td>{obj.offer}</td>
+                        <td>{obj.status ? "Available" : "Booked"}</td>
+                    </tr>
+                ))}
+            </tbody>
         </table>
     );
 }

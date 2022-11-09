@@ -2,7 +2,7 @@
     {
         "id": 1,
         "number": 9,
-        "photo": "https://robohash.org/liberoeterror.png?size=50x50&set=set1",
+        "photo": "https://images.unsplash.com/photo-1444201983204-c43cbd584d93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
         "type": "Single Bed",
         "amenities": [
             "uno",

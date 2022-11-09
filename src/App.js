@@ -92,5 +92,4 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
     )
   }
 }
-
 export default App;
