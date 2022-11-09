@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 const Table = styled.table`
     border-collapse: collapse;
@@ -9,7 +10,7 @@ const HeaderTitle = styled.th`
     font-family: var(--font-poppins);
     font-weight: 600;
     text-align: start;
-    padding-left: 30px;
+    padding: 20px 0 20px 30px;
 `;
 
 const Row = styled.tr`
@@ -85,6 +86,12 @@ const DataContainer = styled.td`
 vertical-align: bottom;
 `;
 
+const Button = styled.button`
+    background-color: transparent;
+    border: none;
+    margin-left: 60px;
+`;
+
 const RoomTable = ({ data }) => {
     return (
         <Table>
@@ -125,6 +132,7 @@ const RoomTable = ({ data }) => {
                             <RoomPrice>${obj.offer}<RoomPriceSpan>/night</RoomPriceSpan></RoomPrice>
                         </DataContainer>
                         <td><RoomStatus status={obj.status ? "#5AD07A" : "#E23428"}>{obj.status ? "Available" : "Booked"}</RoomStatus></td>
+                        <td><Button><BsThreeDotsVertical /></Button></td>
                     </Row>
                 ))}
             </tbody>
