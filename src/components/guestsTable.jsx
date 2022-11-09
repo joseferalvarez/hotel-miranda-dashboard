@@ -36,6 +36,7 @@ const GuestContainer = styled.div`
     display: flex;
     align-items: center;
     gap: 28px;
+    margin-left: 25px;
 `;
 
 const UserImg = styled.img`
@@ -70,16 +71,27 @@ const NotesButton = styled.button`
     ${(props) => {
         if (props.$enabled) {
             return css`
-                background-color: green;
+                background-color: #EEF9F2;
+                font-weight: 500;
+                border: none;
+                color: #212121;
             `;
         } else {
             return css`
-                background-color: red;
                 pointer-events: none;
+                background-color: #EEF9F2;
+                font-weight: 500;
+                border: 1px solid #799283;
+                color: #799283;
             `;
         }
     }
     }
+
+    padding: 13px 25px;
+    border-radius: 12px;
+    text-align: center;
+    margin-left: 30px;
 `;
 
 const Status = styled.p`
@@ -112,8 +124,21 @@ const Status = styled.p`
     padding: 13px 25px;
     border-radius: 12px;
     text-align: center;
-    margin-left: 30px; * /
+    margin-left: 30px;
     `;
+
+const DataContainer = styled.td`
+vertical-align: top;
+`;
+
+const Button = styled.button`
+    background-color: transparent;
+    border: none;
+    margin-left: 60px;
+    margin-top: 15px;
+    width: 24px;
+    height: 24px;
+`;
 
 const GuestsTable = (props) => {
     return (
@@ -140,16 +165,25 @@ const GuestsTable = (props) => {
                             </div>
                         </GuestContainer>
                     </td>
-                    <td><GuestText>{obj.order}</GuestText></td>
-                    <td><GuestText>{obj.checkin}</GuestText></td>
-                    <td><GuestText>{obj.checkout}</GuestText></td>
+                    <DataContainer>
+                        <GuestText>{obj.order}</GuestText>
+                    </DataContainer>
+                    <DataContainer>
+                        <GuestText>{obj.checkin}</GuestText>
+                    </DataContainer>
+                    <DataContainer>
+                        <GuestText>{obj.checkout}</GuestText>
+                    </DataContainer>
                     <td><NotesButton $enabled={obj.description}>View Notes</NotesButton></td>
-                    <td>
+                    <DataContainer>
                         <GuestText>{obj.typeroom} - {obj.numroom}</GuestText>
-                    </td>
+                    </DataContainer>
                     <td>
                         <Status $type={obj.state}>{obj.state}</Status>
                     </td>
+                    <DataContainer>
+                        <Button><BsThreeDotsVertical /></Button>
+                    </DataContainer>
                 </Row>
             ))}
         </Table>
