@@ -1,17 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { BsThreeDotsVertical } from "react-icons/bs";
-
-const Table = styled.table`
-    border-collapse: collapse;
-`;
-
-const HeaderTitle = styled.th`
-    font-family: var(--font-poppins);
-    font-weight: 600;
-    text-align: start;
-    padding: 20px 0 20px 30px;
-`;
+import { Table, HeaderTitle } from './blocks';
 
 const Row = styled.tr`
     border-bottom: 1px solid #D4D4D4;
