@@ -126,7 +126,7 @@ const Navegation = ({ width }) => {
             setWidthNav("3%");
             setDisplay(false);
         } else {
-            setWidthNav("20%");
+            setWidthNav("25%");
             setDisplay(true);
         }
     }

@@ -13,6 +13,7 @@ import Users from "./pages/users"
 import Newuser from './pages/newuser'
 import User from "./pages/user"
 import Login from './pages/login';
+import Contact from './pages/contact';
 import Navegation from './components/navegation';
 import styled from 'styled-components';
 
@@ -27,7 +28,7 @@ function App() {
   return (
     <HashRouter>
       <AppContainer>
-        <Navegation width={"20%"}></Navegation>
+        <Navegation width={"25%"}></Navegation>
         <Routes>
 
           {/* login and dashboard */}
@@ -66,6 +67,14 @@ function App() {
               <Room />
             </AuthProvider>}
           />
+
+          {/* contact */}
+          <Route path="/contact" action={({ params }) => { }} element={
+            <AuthProvider>
+              <Contact />
+            </AuthProvider>}
+          />
+
 
           {/* users */}
           <Route path="/users" element={

@@ -1,22 +1,10 @@
 import React, { useCallback, useState } from 'react';
-import styled from 'styled-components';
-import RowRoom from './rowRoom';
+import RoomRow from './roomRow';
 import update from 'immutability-helper';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-const Table = styled.table`
-    border-collapse: collapse;
-    background-color: #FFFFFF;
-    border-radius: 20px;
-`;
-
-const HeaderTitle = styled.th`
-    font-family: var(--font-poppins);
-    font-weight: 600;
-    text-align: start;
-    padding: 20px 0 20px 30px;
-`;
+import { Table, HeaderTitle } from './blocks';
 
 const RoomTable = ({ data }) => {
     const [items, setItems] = useState(data);
@@ -32,7 +20,7 @@ const RoomTable = ({ data }) => {
 
     const renderItem = useCallback((item, index) => {
         return (
-            <RowRoom key={item.id} id={item.id} room={item} index={index} moveRow={moveRow}></RowRoom>
+            <RoomRow key={item.id} id={item.id} room={item} index={index} moveRow={moveRow}></RoomRow>
         )
     })
     return (
