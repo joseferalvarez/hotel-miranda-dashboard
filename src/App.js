@@ -17,17 +17,17 @@ import Navegation from './components/navegation';
 import styled from 'styled-components';
 
 const AppContainer = styled.div`
-display: flex;
+  display: flex;
+  background-color: #F8F8F8;
 `;
 
 
 function App() {
 
   return (
-    <AppContainer>
-      <Navegation></Navegation>
-
-      <HashRouter>
+    <HashRouter>
+      <AppContainer>
+        <Navegation width={"20%"}></Navegation>
         <Routes>
 
           {/* login and dashboard */}
@@ -83,10 +83,11 @@ function App() {
             </AuthProvider>}
           />
 
-        </Routes>
+          <Route path="*" action={({ params }) => { }} element={<Dashboard />} />
 
-      </HashRouter>
-    </AppContainer>
+        </Routes>
+      </AppContainer>
+    </HashRouter>
   );
 }
 

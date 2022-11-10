@@ -7,6 +7,8 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 const Table = styled.table`
     border-collapse: collapse;
+    background-color: #FFFFFF;
+    border-radius: 20px;
 `;
 
 const HeaderTitle = styled.th`
