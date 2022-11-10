@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
 
 import Dashboard from "./pages/dashboard"
@@ -17,7 +17,7 @@ import Login from './pages/login';
 function App() {
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
 
         {/* login and dashboard */}
@@ -75,7 +75,7 @@ function App() {
 
       </Routes>
 
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
