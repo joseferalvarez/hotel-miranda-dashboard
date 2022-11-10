@@ -13,69 +13,80 @@ import Users from "./pages/users"
 import Newuser from './pages/newuser'
 import User from "./pages/user"
 import Login from './pages/login';
+import Navegation from './components/navegation';
+import styled from 'styled-components';
+
+const AppContainer = styled.div`
+display: flex;
+`;
+
 
 function App() {
 
   return (
-    <HashRouter>
-      <Routes>
+    <AppContainer>
+      <Navegation></Navegation>
 
-        {/* login and dashboard */}
-        <Route path='/' element={
-          <AuthProvider>
-            <Dashboard />
-          </AuthProvider>}
-        />
-        <Route path='/login' element={<Login />} />
+      <HashRouter>
+        <Routes>
 
-        {/* bookings */}
-        <Route path="/bookings" element={
-          <AuthProvider>
-            <Bookings />
-          </AuthProvider>
-        } />
-        <Route path='/bookings/:idguest' action={({ params }) => { }} element={
-          <AuthProvider>
-            <Guest />
-          </AuthProvider>}
-        />
+          {/* login and dashboard */}
+          <Route path='/' element={
+            <AuthProvider>
+              <Dashboard />
+            </AuthProvider>}
+          />
+          <Route path='/login' element={<Login />} />
 
-        {/* rooms */}
-        <Route path='/rooms' element={
-          <AuthProvider>
-            <Rooms />
-          </AuthProvider>}
-        />
-        <Route path='/rooms/newroom' element={
-          <AuthProvider>
-            <Newroom />
-          </AuthProvider>}
-        />
-        <Route path="/rooms/:idroom" action={({ params }) => { }} element={
-          <AuthProvider>
-            <Room />
-          </AuthProvider>}
-        />
+          {/* bookings */}
+          <Route path="/bookings" element={
+            <AuthProvider>
+              <Bookings />
+            </AuthProvider>
+          } />
+          <Route path='/bookings/:idguest' action={({ params }) => { }} element={
+            <AuthProvider>
+              <Guest />
+            </AuthProvider>}
+          />
 
-        {/* users */}
-        <Route path="/users" element={
-          <AuthProvider>
-            <Users />
-          </AuthProvider>}
-        />
-        <Route path="/users/newuser" element={
-          <AuthProvider>
-            <Newuser />
-          </AuthProvider>} />
-        <Route path="/users/:iduser" action={({ params }) => { }} element={
-          <AuthProvider>
-            <User />
-          </AuthProvider>}
-        />
+          {/* rooms */}
+          <Route path='/rooms' element={
+            <AuthProvider>
+              <Rooms />
+            </AuthProvider>}
+          />
+          <Route path='/rooms/newroom' element={
+            <AuthProvider>
+              <Newroom />
+            </AuthProvider>}
+          />
+          <Route path="/rooms/:idroom" action={({ params }) => { }} element={
+            <AuthProvider>
+              <Room />
+            </AuthProvider>}
+          />
 
-      </Routes>
+          {/* users */}
+          <Route path="/users" element={
+            <AuthProvider>
+              <Users />
+            </AuthProvider>}
+          />
+          <Route path="/users/newuser" element={
+            <AuthProvider>
+              <Newuser />
+            </AuthProvider>} />
+          <Route path="/users/:iduser" action={({ params }) => { }} element={
+            <AuthProvider>
+              <User />
+            </AuthProvider>}
+          />
 
-    </HashRouter>
+        </Routes>
+
+      </HashRouter>
+    </AppContainer>
   );
 }
 
