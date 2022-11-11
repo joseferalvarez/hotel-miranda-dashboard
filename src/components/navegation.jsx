@@ -1,22 +1,44 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { BiKey } from "react-icons/bi";
-import { BsCalendarCheck } from "react-icons/bs";
-import { FaUserFriends } from "react-icons/fa";
-import { AiFillHome, AiFillContacts, AiFillHeart } from "react-icons/ai";
 import styled from 'styled-components';
 import WordMark from "./wordMark";
 import LoguedUser from './LoguedUser';
 
+import { BiKey } from "react-icons/bi";
+import { BsCalendarCheck } from "react-icons/bs";
+import { FaUserFriends, FaArrowsAltH } from "react-icons/fa";
+import { AiFillHome, AiFillContacts, AiFillHeart } from "react-icons/ai";
+
 const NavContainer = styled.div`
-    width: ${props => props.width || "0px"};
+    width: ${props => props.display};
     box-shadow: 13px 3px 40px #00000005;
     background-color: #FFFFFF;
     transition: width 0.3s;
-    overflow: hidden;
+    overflow: visible;
+    position: relative;
+
+    button{
+        position: absolute;
+        right: -50px;
+        top: 35px;
+        background-color: transparent;
+        border: none;
+        width: 25px;
+        height: 25px;
+
+        &:focus{
+            outline: none;
+        }
+
+        .arrow{
+            width: 25px;
+            height: 25px;
+        }
+    }
 
     .user-card{
         margin-left: 15%;
+        overflow: hidden;
     }
 
 
@@ -24,22 +46,26 @@ const NavContainer = styled.div`
     .rights,
     .author{
         padding-left: 15%;
+        overflow: hidden;
     }
 
     .description{
         font-family: var(--font-poppins);
         font-weight: 600;
         color: #212121;
+        overflow: hidden;
     }
 
     .rights,
     .author{
         color: #799283;
         font-size: 14px;
+        overflow: hidden;
     }
 
     .author{
         margin-top: 30px;
+        overflow: hidden;
     }
 `;
 
@@ -52,6 +78,7 @@ const Logo = styled.div`
 `;
 
 const LogoIcon = styled.div`
+overflow: hidden;
     width: 80px;
     height: 80px;
     box-shadow: 0px 14px 24px 0px rgba(139, 139, 139, 0.25);
@@ -61,12 +88,14 @@ const LogoIcon = styled.div`
 `;
 
 const LogoLetter = styled.p`
+overflow: hidden;
     font-size: 2.5rem;
     font-weight: 700;
     font-family: var(--font-poppins);
 `;
 
 const Navigation = styled.nav`
+overflow: hidden;
     ul{
         display: flex;
         flex-direction: column;
@@ -83,6 +112,7 @@ const Link = styled.li`
     display: flex;
     height: 70px;
     border-left: 8px solid white;
+    border-radius: 6px;
     align-items: center;
     gap: 20px;
     padding-left: 15%;
@@ -110,7 +140,7 @@ const Link = styled.li`
     }
 `;
 
-const Navegation = ({ width }) => {
+const Navegation = () => {
 
     let user = {
         photo: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
@@ -118,22 +148,15 @@ const Navegation = ({ width }) => {
         email: "sgouthier0@aboutads.info",
     }
 
-    const [display, setDisplay] = useState(true);
-    const [widthNav, setWidthNav] = useState(width);
+    const [display, setDisplay] = useState(0);
 
-    const resize = () => {
-        if (display) {
-            setWidthNav("3%");
-            setDisplay(false);
-        } else {
-            setWidthNav("25%");
-            setDisplay(true);
-        }
+    const displayMenu = () => {
+        setDisplay(!display)
     }
 
     return (
-        <NavContainer width={widthNav}>
-            <button onClick={resize}>resize</button>
+        <NavContainer display={display ? "500px" : "0px"}>
+            <button onClick={displayMenu}><FaArrowsAltH className='arrow' /></button>
             <Logo>
                 <LogoIcon>
                     <LogoLetter>H</LogoLetter>
@@ -178,7 +201,7 @@ const Navegation = ({ width }) => {
             <p className='rights'>@2022 All Rights Reserved</p>
             <p className='author'>Making With <span><AiFillHeart /></span> by Jose Fernando Álvarez</p>
         </NavContainer>
-    );
+    )
 }
 
 export default Navegation;

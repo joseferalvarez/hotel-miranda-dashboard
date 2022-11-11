@@ -1,6 +1,6 @@
 import './App.css';
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, createContext } from 'react';
 
 import Dashboard from "./pages/dashboard"
 import Bookings from "./pages/bookings"
@@ -25,13 +25,14 @@ const AppContainer = styled.div`
   }
 `;
 
+const MenuProvider = createContext(false);
 
 function App() {
-
   return (
     <HashRouter>
       <AppContainer>
-        <Navegation width={"25%"}></Navegation>
+
+        <Navegation></Navegation>
 
         <div className='window-container'>
           <Topbar></Topbar>
@@ -120,4 +121,6 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
     )
   }
 }
+
+export { MenuProvider };
 export default App;

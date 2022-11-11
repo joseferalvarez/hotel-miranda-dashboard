@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { AiOutlineArrowRight, AiOutlineMail, AiOutlineBell } from "react-icons/ai";
+import { AiOutlineMail, AiOutlineBell } from "react-icons/ai";
 import { useLocation } from 'react-router';
 
 const TopbarContainer = styled.div`
@@ -14,24 +14,8 @@ const TopbarContainer = styled.div`
         width: 20%;
         gap: 50px;
 
-        button{
-            background-color: transparent;
-            border: none;
-            width: 25px;
-            height: 25px;
-
-            &:focus{
-                outline: none;
-            }
-        }
-        .arrow{
-            transform: ${props => props.displaynav ? "rotate(180deg)" : "" || ""};
-            transition: transform 0.3s;
-            width: 25px;
-            height: 25px;
-        }
-
         .title{
+            padding-left: 100px;
             font-family: var(--font-poppins);
             font-size: 28px;
             font-weight: 700;
@@ -83,16 +67,7 @@ const Icon = styled.div`
 const Topbar = () => {
 
     let location = useLocation();
-    const [displayNav, setDisplayNav] = useState(false);
     const [title, setTitle] = useState("");
-
-    const display = () => {
-        if (displayNav) {
-            setDisplayNav(false);
-        } else {
-            setDisplayNav(true);
-        }
-    }
 
     useEffect(() => {
         switch (location.pathname) {
@@ -117,9 +92,8 @@ const Topbar = () => {
     }, [location]);
 
     return (
-        <TopbarContainer displaynav={displayNav}>
+        <TopbarContainer>
             <div className='data'>
-                <button onClick={display}><AiOutlineArrowRight className='arrow'></AiOutlineArrowRight></button>
                 <p className='title'>{title}</p>
             </div>
 
