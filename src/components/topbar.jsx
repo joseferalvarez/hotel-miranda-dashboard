@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlineArrowRight, AiOutlineMail, AiOutlineBell } from "react-icons/ai";
+import { useLocation } from 'react-router';
 
 const TopbarContainer = styled.div`
     display: flex;
@@ -81,7 +82,10 @@ const Icon = styled.div`
 
 const Topbar = ({ title }) => {
 
+    let location = useLocation();
+
     const [displayNav, setDisplayNav] = useState(false);
+    console.log(location);
 
     const display = () => {
         if (displayNav) {

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { Checkbox } from './blocks';
 
 
 const Row = styled.tr`
@@ -151,7 +152,13 @@ const GuestRow = ({ guest }) => {
         <Row>
             <DataContainer className='data-container__checkbox'>
                 <div className='checkbox__container'>
-                    <input className='checkbox' type="checkbox"></input>
+                    <Checkbox>
+                        <input type="checkbox" className="checkbox-input" id="checkbox" />
+                        <label>
+                            <span className="checkbox">
+                            </span>
+                        </label>
+                    </Checkbox>
                 </div>
             </DataContainer>
             <td>

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { HiOutlinePhone, HiOutlineMail } from "react-icons/hi";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { Checkbox } from './blocks';
 
 const Row = styled.tr`
     border-bottom: 1px solid #D4D4D4;
@@ -28,11 +29,9 @@ const DataContainer = styled.td`
     }
 
     .checkbox{
-        width: 24px;
-        height: 24px;
-        margin-top: 20px;
-
         &__container{
+            display: block;
+            margin-top: 20px;
             padding-left: 30px;
         }
     }
@@ -105,8 +104,17 @@ const UsersRow = ({ user }) => {
     return (
         <Row>
             <DataContainer>
-                <div className='checkbox__container'>
+                {/* <div className='checkbox__container'>
                     <input className='checkbox' type="checkbox"></input>
+                </div> */}
+                <div className='checkbox__container'>
+                    <Checkbox>
+                        <input type="checkbox" className="checkbox-input" id="checkbox" />
+                        <label>
+                            <span className="checkbox">
+                            </span>
+                        </label>
+                    </Checkbox>
                 </div>
             </DataContainer>
             <td>
