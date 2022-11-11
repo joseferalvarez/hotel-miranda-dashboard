@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
@@ -16,10 +15,14 @@ import Login from './pages/login';
 import Contact from './pages/contact';
 import Navegation from './components/navegation';
 import styled from 'styled-components';
+import Topbar from './components/topbar';
 
 const AppContainer = styled.div`
   display: flex;
   background-color: #F8F8F8;
+  .window-container{
+    width: 100%;
+  }
 `;
 
 
@@ -29,72 +32,76 @@ function App() {
     <HashRouter>
       <AppContainer>
         <Navegation width={"25%"}></Navegation>
-        <Routes>
 
-          {/* login and dashboard */}
-          <Route path='/' element={
-            <AuthProvider>
-              <Dashboard />
-            </AuthProvider>}
-          />
-          <Route path='/login' element={<Login />} />
+        <div className='window-container'>
+          <Topbar></Topbar>
+          <Routes>
 
-          {/* bookings */}
-          <Route path="/bookings" element={
-            <AuthProvider>
-              <Bookings />
-            </AuthProvider>
-          } />
-          <Route path='/bookings/:idguest' action={({ params }) => { }} element={
-            <AuthProvider>
-              <Guest />
-            </AuthProvider>}
-          />
+            {/* login and dashboard */}
+            <Route path='/' element={
+              <AuthProvider>
+                <Dashboard />
+              </AuthProvider>}
+            />
+            <Route path='/login' element={<Login />} />
 
-          {/* rooms */}
-          <Route path='/rooms' element={
-            <AuthProvider>
-              <Rooms />
-            </AuthProvider>}
-          />
-          <Route path='/rooms/newroom' element={
-            <AuthProvider>
-              <Newroom />
-            </AuthProvider>}
-          />
-          <Route path="/rooms/:idroom" action={({ params }) => { }} element={
-            <AuthProvider>
-              <Room />
-            </AuthProvider>}
-          />
+            {/* bookings */}
+            <Route path="/bookings" element={
+              <AuthProvider>
+                <Bookings />
+              </AuthProvider>
+            } />
+            <Route path='/bookings/:idguest' action={({ params }) => { }} element={
+              <AuthProvider>
+                <Guest />
+              </AuthProvider>}
+            />
 
-          {/* contact */}
-          <Route path="/contact" action={({ params }) => { }} element={
-            <AuthProvider>
-              <Contact />
-            </AuthProvider>}
-          />
+            {/* rooms */}
+            <Route path='/rooms' element={
+              <AuthProvider>
+                <Rooms />
+              </AuthProvider>}
+            />
+            <Route path='/rooms/newroom' element={
+              <AuthProvider>
+                <Newroom />
+              </AuthProvider>}
+            />
+            <Route path="/rooms/:idroom" action={({ params }) => { }} element={
+              <AuthProvider>
+                <Room />
+              </AuthProvider>}
+            />
+
+            {/* contact */}
+            <Route path="/contact" action={({ params }) => { }} element={
+              <AuthProvider>
+                <Contact />
+              </AuthProvider>}
+            />
 
 
-          {/* users */}
-          <Route path="/users" element={
-            <AuthProvider>
-              <Users />
-            </AuthProvider>}
-          />
-          <Route path="/users/newuser" element={
-            <AuthProvider>
-              <Newuser />
-            </AuthProvider>} />
-          <Route path="/users/:iduser" action={({ params }) => { }} element={
-            <AuthProvider>
-              <User />
-            </AuthProvider>}
-          />
+            {/* users */}
+            <Route path="/users" element={
+              <AuthProvider>
+                <Users />
+              </AuthProvider>}
+            />
+            <Route path="/users/newuser" element={
+              <AuthProvider>
+                <Newuser />
+              </AuthProvider>} />
+            <Route path="/users/:iduser" action={({ params }) => { }} element={
+              <AuthProvider>
+                <User />
+              </AuthProvider>}
+            />
 
-          <Route path="*" action={({ params }) => { }} element={<Dashboard />} />
+            <Route path="*" action={({ params }) => { }} element={<Dashboard />} />
 
-        </Routes>
+          </Routes>
+        </div>
       </AppContainer>
     </HashRouter>
   );

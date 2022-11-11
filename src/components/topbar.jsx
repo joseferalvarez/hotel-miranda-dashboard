@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { AiOutlineArrowRight, AiOutlineMail, AiOutlineBell } from "react-icons/ai";
 import { useLocation } from 'react-router';
@@ -80,12 +80,11 @@ const Icon = styled.div`
     }
 `;
 
-const Topbar = ({ title }) => {
+const Topbar = () => {
 
     let location = useLocation();
-
     const [displayNav, setDisplayNav] = useState(false);
-    console.log(location);
+    const [title, setTitle] = useState("");
 
     const display = () => {
         if (displayNav) {
@@ -94,6 +93,28 @@ const Topbar = ({ title }) => {
             setDisplayNav(true);
         }
     }
+
+    useEffect(() => {
+        switch (location.pathname) {
+            case "/":
+                setTitle("Dashboard");
+                break;
+            case "/bookings":
+                setTitle("Bookings");
+                break;
+            case "/rooms":
+                setTitle("Rooms");
+                break;
+            case "/contact":
+                setTitle("Contact");
+                break;
+            case "/users":
+                setTitle("Users");
+                break;
+            default:
+                setTitle("");
+        }
+    }, [location]);
 
     return (
         <TopbarContainer displaynav={displayNav}>
