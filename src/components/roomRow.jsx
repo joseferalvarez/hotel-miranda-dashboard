@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import { useDrag, useDrop } from 'react-dnd'
+import { useDrag, useDrop } from 'react-dnd';
 import { BsThreeDotsVertical } from "react-icons/bs";
 
 const Row = styled.tr`
@@ -194,7 +194,7 @@ const RoomRow = ({ id, room, index, moveRow }) => {
             <DataContainer className='data-container__button'>
                 <button><BsThreeDotsVertical className='icon' /></button>
             </DataContainer>
-        </Row >
+        </Row>
     );
 }
 

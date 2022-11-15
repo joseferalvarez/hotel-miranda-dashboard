@@ -17,7 +17,7 @@ const NavContainer = styled.div`
     overflow: visible;
     position: relative;
 
-    button{
+    .arrow-button{
         position: absolute;
         right: -50px;
         top: 35px;
@@ -156,7 +156,7 @@ const Navegation = () => {
 
     return (
         <NavContainer display={display ? "500px" : "0px"}>
-            <button onClick={displayMenu}><FaArrowsAltH className='arrow' /></button>
+            <button className='arrow-button' onClick={displayMenu}><FaArrowsAltH className='arrow' /></button>
             <Logo>
                 <LogoIcon>
                     <LogoLetter>H</LogoLetter>

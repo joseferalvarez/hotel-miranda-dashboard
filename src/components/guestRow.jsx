@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Checkbox } from './blocks';
 
+import Button from "./button";
+
 
 const Row = styled.tr`
     border-bottom: 1px solid #D4D4D4;
@@ -87,33 +89,6 @@ const DataContainer = styled.td`
     }
 `;
 
-const NotesButton = styled.button`
-    ${(props) => {
-        if (props.$enabled) {
-            return css`
-                background-color: #EEF9F2;
-                font-weight: 500;
-                border: none;
-                color: #212121;
-            `;
-        } else {
-            return css`
-                pointer-events: none;
-                background-color: #EEF9F2;
-                font-weight: 500;
-                border: 1px solid #799283;
-                color: #799283;
-            `;
-        }
-    }
-    }
-
-    padding: 13px 25px;
-    border-radius: 12px;
-    text-align: center;
-    margin-left: 30px;
-`;
-
 const Status = styled.p`
 
     ${(props) => {
@@ -179,7 +154,8 @@ const GuestRow = ({ guest }) => {
             <DataContainer className='data-container__text'>
                 <p>{guest.checkout}</p>
             </DataContainer>
-            <td><NotesButton $enabled={guest.description}>View Notes</NotesButton></td>
+            {/* <td><NotesButton $enabled={guest.description}>View Notes</NotesButton></td> */}
+            <td><Button type="notes" text="View Notes" enabled={guest.description}></Button></td>
             <DataContainer className='data-container__text'>
                 <p>{guest.typeroom} - {guest.numroom}</p>
             </DataContainer>

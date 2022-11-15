@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Button from './button';
 
 const Card = styled.div`
     width: 100%;
@@ -8,6 +9,9 @@ const Card = styled.div`
     padding: 20px;
     border-radius: 18px;
     box-shadow: 0px 20px 30px #00000014;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     .image{
         width: 70px;
@@ -39,6 +43,7 @@ const LoguedUser = ({ user }) => {
             <img className='image' src={user.photo} alt="" />
             <p className='name'>{user.name}</p>
             <p className='email'>{user.email}</p>
+            <Button type="contact" text="Contact Us"></Button>
         </Card>
     );
 }
