@@ -23,9 +23,9 @@ const Login = () => {
         return (
             <div>
                 <h1>login</h1>
-                <input type="text" value={user} placeholder="Usuario" onChange={(e) => setUser(e.target.value)}></input>
-                <input type="text" value={pass} placeholder="Contraseña" onChange={(e) => setPass(e.target.value)}></input>
-                <button onClick={checkLogin}>LOGIN</button>
+                <input type="text" className='input-user' value={user} placeholder="Usuario" onChange={(e) => setUser(e.target.value)}></input>
+                <input type="text" className='input-pass' value={pass} placeholder="Contraseña" onChange={(e) => setPass(e.target.value)}></input>
+                <button className='login-button' onClick={checkLogin}>LOGIN</button>
             </div>
         );
 
