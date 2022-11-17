@@ -1,6 +1,6 @@
 import './App.css';
-import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { useState, createContext } from 'react';
+import { HashRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { useState, createContext, useEffect } from 'react';
 
 import Dashboard from "./pages/dashboard"
 import Bookings from "./pages/bookings"
@@ -11,9 +11,9 @@ import Room from "./pages/room"
 import Users from "./pages/users"
 import Newuser from './pages/newuser'
 import User from "./pages/user"
-import Login from './pages/login';
+import Login from './pages/Login/login';
 import Contact from './pages/contact';
-import Navegation from './components/navegation';
+import Navegation from './components/Navegation/Navegation';
 import styled from 'styled-components';
 import Topbar from './components/topbar';
 
@@ -22,6 +22,7 @@ const AppContainer = styled.div`
   background-color: #F8F8F8;
   .window-container{
     width: 100%;
+    min-height: 100vh;
   }
 `;
 
@@ -32,10 +33,14 @@ function App() {
     <HashRouter>
       <AppContainer>
 
-        <Navegation></Navegation>
+        <SetMenu>
+          <Navegation></Navegation>
+        </SetMenu>
 
         <div className='window-container'>
-          <Topbar></Topbar>
+          <SetMenu>
+            <Topbar></Topbar>
+          </SetMenu>
           <Routes>
 
             {/* login and dashboard */}
@@ -109,15 +114,30 @@ function App() {
 }
 
 const AuthProvider = ({ children }: { children: JSX.Element }) => {
-  const [loged] = useState(localStorage.getItem("login"));
 
-  if (loged) {
+  if (localStorage.getItem("login")) {
     return (
       children
     )
   } else {
     return (
       <Navigate to="/login"></Navigate>
+    )
+  }
+};
+
+const SetMenu = ({ children }: { children: JSX.Element }) => {
+
+  const [loged, setLogued] = useState(localStorage.getItem("login"));
+  const location = useLocation();
+
+  useEffect(() => {
+    setLogued(localStorage.getItem("login"));
+  }, [location]);
+
+  if (loged) {
+    return (
+      children
     )
   }
 }

@@ -4,6 +4,20 @@ import styled, { css } from 'styled-components';
 const StyledButton = styled.button`
     ${(props) => {
         switch (props.$type) {
+            case "login":
+                return css`
+                transition: background-color 0.1s;
+                    background-color: #135846;
+                    color: #EBF1EF;
+                    border: none;
+                    border-radius: 8px;
+                    font-weight: 600;
+                    width: 50%;
+                    margin-top: 25px;
+                    &:hover{
+                        background-color: #0e3f32;
+                    }
+                `;
             case "contact":
                 return css`
                 background-color: #EBF1EF;
@@ -49,10 +63,10 @@ const StyledButton = styled.button`
     font-family: var(--font-poppins);
 `;
 
-const Button = ({ type, text, enabled }) => {
+const Button = ({ type, text, enabled, click }) => {
 
     return (
-        <StyledButton $type={type} $enabled={enabled}>{text}</StyledButton>
+        <StyledButton $type={type} $enabled={enabled} onClick={click}>{text}</StyledButton>
     );
 }
 
