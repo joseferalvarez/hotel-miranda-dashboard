@@ -7,24 +7,24 @@ const NavContainer = styled.div`
     transition: width 0.3s;
     overflow: visible;
     position: relative;
+`;
 
-    button{
-        position: absolute;
-        right: -50px;
-        top: 35px;
-        background-color: transparent;
-        border: none;
+const ArrowButton = styled.button`
+    position: absolute;
+    right: -50px;
+    top: 35px;
+    background-color: transparent;
+    border: none;
+    width: 25px;
+    height: 25px;
+
+    &:focus{
+        outline: none;
+    }
+
+    .arrow{
         width: 25px;
         height: 25px;
-
-        &:focus{
-            outline: none;
-        }
-
-        .arrow{
-            width: 25px;
-            height: 25px;
-        }
     }
 `;
 
@@ -129,6 +129,7 @@ const NavigationAuthor = styled.p`
 
 export {
     NavContainer,
+    ArrowButton,
     Logo,
     LogoIcon,
     LogoLetter,

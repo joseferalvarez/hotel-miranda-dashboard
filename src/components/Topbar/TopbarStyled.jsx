@@ -4,30 +4,29 @@ const TopbarContainer = styled.div`
     display: flex;
     background-color: #FFFFFF;
     box-shadow: 0px 3px 10px #00000005;
+`;
 
-    .data{
-        display: flex;
-        align-items: center;
-        width: 20%;
-        gap: 50px;
-
-        .title{
-            padding-left: 100px;
-            font-family: var(--font-poppins);
-            font-size: 28px;
-            font-weight: 700;
-            color: #262626;
-        }
+const TopbarTitle = styled.div`
+    display: flex;
+    align-items: center;
+    width: 20%;
+    gap: 50px;
+    p{
+        padding-left: 100px;
+        font-family: var(--font-poppins);
+        font-size: 28px;
+        font-weight: 700;
+        color: #262626;
     }
+`;
 
-    .icons{
-        display: flex;
-        width: 70%;
-        padding-right: 10%;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 60px;
-    }
+const IconContainer = styled.div`
+    display: flex;
+    width: 70%;
+    padding-right: 10%;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 60px;
 `;
 
 const Icon = styled.div`
@@ -39,7 +38,7 @@ const Icon = styled.div`
         height: 25px;
     }
 
-    .notification{
+    div{
         position: absolute;
         display: block;
         right: -14px;
@@ -63,5 +62,7 @@ const Icon = styled.div`
 
 export {
     TopbarContainer,
+    TopbarTitle,
+    IconContainer,
     Icon
 }

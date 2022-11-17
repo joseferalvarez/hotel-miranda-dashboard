@@ -6,7 +6,11 @@ import { Checkbox } from '../Blocks/Blocks';
 import {
     Row,
     DataContainer,
+    DataContainerButton,
+    CheckboxContainer,
     UserNameContainer,
+    UserName,
+    UserData,
     UserStatus
 } from "./UsersRowStyled.jsx";
 
@@ -16,7 +20,7 @@ const UsersRow = ({ user }) => {
     return (
         <Row>
             <DataContainer>
-                <div className='checkbox__container'>
+                <CheckboxContainer>
                     <Checkbox>
                         <input type="checkbox" />
                         <label>
@@ -24,15 +28,16 @@ const UsersRow = ({ user }) => {
                             </span>
                         </label>
                     </Checkbox>
-                </div>
+                </CheckboxContainer>
             </DataContainer>
+
             <td>
                 <UserNameContainer>
                     <img src={user.photo} alt="" />
-                    <div className='user__data'>
-                        <p className='user__data__name'>{user.name}</p>
-                        <p className='user__data__id'>#{user.id}</p>
-                        <p className='user__data__date'>Joined on {user.date}</p>
+                    <div>
+                        <UserName>{user.name}</UserName>
+                        <UserData>#{user.id}</UserData>
+                        <UserData>Joined on {user.date}</UserData>
                     </div>
                 </UserNameContainer>
             </td>
@@ -55,9 +60,9 @@ const UsersRow = ({ user }) => {
             <DataContainer>
                 <UserStatus status={user.state ? "#5AD07A" : "#E23428"}>{user.state ? "ACTIVE" : "INACTIVE"}</UserStatus>
             </DataContainer>
-            <DataContainer className='data-container__button'>
+            <DataContainerButton>
                 <button><BsThreeDotsVertical className='icon' /></button>
-            </DataContainer>
+            </DataContainerButton>
         </Row>
     );
 }

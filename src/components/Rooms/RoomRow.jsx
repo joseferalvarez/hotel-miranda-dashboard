@@ -5,7 +5,12 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import {
     Row,
     RoomNameContainer,
+    RoomId,
+    RoomNumber,
     DataContainer,
+    DataContainerButton,
+    RoomText,
+    RoomPrice,
     RoomStatus
 } from "./RoomRowStyled"
 
@@ -78,32 +83,31 @@ const RoomRow = ({ id, room, index, moveRow }) => {
         <Row key={room.id} ref={ref} data-handler-id={handlerId} opacity={opacity}>
             <td>
                 <RoomNameContainer>
-                    {/* <RoomImg src={room.photo} /> */}
-                    <img className='room__img' src={room.photo} alt="" />
-                    <div className='room__data'>
-                        <p className='room__data__id'>#{room.id}</p>
-                        <p className='room__data__number'>{room.number}</p>
+                    <img src={room.photo} alt="" />
+                    <div>
+                        <RoomId>#{room.id}</RoomId>
+                        <RoomNumber>{room.number}</RoomNumber>
                     </div>
                 </RoomNameContainer>
             </td>
             <DataContainer>
-                <p className='data__text'>{room.type}</p>
+                <RoomText>{room.type}</RoomText>
             </DataContainer>
             <DataContainer>
-                <p className='data__text'>{room.amenities.map((amenitie, index) => (
+                <RoomText>{room.amenities.map((amenitie, index) => (
                     <span key={index}>{amenitie}, </span>
-                ))}</p>
+                ))}</RoomText>
             </DataContainer>
             <DataContainer>
-                <p className='data__price'>${room.price}<span>/night</span></p>
+                <RoomPrice>${room.price}<span>/night</span></RoomPrice>
             </DataContainer>
             <DataContainer>
-                <p className='data__price'>${room.offer}<span>/night</span></p>
+                <RoomPrice>${room.offer}<span>/night</span></RoomPrice>
             </DataContainer>
             <td><RoomStatus status={room.status ? "#5AD07A" : "#E23428"}>{room.status ? "Available" : "Booked"}</RoomStatus></td>
-            <DataContainer className='data-container__button'>
+            <DataContainerButton>
                 <button><BsThreeDotsVertical className='icon' /></button>
-            </DataContainer>
+            </DataContainerButton>
         </Row>
     );
 }

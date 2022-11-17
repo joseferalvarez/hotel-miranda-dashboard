@@ -9,6 +9,7 @@ import {
     LogoIcon,
     LogoLetter,
     Navigation,
+    ArrowButton,
     UserCard,
     NavigationDescription,
     NavigationRights,
@@ -39,7 +40,7 @@ const Navegation = () => {
 
     return (
         <NavContainer display={display ? "500px" : "0px"}>
-            <button className='arrow-button' onClick={displayMenu}><FaArrowsAltH className='arrow' /></button>
+            <ArrowButton onClick={displayMenu}><FaArrowsAltH className='arrow' /></ArrowButton>
             <Logo>
                 <LogoIcon>
                     <LogoLetter>H</LogoLetter>

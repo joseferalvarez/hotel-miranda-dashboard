@@ -7,6 +7,7 @@ import Button from "../Blocks/Button";
 import {
     Row,
     DataContainer,
+    CheckboxContainer,
     DataContainerButton,
     DataContainerCheckbox,
     GuestContainer,
@@ -19,7 +20,7 @@ const GuestRow = ({ guest }) => {
     return (
         <Row>
             <DataContainerCheckbox>
-                <div className='checkbox__container'>
+                <CheckboxContainer>
                     <Checkbox>
                         <input type="checkbox" />
                         <label>
@@ -27,7 +28,7 @@ const GuestRow = ({ guest }) => {
                             </span>
                         </label>
                     </Checkbox>
-                </div>
+                </CheckboxContainer>
             </DataContainerCheckbox>
             <td>
                 <GuestContainer>

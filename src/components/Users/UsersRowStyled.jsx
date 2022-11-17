@@ -19,19 +19,6 @@ const Row = styled.tr`
 const DataContainer = styled.td`
     vertical-align: top;
 
-    &~.data-container__button{
-        vertical-align: top;
-        padding-right: 30px;
-    }
-
-    .checkbox{
-        &__container{
-            display: block;
-            margin-top: 20px;
-            padding-left: 30px;
-        }
-    }
-
     .data{
         &__description{
             max-width: 300px;
@@ -49,6 +36,13 @@ const DataContainer = styled.td`
         }
     }
 
+
+`;
+
+const DataContainerButton = styled.div`
+    vertical-align: top;
+    padding-right: 30px;
+
     button{
         background-color: transparent;
         border: none;
@@ -64,6 +58,12 @@ const DataContainer = styled.td`
     }
 `;
 
+const CheckboxContainer = styled.div`
+    display: block;
+    margin-top: 20px;
+    padding-left: 30px;
+`;
+
 const UserNameContainer = styled.div`
     display: flex;
     align-items: center;
@@ -75,17 +75,14 @@ const UserNameContainer = styled.div`
         height: 88px;
         object-fit: cover;
     }
+`;
 
-    .user__data{
-        &__name{
-            font-weight: 500;
-        }
+const UserName = styled.p`
+    font-weight: 500;
+`;
 
-        &__id,
-        &__date{
-            font-size: 14px;
-        }
-    }
+const UserData = styled.p`
+    font-size: 14px;
 `;
 
 const UserStatus = styled.p`
@@ -99,6 +96,10 @@ const UserStatus = styled.p`
 export {
     Row,
     DataContainer,
+    DataContainerButton,
+    CheckboxContainer,
     UserNameContainer,
+    UserName,
+    UserData,
     UserStatus
 }

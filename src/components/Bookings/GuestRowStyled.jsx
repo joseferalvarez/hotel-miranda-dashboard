@@ -24,6 +24,10 @@ const GuestContainer = styled.div`
     }
 `;
 
+const CheckboxContainer = styled.div`
+    padding-left: 30px;
+`;
+
 const GuestName = styled.p`
     font-family: var(--font-poppins);
     font-size: 16px;
@@ -107,6 +111,7 @@ const Status = styled.p`
 export {
     Row,
     GuestContainer,
+    CheckboxContainer,
     GuestName,
     GuestId,
     DataContainer,

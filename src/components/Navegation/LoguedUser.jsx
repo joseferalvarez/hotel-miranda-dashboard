@@ -14,7 +14,7 @@ const LoguedUser = ({ user }) => {
             <UserName>{user.name}</UserName>
             <UserEmail>{user.email}</UserEmail>
             <Button type="contact" text="Contact Us"></Button>
-        </Card >
+        </Card>
     );
 }
 

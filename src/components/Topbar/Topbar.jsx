@@ -4,6 +4,8 @@ import { useLocation } from 'react-router';
 
 import {
     TopbarContainer,
+    TopbarTitle,
+    IconContainer,
     Icon
 } from "./TopbarStyled";
 
@@ -36,11 +38,11 @@ const Topbar = () => {
 
     return (
         <TopbarContainer>
-            <div className='data'>
-                <p className='title'>{title}</p>
-            </div>
+            <TopbarTitle>
+                <p>{title}</p>
+            </TopbarTitle>
 
-            <div className='icons'>
+            <IconContainer>
                 <Icon>
                     <AiOutlineMail className='icon' />
                     <div className='notification'>
@@ -53,7 +55,7 @@ const Topbar = () => {
                         <p>8</p>
                     </div>
                 </Icon>
-            </div>
+            </IconContainer>
         </TopbarContainer>
     );
 }
