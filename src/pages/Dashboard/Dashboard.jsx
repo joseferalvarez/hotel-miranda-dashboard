@@ -1,9 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const DashboardContainer = styled.div`
-    width: 100%;
-`;
+import { DashboardContainer } from './DashboardStyled';
 
 const Dashboard = () => {
     return (

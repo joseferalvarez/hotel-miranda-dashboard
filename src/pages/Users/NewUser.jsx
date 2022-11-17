@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Newroom = () => {
+const NewUser = () => {
     return (
         <div>
-            <h1>newroom</h1>
+            <h1>newuser</h1>
         </div>
     );
 }
 
-export default Newroom;
+export default NewUser;

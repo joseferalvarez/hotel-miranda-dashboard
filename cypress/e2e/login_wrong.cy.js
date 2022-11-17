@@ -9,7 +9,7 @@ describe("The Home Page", () => {
             .type("fakepass")
             .should("have.value", "fakepass");
 
-        cy.get(".login-button")
+        cy.contains("LOGIN")
             .click();
 
         cy.url().should("include", "/login");

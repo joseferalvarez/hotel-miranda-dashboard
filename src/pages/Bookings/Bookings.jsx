@@ -1,15 +1,7 @@
 import React from 'react';
-import GuestsTable from '../components/Bookings/GuestsTable';
-import data from "../db/guest.json";
-import styled from 'styled-components';
-
-const BookingsContainer = styled.div`
-    width: 100%;
-
-    .content{
-        padding: 50px 5%;
-    }
-`;
+import GuestsTable from '../../components/Bookings/GuestsTable';
+import data from "../../db/guest.json";
+import { BookingsContainer } from './BookingsStyled';
 
 const Bookings = () => {
     return (

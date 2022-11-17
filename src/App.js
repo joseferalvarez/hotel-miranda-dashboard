@@ -2,17 +2,17 @@ import './App.css';
 import { HashRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { useState, createContext, useEffect } from 'react';
 
-import Dashboard from "./pages/dashboard"
-import Bookings from "./pages/bookings"
-import Guest from "./pages/guest"
-import Rooms from "./pages/rooms"
-import Newroom from "./pages/newroom"
-import Room from "./pages/room"
-import Users from "./pages/users"
-import Newuser from './pages/newuser'
-import User from "./pages/user"
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Bookings from "./pages/Bookings/Bookings";
+import Guest from "./pages/Bookings/Guest";
+import Rooms from "./pages/Rooms/Rooms";
+import NewRoom from "./pages/Rooms/NewRoom";
+import Room from "./pages/Rooms/Room";
+import Users from "./pages/Users/Users";
+import NewUser from './pages/Users/NewUser';
+import User from "./pages/Users/User";
 import Login from './pages/Login/Login';
-import Contact from './pages/contact';
+import Contact from './pages/Contact/Contact';
 import Navegation from './components/Navegation/Navegation';
 import styled from 'styled-components';
 import Topbar from './components/Topbar/Topbar';
@@ -71,7 +71,7 @@ function App() {
             />
             <Route path='/rooms/newroom' element={
               <AuthProvider>
-                <Newroom />
+                <NewRoom />
               </AuthProvider>}
             />
             <Route path="/rooms/:idroom" action={({ params }) => { }} element={
@@ -96,7 +96,7 @@ function App() {
             />
             <Route path="/users/newuser" element={
               <AuthProvider>
-                <Newuser />
+                <NewUser />
               </AuthProvider>} />
             <Route path="/users/:iduser" action={({ params }) => { }} element={
               <AuthProvider>

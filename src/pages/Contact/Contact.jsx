@@ -1,9 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const ContactContainer = styled.div`
-    width: 100%;
-`;
+import { ContactContainer } from './ContactStyled';
 
 const Contact = () => {
     return (
