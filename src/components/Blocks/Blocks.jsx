@@ -18,18 +18,18 @@ const Checkbox = styled.div`
     display: block;
     position: relative;
 
-    .checkbox-input,
-    .checkbox{
+    input,
+    label span{
         width: 24px;
         height: 24px;
     }
 
-    .checkbox-input {
+    input {
         position: absolute;
         opacity: 0;
         z-index: 1;
 
-        &:checked + label .checkbox {
+        &:checked + label span {
             border: 2px solid #135846;
             &:after {
                 transform: translate(-50%, -50%) scale(1);
@@ -37,7 +37,7 @@ const Checkbox = styled.div`
         }
     }
 
-    .checkbox {
+    label span {
         border: 2px solid #707070;
         border-radius: 3px;
         display: inline-block;

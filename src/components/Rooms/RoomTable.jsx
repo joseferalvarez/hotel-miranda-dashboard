@@ -4,7 +4,7 @@ import update from 'immutability-helper';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-import { Table, HeaderTitle } from '../Blocks/blocks';
+import { Table, HeaderTitle } from '../Blocks/Blocks';
 
 const RoomTable = ({ data }) => {
     const [items, setItems] = useState(data);

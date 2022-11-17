@@ -22,52 +22,36 @@ const GuestContainer = styled.div`
         height: 45px;
         object-fit: cover;
     }
+`;
 
-    .guest__data{
-        &__name{
-            font-family: var(--font-poppins);
-            font-size: 16px;
-            font-weight: 500px;
-            color: #393939;
-        }
+const GuestName = styled.p`
+    font-family: var(--font-poppins);
+    font-size: 16px;
+    font-weight: 500px;
+    color: #393939;
+`;
 
-        &__id{
-            color: #799283;
-            font-size: 14px;
-            font-family: var(--font-poppins);
-        }
-    }
+const GuestId = styled.p`
+    color: #799283;
+    font-size: 14px;
+    font-family: var(--font-poppins);
 `;
 
 const DataContainer = styled.td`
-    &~.data-container__button{
-        vertical-align: top;
-        padding-right: 30px;
-    }
+    vertical-align: top;
 
-    &~.data-container__checkbox{
-        vertical-align: middle;
-    }
-
-    &~.data-container__text{
-        vertical-align: top;
-
-        p{
-            font-family: var(--font-poppins);
+    p{
+        font-family: var(--font-poppins);
         color: #393939;
         font-size: 16px;
         max-width: 300px;
         padding-left: 30px;
-        }
     }
+`;
 
-    .checkbox{
-        width: 24px;
-        height: 24px;
-        &__container{
-            padding-left: 30px;
-        }
-    }
+const DataContainerButton = styled.td`
+    vertical-align: top;
+    padding-right: 30px;
 
     button{
         background-color: transparent;
@@ -81,6 +65,10 @@ const DataContainer = styled.td`
             height: 25px;
         }
     }
+`;
+
+const DataContainerCheckbox = styled.td`
+    vertical-align: middle;
 `;
 
 const Status = styled.p`
@@ -119,6 +107,10 @@ const Status = styled.p`
 export {
     Row,
     GuestContainer,
+    GuestName,
+    GuestId,
     DataContainer,
+    DataContainerButton,
+    DataContainerCheckbox,
     Status
 };

@@ -9,6 +9,10 @@ import {
     LogoIcon,
     LogoLetter,
     Navigation,
+    UserCard,
+    NavigationDescription,
+    NavigationRights,
+    NavigationAuthor,
     Link
 } from "./NavegationStyled"
 
@@ -72,13 +76,13 @@ const Navegation = () => {
                 </ul>
             </Navigation>
 
-            <div className='user-card'>
+            <UserCard>
                 <LoguedUser user={user}></LoguedUser>
-            </div>
+            </UserCard>
 
-            <p className='description'>Hotel Miranda Admin Dashboard</p>
-            <p className='rights'>@2022 All Rights Reserved</p>
-            <p className='author'>Making With <span><AiFillHeart /></span> by Jose Fernando Álvarez</p>
+            <NavigationDescription>Hotel Miranda Admin Dashboard</NavigationDescription>
+            <NavigationRights>@2022 All Rights Reserved</NavigationRights>
+            <NavigationAuthor>Making With <span><AiFillHeart /></span> by Jose Fernando Álvarez</NavigationAuthor>
         </NavContainer>
     )
 }

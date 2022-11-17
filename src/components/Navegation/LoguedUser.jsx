@@ -1,16 +1,20 @@
 import React from 'react';
 import Button from '../Blocks/Button';
 
-import { Card } from './LoguedUserStyled';
+import {
+    Card,
+    UserName,
+    UserEmail
+} from './LoguedUserStyled';
 
 const LoguedUser = ({ user }) => {
     return (
         <Card>
             <img className='image' src={user.photo} alt="" />
-            <p className='name'>{user.name}</p>
-            <p className='email'>{user.email}</p>
+            <UserName>{user.name}</UserName>
+            <UserEmail>{user.email}</UserEmail>
             <Button type="contact" text="Contact Us"></Button>
-        </Card>
+        </Card >
     );
 }
 

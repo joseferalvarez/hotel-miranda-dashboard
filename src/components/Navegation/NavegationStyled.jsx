@@ -8,7 +8,7 @@ const NavContainer = styled.div`
     overflow: visible;
     position: relative;
 
-    .arrow-button{
+    button{
         position: absolute;
         right: -50px;
         top: 35px;
@@ -26,38 +26,11 @@ const NavContainer = styled.div`
             height: 25px;
         }
     }
+`;
 
-    .user-card{
-        margin-left: 15%;
-        overflow: hidden;
-    }
-
-
-    .description,
-    .rights,
-    .author{
-        padding-left: 15%;
-        overflow: hidden;
-    }
-
-    .description{
-        font-family: var(--font-poppins);
-        font-weight: 600;
-        color: #212121;
-        overflow: hidden;
-    }
-
-    .rights,
-    .author{
-        color: #799283;
-        font-size: 14px;
-        overflow: hidden;
-    }
-
-    .author{
-        margin-top: 30px;
-        overflow: hidden;
-    }
+const UserCard = styled.div`
+    margin-left: 15%;
+    overflow: hidden;
 `;
 
 const Logo = styled.div`
@@ -131,11 +104,38 @@ const Link = styled.li`
     }
 `;
 
+const NavigationDescription = styled.p`
+    padding-left: 15%;
+    overflow: hidden;
+    font-family: var(--font-poppins);
+    font-weight: 600;
+    color: #212121;
+`;
+
+const NavigationRights = styled.p`
+    padding-left: 15%;
+    overflow: hidden;
+    color: #799283;
+    font-size: 14px;
+`;
+
+const NavigationAuthor = styled.p`
+    padding-left: 15%;
+    overflow: hidden;
+    color: #799283;
+    font-size: 14px;
+    margin-top: 30px;
+`;
+
 export {
     NavContainer,
     Logo,
     LogoIcon,
     LogoLetter,
     Navigation,
+    UserCard,
+    NavigationDescription,
+    NavigationRights,
+    NavigationAuthor,
     Link
 };

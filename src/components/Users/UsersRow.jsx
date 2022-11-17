@@ -1,7 +1,7 @@
 import React from 'react';
 import { HiOutlinePhone, HiOutlineMail } from "react-icons/hi";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { Checkbox } from '../Blocks/blocks';
+import { Checkbox } from '../Blocks/Blocks';
 
 import {
     Row,
@@ -18,9 +18,9 @@ const UsersRow = ({ user }) => {
             <DataContainer>
                 <div className='checkbox__container'>
                     <Checkbox>
-                        <input type="checkbox" className="checkbox-input" id="checkbox" />
+                        <input type="checkbox" />
                         <label>
-                            <span className="checkbox">
+                            <span>
                             </span>
                         </label>
                     </Checkbox>

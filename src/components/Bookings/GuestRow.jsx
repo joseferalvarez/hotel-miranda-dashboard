@@ -1,36 +1,40 @@
 import React from 'react';
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { Checkbox } from '../Blocks/blocks';
+import { Checkbox } from '../Blocks/Blocks';
 
 import Button from "../Blocks/Button";
 
 import {
     Row,
     DataContainer,
+    DataContainerButton,
+    DataContainerCheckbox,
     GuestContainer,
+    GuestName,
+    GuestId,
     Status
 } from "./GuestRowStyled";
 
 const GuestRow = ({ guest }) => {
     return (
         <Row>
-            <DataContainer className='data-container__checkbox'>
+            <DataContainerCheckbox>
                 <div className='checkbox__container'>
                     <Checkbox>
-                        <input type="checkbox" className="checkbox-input" id="checkbox" />
+                        <input type="checkbox" />
                         <label>
-                            <span className="checkbox">
+                            <span>
                             </span>
                         </label>
                     </Checkbox>
                 </div>
-            </DataContainer>
+            </DataContainerCheckbox>
             <td>
                 <GuestContainer>
                     <img src={guest.photo} alt='' />
-                    <div className='guest__data'>
-                        <p className='guest__data__name'>{guest.name}</p>
-                        <p className='guest__data__id'>#{guest.id}</p>
+                    <div>
+                        <GuestName>{guest.name}</GuestName>
+                        <GuestId>#{guest.id}</GuestId>
                     </div>
                 </GuestContainer>
             </td>
@@ -50,9 +54,9 @@ const GuestRow = ({ guest }) => {
             <td>
                 <Status $type={guest.state}>{guest.state}</Status>
             </td>
-            <DataContainer className='data-container__button'>
+            <DataContainerButton>
                 <button><BsThreeDotsVertical className='icon' /></button>
-            </DataContainer>
+            </DataContainerButton>
         </Row>
     );
 }

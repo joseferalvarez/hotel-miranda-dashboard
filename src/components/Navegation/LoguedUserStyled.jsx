@@ -11,7 +11,7 @@ const Card = styled.div`
     flex-direction: column;
     align-items: center;
 
-    .image{
+    img{
         width: 70px;
         height: 70px;
         object-fit: cover;
@@ -19,20 +19,24 @@ const Card = styled.div`
         margin: auto;
         border-radius: 8px;
     }
-
-    .name{
-        color: #393939;
-        font-family: var(--font-poppins);
-        text-align: center;
-        font-weight: 500;
-    }
-
-    .email{
-        color: #B2B2B2;
-        font-family: var(--font-poppins);
-        font-size: 12px;
-        text-align: center;
-    }
 `;
 
-export { Card };
+const UserName = styled.p`
+    color: #393939;
+    font-family: var(--font-poppins);
+    text-align: center;
+    font-weight: 500;
+`;
+
+const UserEmail = styled.p`
+    color: #B2B2B2;
+    font-family: var(--font-poppins);
+    font-size: 12px;
+    text-align: center;
+`;
+
+export {
+    Card,
+    UserName,
+    UserEmail
+};
