@@ -1,7 +1,7 @@
 import React from 'react';
-import { Table, HeaderTitle } from './blocks';
-import GuestRow from './guestRow';
-import { Checkbox } from './blocks';
+import { Table, HeaderTitle } from '../Blocks/blocks';
+import GuestRow from './GuestRow';
+import { Checkbox } from '../Blocks/blocks';
 
 const GuestsTable = (props) => {
     return (

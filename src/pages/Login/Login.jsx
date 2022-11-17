@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router';
 
-import Button from '../../components/button';
+import Button from '../../components/Blocks/Button';
 
 import {
     LoginContainer,
@@ -14,7 +14,7 @@ import {
     Icon
 } from "./LoginStyled"
 
-import WordMark from '../../components/wordMark';
+import WordMark from '../../components/Logo/WordMark';
 import { FaUser } from "react-icons/fa"
 import { RiLockPasswordFill } from "react-icons/ri";
 

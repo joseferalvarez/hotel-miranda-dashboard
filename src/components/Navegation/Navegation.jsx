@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import WordMark from "../wordMark";
-import LoguedUser from '../LoguedUser';
+import WordMark from "../Logo/WordMark";
+import LoguedUser from './LoguedUser';
 
 import {
     NavContainer,

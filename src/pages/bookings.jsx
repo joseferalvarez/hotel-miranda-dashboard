@@ -1,5 +1,5 @@
 import React from 'react';
-import GuestsTable from '../components/guestsTable';
+import GuestsTable from '../components/Bookings/GuestsTable';
 import data from "../db/guest.json";
 import styled from 'styled-components';
 

@@ -1,6 +1,4 @@
-import React from 'react';
 import styled from 'styled-components';
-import Button from './button';
 
 const Card = styled.div`
     width: 100%;
@@ -37,15 +35,4 @@ const Card = styled.div`
     }
 `;
 
-const LoguedUser = ({ user }) => {
-    return (
-        <Card>
-            <img className='image' src={user.photo} alt="" />
-            <p className='name'>{user.name}</p>
-            <p className='email'>{user.email}</p>
-            <Button type="contact" text="Contact Us"></Button>
-        </Card>
-    );
-}
-
-export default LoguedUser;
+export { Card };

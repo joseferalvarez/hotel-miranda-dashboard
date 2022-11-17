@@ -11,11 +11,11 @@ import Room from "./pages/room"
 import Users from "./pages/users"
 import Newuser from './pages/newuser'
 import User from "./pages/user"
-import Login from './pages/Login/login';
+import Login from './pages/Login/Login';
 import Contact from './pages/contact';
 import Navegation from './components/Navegation/Navegation';
 import styled from 'styled-components';
-import Topbar from './components/topbar';
+import Topbar from './components/Topbar/Topbar';
 
 const AppContainer = styled.div`
   display: flex;

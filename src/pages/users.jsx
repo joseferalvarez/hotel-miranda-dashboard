@@ -1,5 +1,5 @@
 import React from 'react';
-import UsersTable from '../components/usersTable';
+import UsersTable from '../components/Users/UsersTable';
 import data from "../db/users.json";
 import styled from 'styled-components';
 

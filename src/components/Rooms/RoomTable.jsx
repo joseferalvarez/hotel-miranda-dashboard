@@ -1,10 +1,10 @@
 import React, { useCallback, useState } from 'react';
-import RoomRow from './roomRow';
+import RoomRow from './RoomRow';
 import update from 'immutability-helper';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-import { Table, HeaderTitle } from './blocks';
+import { Table, HeaderTitle } from '../Blocks/blocks';
 
 const RoomTable = ({ data }) => {
     const [items, setItems] = useState(data);

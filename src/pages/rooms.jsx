@@ -1,5 +1,5 @@
 import React from 'react';
-import RoomTable from '../components/roomTable';
+import RoomTable from '../components/Rooms/RoomTable';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import data from "../db/rooms.json";
