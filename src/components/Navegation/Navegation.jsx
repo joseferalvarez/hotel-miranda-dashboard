@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import WordMark from "../Logo/WordMark";
 import LoguedUser from './LoguedUser';
 
@@ -33,6 +33,7 @@ const Navegation = () => {
     }
 
     const [display, setDisplay] = useState(0);
+    const location = useLocation();
 
     const displayMenu = () => {
         setDisplay(!display)
@@ -50,27 +51,27 @@ const Navegation = () => {
             <Navigation>
                 <ul>
                     <NavLink to="/">
-                        <Link>
+                        <Link route="/" current={location.pathname}>
                             <AiFillHome className='icon' /><p>Dashboard</p>
                         </Link>
                     </NavLink>
                     <NavLink to="/bookings">
-                        <Link>
+                        <Link route="/bookings" current={location.pathname}>
                             <BsCalendarCheck className='icon' /><p>Bookings</p>
                         </Link>
                     </NavLink>
                     <NavLink to="/rooms">
-                        <Link>
+                        <Link route="/rooms" current={location.pathname}>
                             <BiKey className='icon' /><p>Rooms</p>
                         </Link>
                     </NavLink>
                     <NavLink to="/contact">
-                        <Link>
+                        <Link route="/contact" current={location.pathname}>
                             <AiFillContacts className='icon' /><p>Contact</p>
                         </Link>
                     </NavLink>
                     <NavLink to="/users">
-                        <Link>
+                        <Link route="/users" current={location.pathname}>
                             <FaUserFriends className='icon' /><p>Users</p>
                         </Link>
                     </NavLink>

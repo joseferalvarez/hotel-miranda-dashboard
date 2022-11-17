@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const NavContainer = styled.div`
     width: ${props => props.display};
@@ -91,14 +91,26 @@ const Link = styled.li`
     }
 
     p {
-        color: #799283;
+        color: ${props => {
+        if (props.route === props.current) {
+            return "#E23428";
+        } else {
+            return "#799283";
+        }
+    }};
         font-family: var(--font-poppins);
         font-size: 18px;
         text-decoration: none;
     }
 
     .icon{
-        color: #799283;
+        color: ${props => {
+        if (props.route === props.current) {
+            return "#E23428";
+        } else {
+            return "#799283";
+        }
+    }};
         width: 20px;
         height: 20px;
     }
