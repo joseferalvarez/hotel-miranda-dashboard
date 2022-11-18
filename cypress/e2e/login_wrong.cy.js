@@ -1,3 +1,5 @@
+/* Tests that the path stays in login when the user or password is incorrect */
+
 describe("The Home Page", () => {
     it("succesfully loads", () => {
         cy.visit("/");

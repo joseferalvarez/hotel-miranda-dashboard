@@ -6,6 +6,7 @@ import Button from '../../components/Blocks/Button';
 import {
     LoginContainer,
     LoginCard,
+    LogoContainer,
     Logo,
     LogoIcon,
     LogoLetter,
@@ -40,12 +41,14 @@ const Login = () => {
         return (
             <LoginContainer>
                 <LoginCard>
-                    <Logo>
-                        <LogoIcon>
-                            <LogoLetter>H</LogoLetter>
-                        </LogoIcon>
-                        <WordMark></WordMark>
-                    </Logo>
+                    <LogoContainer>
+                        <Logo>
+                            <LogoIcon>
+                                <LogoLetter>H</LogoLetter>
+                            </LogoIcon>
+                            <WordMark></WordMark>
+                        </Logo>
+                    </LogoContainer>
                     <form>
                         <InputContainer>
                             <Input type="text" className='input-user' value={user} placeholder="User" onChange={(e) => setUser(e.target.value)}></Input>

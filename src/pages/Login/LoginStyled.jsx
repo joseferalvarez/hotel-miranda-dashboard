@@ -16,6 +16,12 @@ const LoginCard = styled.div`
     padding: 3%;
 `;
 
+const LogoContainer = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+`;
+
 const Logo = styled.div`
     display: flex;
     align-items: center;
@@ -84,6 +90,7 @@ const Icon = styled.div`
 export {
     LoginContainer,
     LoginCard,
+    LogoContainer,
     Logo,
     LogoIcon,
     LogoLetter,

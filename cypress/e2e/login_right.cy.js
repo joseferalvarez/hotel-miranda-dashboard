@@ -1,3 +1,5 @@
+/* Tests that the path navigates to dashboard when login is correct */
+
 describe("The Home Page", () => {
     it("succesfully loads", () => {
         cy.visit("/");
