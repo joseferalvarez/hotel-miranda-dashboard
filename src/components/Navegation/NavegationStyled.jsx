@@ -62,7 +62,7 @@ const Link = styled.li`
     border-radius: 6px;
     align-items: center;
     gap: 20px;
-    transition: all 0.3s;
+    transition: all 0.2s;
 
     &:hover p,
     &:hover .icon{

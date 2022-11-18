@@ -3,6 +3,10 @@ import styled from 'styled-components';
 const Row = styled.tr`
     opacity: ${props => props.opacity || 1};
     border-top: 1px solid #D4D4D4;
+
+    &:hover{
+        box-shadow: 0px 4px 30px #00000014;
+    }
 `;
 
 const RoomNameContainer = styled.div`

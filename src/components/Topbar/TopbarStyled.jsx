@@ -31,6 +31,7 @@ const IconContainer = styled.div`
 
 const Icon = styled.div`
     position: relative;
+    cursor: pointer;
 
     .icon{
         color: #135846;
@@ -56,6 +57,38 @@ const Icon = styled.div`
             font-weight: 600;
             color: white;
             font-size: 14px;
+        }
+    }
+
+    &:hover div{
+        animation-duration: 0.2s;
+        animation-name: vibrate;
+    }
+
+    @keyframes vibrate {
+        0%{
+            top: -14px;
+            right: -14px;
+        }
+
+        25%{
+            top: -13px;
+            right: -16px;
+        }
+
+        50%{
+            top: -14px;
+            right: -14px;
+        }
+
+        75%{
+            top: -15px;
+            right: -13px;
+        }
+
+        100%{
+            top: -14px;
+            right: -14px;
         }
     }
 `;
