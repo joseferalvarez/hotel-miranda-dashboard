@@ -6,7 +6,7 @@ const StyledButton = styled.button`
         switch (props.$type) {
             case "login":
                 return css`
-                transition: background-color 0.1s;
+                    transition: background-color 0.1s;
                     background-color: #135846;
                     color: #EBF1EF;
                     border: none;
@@ -50,6 +50,16 @@ const StyledButton = styled.button`
                     max-width: 160px;
                 `;
                 }
+            case "create":
+                return css`
+                    background-color: #135846;
+                    color: #FFFFFF;
+                    border: none;
+                    border-radius: 8px;
+                    font-weight: 600;
+                    width: 213px;
+                    height: 50px;
+            `;
 
             default:
                 return css`
