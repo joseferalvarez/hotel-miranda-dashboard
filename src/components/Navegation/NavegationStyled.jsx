@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const NavContainer = styled.div`
     width: ${props => props.display};
@@ -30,32 +30,16 @@ const ArrowButton = styled.button`
 
 const UserCard = styled.div`
     margin-left: 15%;
+    padding-bottom: 10px;
     overflow: hidden;
 `;
 
-const Logo = styled.div`
-    width: 70%;
-    padding: 5% 15%;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-`;
-
-const LogoIcon = styled.div`
-overflow: hidden;
-    width: 80px;
-    height: 80px;
-    box-shadow: 0px 14px 24px 0px rgba(139, 139, 139, 0.25);
+const LogoContainer = styled.div`
+    width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
-`;
-
-const LogoLetter = styled.p`
-overflow: hidden;
-    font-size: 2.5rem;
-    font-weight: 700;
-    font-family: var(--font-poppins);
+    padding-top: 30px;
+    overflow: hidden;
 `;
 
 const Navigation = styled.nav`
@@ -75,19 +59,29 @@ const Link = styled.li`
     width: 70%;
     display: flex;
     height: 70px;
-    border-left: 8px solid white;
     border-radius: 6px;
     align-items: center;
     gap: 20px;
-    padding-left: 15%;
     transition: all 0.3s;
 
-    &:hover{
-        border-left: 8px solid #E23428;
-        p,
-        .icon{
-            color: #E23428;
+    &:hover p,
+    &:hover .icon{
+        color: #E23428;
+    }
+
+    div{
+        margin-right: 15%;
+        transition: background-color 0.2s;
+        width: 8px;
+        height: 100%;
+        background-color: ${props => {
+        if (props.route === props.current) {
+            return "#E23428";
+        } else {
+            return "#FFFFFF";
         }
+    }};;
+        border-radius: 0 8px 8px 0;
     }
 
     p {
@@ -142,9 +136,7 @@ const NavigationAuthor = styled.p`
 export {
     NavContainer,
     ArrowButton,
-    Logo,
-    LogoIcon,
-    LogoLetter,
+    LogoContainer,
     Navigation,
     UserCard,
     NavigationDescription,

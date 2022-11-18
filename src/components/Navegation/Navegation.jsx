@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import WordMark from "../Logo/WordMark";
 import LoguedUser from './LoguedUser';
+import Logo from '../Logo/Logo';
 
 import {
     NavContainer,
-    Logo,
-    LogoIcon,
-    LogoLetter,
+    LogoContainer,
     Navigation,
     ArrowButton,
     UserCard,
@@ -42,37 +40,34 @@ const Navegation = () => {
     return (
         <NavContainer display={display ? "500px" : "0px"}>
             <ArrowButton onClick={displayMenu}><FaArrowsAltH className='arrow' /></ArrowButton>
-            <Logo>
-                <LogoIcon>
-                    <LogoLetter>H</LogoLetter>
-                </LogoIcon>
-                <WordMark></WordMark>
-            </Logo>
+            <LogoContainer>
+                <Logo />
+            </LogoContainer>
             <Navigation>
                 <ul>
                     <NavLink to="/">
                         <Link route="/" current={location.pathname}>
-                            <AiFillHome className='icon' /><p>Dashboard</p>
+                            <div /><AiFillHome className='icon' /><p>Dashboard</p>
                         </Link>
                     </NavLink>
                     <NavLink to="/bookings">
                         <Link route="/bookings" current={location.pathname}>
-                            <BsCalendarCheck className='icon' /><p>Bookings</p>
+                            <div /><BsCalendarCheck className='icon' /><p>Bookings</p>
                         </Link>
                     </NavLink>
                     <NavLink to="/rooms">
                         <Link route="/rooms" current={location.pathname}>
-                            <BiKey className='icon' /><p>Rooms</p>
+                            <div /><BiKey className='icon' /><p>Rooms</p>
                         </Link>
                     </NavLink>
                     <NavLink to="/contact">
                         <Link route="/contact" current={location.pathname}>
-                            <AiFillContacts className='icon' /><p>Contact</p>
+                            <div /><AiFillContacts className='icon' /><p>Contact</p>
                         </Link>
                     </NavLink>
                     <NavLink to="/users">
                         <Link route="/users" current={location.pathname}>
-                            <FaUserFriends className='icon' /><p>Users</p>
+                            <div /><FaUserFriends className='icon' /><p>Users</p>
                         </Link>
                     </NavLink>
                 </ul>

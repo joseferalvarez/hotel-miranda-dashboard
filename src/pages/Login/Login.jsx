@@ -2,20 +2,17 @@ import React, { useState } from 'react';
 import { Navigate } from 'react-router';
 
 import Button from '../../components/Blocks/Button';
+import Logo from '../../components/Logo/Logo';
 
 import {
     LoginContainer,
     LoginCard,
     LogoContainer,
-    Logo,
-    LogoIcon,
-    LogoLetter,
     InputContainer,
     Input,
     Icon
 } from "./LoginStyled"
 
-import WordMark from '../../components/Logo/WordMark';
 import { FaUser } from "react-icons/fa"
 import { RiLockPasswordFill } from "react-icons/ri";
 
@@ -42,12 +39,7 @@ const Login = () => {
             <LoginContainer>
                 <LoginCard>
                     <LogoContainer>
-                        <Logo>
-                            <LogoIcon>
-                                <LogoLetter>H</LogoLetter>
-                            </LogoIcon>
-                            <WordMark></WordMark>
-                        </Logo>
+                        <Logo />
                     </LogoContainer>
                     <form>
                         <InputContainer>

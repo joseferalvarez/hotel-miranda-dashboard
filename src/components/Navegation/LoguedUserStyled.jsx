@@ -6,7 +6,7 @@ const Card = styled.div`
     height: 200px;
     padding: 20px;
     border-radius: 18px;
-    box-shadow: 0px 20px 30px #00000014;
+    box-shadow: 0px 6px 6px #00000014;
     display: flex;
     flex-direction: column;
     align-items: center;
