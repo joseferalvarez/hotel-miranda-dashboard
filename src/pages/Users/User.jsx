@@ -6,6 +6,8 @@ const User = () => {
     return (
         <div>
             <h1>user nº{params.iduser}</h1>
+            <input type="text"></input>
+            <button>Edit User</button>
         </div>
     );
 }

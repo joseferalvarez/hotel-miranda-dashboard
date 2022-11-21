@@ -1,6 +1,9 @@
 import './App.css';
-import { HashRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import { useState, createContext, useEffect } from 'react';
+import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { useReducer, useContext } from 'react';
+import { reduceLogin } from "./context/reduceLogin";
+import LoginContext from './context/contextLogin';
+import { AppContainer } from './AppStyled';
 
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Bookings from "./pages/Bookings/Bookings";
@@ -14,108 +17,103 @@ import User from "./pages/Users/User";
 import Login from './pages/Login/Login';
 import Contact from './pages/Contact/Contact';
 import Navegation from './components/Navegation/Navegation';
-import styled from 'styled-components';
 import Topbar from './components/Topbar/Topbar';
 
-const AppContainer = styled.div`
-  display: flex;
-  background-color: #F8F8F8;
-  .window-container{
-    width: 100%;
-    min-height: 100vh;
-  }
-`;
-
-const MenuProvider = createContext(false);
-
 function App() {
+
+  const [log, setLog] = useReducer(reduceLogin, { auth: false, email: "" });
+
   return (
-    <HashRouter>
-      <AppContainer>
+    <LoginContext.Provider value={[log, setLog]}>
+      <HashRouter>
+        <AppContainer>
 
-        <SetMenu>
-          <Navegation></Navegation>
-        </SetMenu>
-
-        <div className='window-container'>
           <SetMenu>
-            <Topbar></Topbar>
+            <Navegation></Navegation>
           </SetMenu>
-          <Routes>
 
-            {/* login and dashboard */}
-            <Route path='/' element={
-              <AuthProvider>
-                <Dashboard />
-              </AuthProvider>}
-            />
-            <Route path='/login' element={<Login />} />
+          <div className='window-container'>
+            <SetMenu>
+              <Topbar></Topbar>
+            </SetMenu>
+            <Routes>
 
-            {/* bookings */}
-            <Route path="/bookings" element={
-              <AuthProvider>
-                <Bookings />
-              </AuthProvider>
-            } />
-            <Route path='/bookings/:idguest' action={({ params }) => { }} element={
-              <AuthProvider>
-                <Guest />
-              </AuthProvider>}
-            />
+              {/* login and dashboard */}
+              <Route path='/' element={
+                <AuthProvider>
+                  <Dashboard />
+                </AuthProvider>}
+              />
+              <Route path='/login' element={<Login />} />
 
-            {/* rooms */}
-            <Route path='/rooms' element={
-              <AuthProvider>
-                <Rooms />
-              </AuthProvider>}
-            />
-            <Route path='/rooms/newroom' element={
-              <AuthProvider>
-                <NewRoom />
-              </AuthProvider>}
-            />
-            <Route path="/rooms/:idroom" action={({ params }) => { }} element={
-              <AuthProvider>
-                <Room />
-              </AuthProvider>}
-            />
+              {/* bookings */}
+              <Route path="/bookings" element={
+                <AuthProvider>
+                  <Bookings />
+                </AuthProvider>
+              } />
+              <Route path='/bookings/:idguest' action={({ params }) => { }} element={
+                <AuthProvider>
+                  <Guest />
+                </AuthProvider>}
+              />
 
-            {/* contact */}
-            <Route path="/contact" action={({ params }) => { }} element={
-              <AuthProvider>
-                <Contact />
-              </AuthProvider>}
-            />
+              {/* rooms */}
+              <Route path='/rooms' element={
+                <AuthProvider>
+                  <Rooms />
+                </AuthProvider>}
+              />
+              <Route path='/rooms/newroom' element={
+                <AuthProvider>
+                  <NewRoom />
+                </AuthProvider>}
+              />
+              <Route path="/rooms/:idroom" action={({ params }) => { }} element={
+                <AuthProvider>
+                  <Room />
+                </AuthProvider>}
+              />
+
+              {/* contact */}
+              <Route path="/contact" action={({ params }) => { }} element={
+                <AuthProvider>
+                  <Contact />
+                </AuthProvider>}
+              />
 
 
-            {/* users */}
-            <Route path="/users" element={
-              <AuthProvider>
-                <Users />
-              </AuthProvider>}
-            />
-            <Route path="/users/newuser" element={
-              <AuthProvider>
-                <NewUser />
-              </AuthProvider>} />
-            <Route path="/users/:iduser" action={({ params }) => { }} element={
-              <AuthProvider>
-                <User />
-              </AuthProvider>}
-            />
+              {/* users */}
+              <Route path="/users" element={
+                <AuthProvider>
+                  <Users />
+                </AuthProvider>}
+              />
+              <Route path="/users/newuser" element={
+                <AuthProvider>
+                  <NewUser />
+                </AuthProvider>} />
+              <Route path="/users/:iduser" action={({ params }) => { }} element={
+                <AuthProvider>
+                  <User />
+                </AuthProvider>}
+              />
 
-            <Route path="*" action={({ params }) => { }} element={<Dashboard />} />
+              <Route path="*" action={({ params }) => { }} element={<Dashboard />} />
 
-          </Routes>
-        </div>
-      </AppContainer>
-    </HashRouter>
+            </Routes>
+          </div>
+        </AppContainer>
+      </HashRouter>
+    </LoginContext.Provider>
   );
 }
 
 const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
-  if (localStorage.getItem("login")) {
+  const [log,] = useContext(LoginContext);
+
+  if (log.auth) {
     return (
       children
     )
@@ -128,19 +126,13 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
 const SetMenu = ({ children }: { children: JSX.Element }) => {
 
-  const [loged, setLogued] = useState(localStorage.getItem("login"));
-  const location = useLocation();
+  const [log,] = useContext(LoginContext);
 
-  useEffect(() => {
-    setLogued(localStorage.getItem("login"));
-  }, [location]);
-
-  if (loged) {
+  if (log.auth) {
     return (
       children
     )
   }
 }
 
-export { MenuProvider };
 export default App;

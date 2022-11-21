@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Navigate } from 'react-router';
+import { login } from "../../context/actions";
 
 import Button from '../../components/Blocks/Button';
 import Logo from '../../components/Logo/Logo';
+import LoginContext from '../../context/contextLogin';
 
 import {
     LoginContainer,
@@ -17,24 +19,23 @@ import { FaUser } from "react-icons/fa"
 import { RiLockPasswordFill } from "react-icons/ri";
 
 const Login = () => {
+    const [log, setLog] = useContext(LoginContext);
 
-    const [user, setUser] = useState("");
+    const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
-    const [login, setLogin] = useState(localStorage.getItem("login"));
 
-    let userHard = "JoseFer";
+    let emailHard = log.auth ? log.email : "josefer@gmail.com";
     let passHard = "1234";
 
     const checkLogin = () => {
-        if (userHard === user && passHard === pass) {
-            localStorage.setItem("login", true);
-            setLogin(localStorage.getItem("login"));
+        if (emailHard === email && passHard === pass) {
+            setLog(login({ auth: true, email: email }));
         } else {
             alert("usuario o contraseña incorrectos");
         }
     }
 
-    if (!login) {
+    if (!log.auth) {
         return (
             <LoginContainer>
                 <LoginCard>
@@ -43,11 +44,11 @@ const Login = () => {
                     </LogoContainer>
                     <form>
                         <InputContainer>
-                            <Input type="text" className='input-user' value={user} placeholder="User" onChange={(e) => setUser(e.target.value)}></Input>
+                            <Input type="text" className='input-user' value={email} placeholder="e-mail" onChange={(e) => setEmail(e.target.value)}></Input>
                             <Icon><FaUser className='input-icon'></FaUser></Icon>
                         </InputContainer>
                         <InputContainer>
-                            <Input type="password" className='input-pass' value={pass} placeholder="Password" onChange={(e) => setPass(e.target.value)}></Input>
+                            <Input type="password" className='input-pass' value={pass} placeholder="password" onChange={(e) => setPass(e.target.value)}></Input>
                             <Icon><RiLockPasswordFill className='input-icon'></RiLockPasswordFill></Icon>
                         </InputContainer>
                         <Button type="login" text="LOGIN" click={checkLogin}></Button>
