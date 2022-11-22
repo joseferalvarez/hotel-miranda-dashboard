@@ -4,16 +4,10 @@ import update from 'immutability-helper';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-import Button from '../Blocks/Button';
-import Select from '../Blocks/Select';
 
 import {
     Table,
     HeaderTitle,
-    TableTools,
-    FilterTable,
-    FilterButton,
-    TableButtons
 } from '../Blocks/Blocks';
 
 const RoomTable = ({ data }) => {
@@ -39,17 +33,6 @@ const RoomTable = ({ data }) => {
     })
     return (
         <div>
-            <TableTools>
-                <FilterTable>
-                    <FilterButton>All Rooms</FilterButton>
-                    <FilterButton>Available Rooms</FilterButton>
-                    <FilterButton>Booked Rooms</FilterButton>
-                </FilterTable>
-                <TableButtons>
-                    <Button type="create" text="+ New Room"></Button>
-                    <Select type="white" options={["Newest"]}></Select>
-                </TableButtons>
-            </TableTools>
             <Table>
                 <thead>
                     <tr>

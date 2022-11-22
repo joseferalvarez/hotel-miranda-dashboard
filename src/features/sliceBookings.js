@@ -14,8 +14,24 @@ const initialState = {
 export const sliceBookings = createSlice({
     name: "bookings",
     initialState,
-    /* reducers: {
-    }, */
+    reducers: {
+        addNewBooking: (state, action) => {
+            state.bookings = [...state.bookings, action.payload];
+        },
+        deleteBooking: (state, action) => {
+            state.bookings = state.bookings.filter(
+                (booking) => booking.id !== action.payload
+            );
+        },
+        editBooking: (state, action) => {
+            state.bookings = state.bookings.map((booking) => {
+                if (booking.id === action.payload.id) {
+                    booking = action.payload;
+                }
+                return booking;
+            });
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(getApiBookings.fulfilled, (state, action) => {
             state.bookings = action.payload;
