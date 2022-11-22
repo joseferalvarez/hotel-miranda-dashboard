@@ -4,6 +4,7 @@ const TopbarContainer = styled.div`
     display: flex;
     background-color: #FFFFFF;
     box-shadow: 0px 3px 10px #00000005;
+    height: 120px;
 `;
 
 const TopbarTitle = styled.div`

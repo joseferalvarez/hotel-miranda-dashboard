@@ -21,7 +21,11 @@ import Topbar from './components/Topbar/Topbar';
 
 function App() {
 
-  const [log, setLog] = useReducer(reduceLogin, { auth: false, email: "" });
+  const getLocalEmail = () => {
+    return localStorage.getItem("login");
+  }
+
+  const [log, setLog] = useReducer(reduceLogin, JSON.parse(getLocalEmail()) || { auth: false, email: "" });
 
   return (
     <LoginContext.Provider value={[log, setLog]}>

@@ -24,12 +24,13 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
 
-    let emailHard = log.auth ? log.email : "josefer@gmail.com";
+    let emailHard = log.email || "josefer@gmail.com";
     let passHard = "1234";
 
     const checkLogin = () => {
         if (emailHard === email && passHard === pass) {
             setLog(login({ auth: true, email: email }));
+            localStorage.setItem("login", JSON.stringify({ auth: true, email: email }));
         } else {
             alert("usuario o contraseña incorrectos");
         }

@@ -14,12 +14,13 @@ import { logout } from '../../context/actions';
 
 const Topbar = () => {
 
-    const [, setLog] = useContext(LoginContext);
+    const [log, setLog] = useContext(LoginContext);
     let location = useLocation();
     const [title, setTitle] = useState("");
 
     const goLogin = () => {
-        setLog(logout({ auth: false, name: "" }));
+        setLog(logout({ auth: false, email: log.email }));
+        localStorage.setItem("login", JSON.stringify({ auth: false, email: log.email }));
     }
 
 

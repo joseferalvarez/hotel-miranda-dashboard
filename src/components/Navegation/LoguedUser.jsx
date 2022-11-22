@@ -1,29 +1,44 @@
-import React, { useContext, useState } from 'react';
-import { Navigate } from 'react-router';
+import React, { useContext } from 'react';
 import LoginContext from '../../context/contextLogin';
-import Button from '../Blocks/Button';
+import { Link } from "react-router-dom";
 
 import {
     Card,
     UserName,
     UserEmail
 } from './LoguedUserStyled';
+import styled from 'styled-components';
+
+const LinkButton = styled.div`
+    background-color: #EBF1EF;
+    border: none;
+    border-radius: 8px;
+    width: 160px;
+    height: 50px;
+    a{
+        text-align: center;
+        font-family: var(--font-poppins);
+        text-decoration: none;
+        color: #135846;
+        font-size: 14px;
+        font-weight: 600;
+        display: block;
+        padding: 15px;
+    }
+`;
 
 const LoguedUser = ({ user }) => {
 
     const [log,] = useContext(LoginContext);
-    const [editUser, setEditUser] = useState(false);
-    console.log(editUser);
 
     return (
         <Card>
             <img className='image' src={user.photo} alt="" />
             <UserName>{user.name}</UserName>
             <UserEmail>{log.email}</UserEmail>
-            {!editUser ?
-                <Button type="contact" text="Edit User" click={() => setEditUser(!editUser)}></Button>
-                : <Navigate to={"/users/" + log.email}></Navigate>}
-
+            <LinkButton>
+                <Link to={"/users/" + log.email}>Edit user</Link>
+            </LinkButton>
         </Card>
     );
 }

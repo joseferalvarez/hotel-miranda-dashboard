@@ -3,7 +3,6 @@ import GuestsTable from '../../components/Bookings/GuestsTable';
 import data from "../../db/guest.json";
 import { BookingsContainer } from './BookingsStyled';
 import { FilterTable, FilterButton, TableTools, TableButtons } from '../../components/Blocks/Blocks';
-import Button from '../../components/Blocks/Button';
 import Select from '../../components/Blocks/Select';
 
 
