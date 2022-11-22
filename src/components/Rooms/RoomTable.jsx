@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import RoomRow from './RoomRow';
 import update from 'immutability-helper';
 import { DndProvider } from "react-dnd";
@@ -18,6 +18,10 @@ import {
 
 const RoomTable = ({ data }) => {
     const [items, setItems] = useState(data);
+
+    useEffect(() => {
+        setItems(data);
+    }, [data]);
 
     const moveRow = useCallback((dragIndex, hoverIndex) => {
         setItems((prevItems) => update(prevItems, {

@@ -14,7 +14,7 @@ const Bookings = () => {
 
     useEffect(() => {
         dispatch(getApiBookings());
-    }, [dispatch]);
+    }, [dispatch, bookings]);
 
     return (
         <BookingsContainer>

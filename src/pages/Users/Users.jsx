@@ -6,11 +6,11 @@ import { UsersContainer } from './UsersStyled';
 
 const Users = () => {
     const dispatch = useDispatch();
-    const users = useSelector((state) => state.sliceUsers);
+    const { users } = useSelector((state) => state.usersReducer);
 
     useEffect(() => {
         dispatch(getApiUsers());
-    }, [dispatch]);
+    }, [dispatch, users]);
 
     return (
         <UsersContainer>

@@ -9,11 +9,12 @@ import { getApiRooms } from '../../features/sliceRooms';
 const Rooms = () => {
 
     const dispatch = useDispatch();
-    const { rooms } = useSelector((state) => state.sliceRooms);
+    const { rooms } = useSelector((state) => state.roomsReducer);
 
     useEffect(() => {
-        dispatch(getApiRooms);
-    }, [dispatch]);
+        dispatch(getApiRooms());
+        console.log(rooms);
+    }, [dispatch, rooms]);
 
     return (
         <RoomsContainer>

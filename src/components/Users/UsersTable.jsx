@@ -12,7 +12,7 @@ import { Checkbox } from '../Blocks/Blocks';
 import Button from '../Blocks/Button';
 import Select from '../Blocks/Select';
 
-const UsersTable = (props) => {
+const UsersTable = ({ data }) => {
     return (
         <div>
             <TableTools>
@@ -46,7 +46,7 @@ const UsersTable = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.data.map((obj, index) => (
+                    {data.map((obj, index) => (
                         <UsersRow key={index} user={obj}></UsersRow>
                     ))}
                 </tbody>

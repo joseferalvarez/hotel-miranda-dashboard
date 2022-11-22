@@ -4,7 +4,7 @@ import { fetchApi } from "./fetchApi";
 export const getApiRooms = createAsyncThunk(
     "list/fetchRooms",
     async () => {
-        return await fetchApi("Bookings");
+        return await fetchApi("Rooms");
     }
 );
 
@@ -15,13 +15,13 @@ export const sliceRooms = createSlice({
     name: "rooms",
     initialState,
     reducers: {
-        extraReducers: (builder) => {
-            builder.addCase(getApiRooms.fulfilled, (state, action) => {
-                state.bookings = action.payload;
-            }).addCase(getApiRooms.rejected, () => {
-                console.error("No se han podido encontrar habitaciones.");
-            });
-        }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(getApiRooms.fulfilled, (state, action) => {
+            state.rooms = action.payload;
+        }).addCase(getApiRooms.rejected, () => {
+            console.error("No se han podido encontrar habitaciones.");
+        });
     }
 });
 

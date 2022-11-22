@@ -19,7 +19,7 @@ export const sliceUsers = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(getApiUsers.fulfilled, (state, action) => {
-            state.bookings = action.payload;
+            state.users = action.payload;
         }).addCase(getApiUsers.rejected, () => {
             console.error("No se han podido encontrar usuarios.");
         });

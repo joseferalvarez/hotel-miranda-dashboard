@@ -3,7 +3,7 @@ import { Table, HeaderTitle } from '../Blocks/Blocks';
 import GuestRow from './GuestRow';
 import { Checkbox } from '../Blocks/Blocks';
 
-const GuestsTable = (props) => {
+const GuestsTable = ({ data }) => {
     return (
         <Table>
             <thead>
@@ -27,7 +27,7 @@ const GuestsTable = (props) => {
                 </tr>
             </thead>
             <tbody>
-                {props.data.map((obj, index) => (
+                {data.map((obj, index) => (
                     <GuestRow key={index} guest={obj} />
                 ))}
             </tbody>
