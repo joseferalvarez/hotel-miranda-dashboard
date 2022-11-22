@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import GuestsTable from '../../components/Bookings/GuestsTable';
-import data from "../../db/guest.json";
 import { BookingsContainer } from './BookingsStyled';
 import { FilterTable, FilterButton, TableTools, TableButtons } from '../../components/Blocks/Blocks';
 import Select from '../../components/Blocks/Select';
+import { useDispatch, useSelector } from 'react-redux';
+import { getApiBookings } from '../../features/sliceBookings';
 
 
 
 const Bookings = () => {
+    const dispatch = useDispatch();
+    const { bookings } = useSelector((state) => state.bookingsReducer);
+
+    useEffect(() => {
+        dispatch(getApiBookings());
+    }, [dispatch]);
+
     return (
         <BookingsContainer>
             <div className='content'>
@@ -24,7 +32,7 @@ const Bookings = () => {
                         <Select type="white" options={["Newest"]}></Select>
                     </TableButtons>
                 </TableTools>
-                <GuestsTable data={data}></GuestsTable>
+                <GuestsTable data={bookings}></GuestsTable>
             </div>
         </BookingsContainer>
     );

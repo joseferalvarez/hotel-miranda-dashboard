@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import UsersTable from '../../components/Users/UsersTable';
-import data from "../../db/users.json";
+import { getApiUsers } from '../../features/sliceUsers';
 import { UsersContainer } from './UsersStyled';
 
 const Users = () => {
+    const dispatch = useDispatch();
+    const users = useSelector((state) => state.sliceUsers);
+
+    useEffect(() => {
+        dispatch(getApiUsers());
+    }, [dispatch]);
+
     return (
         <UsersContainer>
             <div className='content'>
-                <UsersTable data={data}></UsersTable>
+                <UsersTable data={users}></UsersTable>
             </div>
         </UsersContainer>
     );

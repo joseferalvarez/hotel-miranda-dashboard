@@ -35,8 +35,8 @@ const SelectStyled = styled.select`
 const Select = ({ type, options }) => {
     return (
         <SelectStyled $type={type}>
-            {options.map((option) => {
-                return (<option>{option}</option>)
+            {options.map((option, index) => {
+                return (<option key={index}>{option}</option>)
             })}
         </SelectStyled>
     );

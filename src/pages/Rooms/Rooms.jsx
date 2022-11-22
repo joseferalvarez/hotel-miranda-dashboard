@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import RoomTable from '../../components/Rooms/RoomTable';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import data from "../../db/rooms.json";
 import { RoomsContainer } from './RoomsStyled';
+import { useDispatch, useSelector } from 'react-redux';
+import { getApiRooms } from '../../features/sliceRooms';
 
 const Rooms = () => {
+
+    const dispatch = useDispatch();
+    const { rooms } = useSelector((state) => state.sliceRooms);
+
+    useEffect(() => {
+        dispatch(getApiRooms);
+    }, [dispatch]);
 
     return (
         <RoomsContainer>
             <div className='content'>
                 <DndProvider backend={HTML5Backend}>
-                    <RoomTable data={data}></RoomTable>
+                    <RoomTable data={rooms}></RoomTable>
                 </DndProvider>
             </div>
         </RoomsContainer>
