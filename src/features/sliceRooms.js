@@ -53,5 +53,5 @@ export const sliceRooms = createSlice({
     }
 });
 
-export const { filterRooms } = sliceRooms.actions;
+export const { filterRooms, addNewRoom } = sliceRooms.actions;
 export default sliceRooms.reducer;

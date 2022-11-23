@@ -48,7 +48,7 @@ const Rooms = () => {
                         <FilterButton onClick={() => filterByType(false)}>Booked Rooms</FilterButton>
                     </FilterTable>
                     <TableButtons>
-                        <Link to="/">Hola</Link>
+                        <Link to="/rooms/newroom">Hola</Link>
                         <Button type="create" text="+ New Room">
                         </Button>
                         <Select type="white" options={["Newest"]}></Select>
