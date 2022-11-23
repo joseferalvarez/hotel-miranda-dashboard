@@ -2,30 +2,13 @@ import React from 'react';
 import {
     Table,
     HeaderTitle,
-    FilterTable,
-    FilterButton,
-    TableButtons,
-    TableTools
 } from '../Blocks/Blocks';
 import UsersRow from './UsersRow';
 import { Checkbox } from '../Blocks/Blocks';
-import Button from '../Blocks/Button';
-import Select from '../Blocks/Select';
 
 const UsersTable = ({ data }) => {
     return (
         <div>
-            <TableTools>
-                <FilterTable>
-                    <FilterButton>All Employee</FilterButton>
-                    <FilterButton>Active Employee</FilterButton>
-                    <FilterButton>Inactive Employee</FilterButton>
-                </FilterTable>
-                <TableButtons>
-                    <Button type="create" text="+ New Employee"></Button>
-                    <Select type="white" options={["Newest"]}></Select>
-                </TableButtons>
-            </TableTools>
             <Table>
                 <thead>
                     <tr>

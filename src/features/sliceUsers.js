@@ -1,11 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchApi } from "./fetchApi";
 
-/*Estado inicial del reducer*/
+const getAllUsers = new Promise((data) => {
+    setTimeout(() => {
+        data(fetchApi("Users"));
+    }, 200);
+})
+
 export const getApiUsers = createAsyncThunk(
-    "list/fetchusers",
-    async () => {
-        return await fetchApi("Users");
+    "list/fetchRooms",
+    () => {
+        return getAllUsers
+            .then((data) => data);
     }
 );
 
@@ -16,6 +22,11 @@ export const sliceUsers = createSlice({
     name: "users",
     initialState,
     reducers: {
+        filterUsers: (state, action) => {
+            state.users = state.users.filter(
+                (user) => user.state === action.payload
+            );
+        },
         addNewUser: (state, action) => {
             state.users = [...state, action.payload]
         },
@@ -43,5 +54,5 @@ export const sliceUsers = createSlice({
 
 });
 
-/* export const { } = sliceUsers.actions; */
+export const { filterUsers } = sliceUsers.actions;
 export default sliceUsers.reducer;

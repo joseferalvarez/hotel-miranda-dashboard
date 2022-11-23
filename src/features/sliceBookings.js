@@ -1,10 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchApi } from "./fetchApi";
 
+const getAllBookings = new Promise((data) => {
+    setTimeout(() => {
+        data(fetchApi("Bookings"));
+    }, 200);
+})
+
 export const getApiBookings = createAsyncThunk(
-    "list/fetchBookings",
-    async () => {
-        return await fetchApi("Bookings");
+    "list/fetchRooms",
+    () => {
+        return getAllBookings
+            .then((data) => data);
     }
 );
 
@@ -15,6 +22,11 @@ export const sliceBookings = createSlice({
     name: "bookings",
     initialState,
     reducers: {
+        filterBookings: (state, action) => {
+            state.bookings = state.bookings.filter(
+                (booking) => booking.state === action.payload
+            );
+        },
         addNewBooking: (state, action) => {
             state.bookings = [...state.bookings, action.payload];
         },
@@ -41,5 +53,5 @@ export const sliceBookings = createSlice({
     }
 });
 
-/* export const { } = sliceBookings.actions; */
+export const { filterBookings } = sliceBookings.actions;
 export default sliceBookings.reducer;

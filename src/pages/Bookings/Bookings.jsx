@@ -4,7 +4,7 @@ import { BookingsContainer } from './BookingsStyled';
 import { FilterTable, FilterButton, TableTools, TableButtons } from '../../components/Blocks/Blocks';
 import Select from '../../components/Blocks/Select';
 import { useDispatch, useSelector } from 'react-redux';
-import { getApiBookings } from '../../features/sliceBookings';
+import { filterBookings, getApiBookings } from '../../features/sliceBookings';
 
 
 
@@ -14,18 +14,30 @@ const Bookings = () => {
 
     useEffect(() => {
         dispatch(getApiBookings());
-    }, [dispatch, bookings]);
+    }, [dispatch]);
+
+    const getAllBookings = () => {
+        dispatch(getApiBookings());
+    }
+
+    const filterByType = (type) => {
+        getAllBookings();
+        setTimeout(() => {
+            dispatch(filterBookings(type))
+        }
+            , 0);
+
+    }
 
     return (
         <BookingsContainer>
             <div className='content'>
                 <TableTools>
                     <FilterTable>
-                        <FilterButton>All Guest</FilterButton>
-                        <FilterButton>Pending</FilterButton>
-                        <FilterButton>Booked</FilterButton>
-                        <FilterButton>Canceled</FilterButton>
-                        <FilterButton>Refund</FilterButton>
+                        <FilterButton onClick={getAllBookings}>All Bookings</FilterButton>
+                        <FilterButton onClick={() => filterByType("Check In")}>Checking In</FilterButton>
+                        <FilterButton onClick={() => filterByType("Check Out")}>Checking Out</FilterButton>
+                        <FilterButton onClick={() => filterByType("In Progress")}>In Progress</FilterButton>
                     </FilterTable>
                     <TableButtons>
                         <Select type="green" options={["1 November 2020 - 30 November 2020"]}></Select>

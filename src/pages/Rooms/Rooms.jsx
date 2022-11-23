@@ -28,17 +28,14 @@ const Rooms = () => {
     }, [dispatch]);
 
     const getAllRooms = () => {
-        dispatch(getApiRooms())
+        dispatch(getApiRooms());
     }
 
-    const filterAvailableRooms = () => {
+    const filterByType = (type) => {
         getAllRooms();
-        setTimeout(() => dispatch(filterRooms(true)), 200);
-    }
-
-    const filterBookedRooms = () => {
-        getAllRooms();
-        setTimeout(() => dispatch(filterRooms(false)), 200);
+        setTimeout(() => {
+            dispatch(filterRooms(type));
+        }, 0);
     }
 
     return (
@@ -47,8 +44,8 @@ const Rooms = () => {
                 <TableTools>
                     <FilterTable>
                         <FilterButton onClick={getAllRooms}>All Rooms</FilterButton>
-                        <FilterButton onClick={filterAvailableRooms}>Available Rooms</FilterButton>
-                        <FilterButton onClick={filterBookedRooms}>Booked Rooms</FilterButton>
+                        <FilterButton onClick={() => filterByType(true)}>Available Rooms</FilterButton>
+                        <FilterButton onClick={() => filterByType(false)}>Booked Rooms</FilterButton>
                     </FilterTable>
                     <TableButtons>
                         <Link to="/">Hola</Link>

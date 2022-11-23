@@ -1,15 +1,22 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchApi } from "./fetchApi";
 
+const getAllRooms = new Promise((data) => {
+    setTimeout(() => {
+        data(fetchApi("Rooms"));
+    }, 200);
+})
+
 export const getApiRooms = createAsyncThunk(
     "list/fetchRooms",
-    async () => {
-        return await fetchApi("Rooms");
+    () => {
+        return getAllRooms
+            .then((data) => data);
     }
 );
 
 const initialState = {
-    rooms: []
+    rooms: [],
 }
 export const sliceRooms = createSlice({
     name: "rooms",
