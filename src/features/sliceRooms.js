@@ -23,11 +23,6 @@ export const sliceRooms = createSlice({
     name: "rooms",
     initialState,
     reducers: {
-        filterRooms: (state, action) => {
-            state.rooms = state.rooms.filter(
-                (room) => room.status === action.payload
-            );
-        },
         addNewRoom: (state, action) => {
             state.rooms = [...state.rooms, action.payload];
         },
@@ -62,8 +57,8 @@ export const sliceRooms = createSlice({
 });
 
 export const {
-    filterRooms,
     addNewRoom,
+    editRoom,
     deleteRoom,
     getRoom
 } = sliceRooms.actions;

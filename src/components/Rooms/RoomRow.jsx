@@ -33,8 +33,9 @@ const RoomRow = ({ id, room, index, moveRow }) => {
 
     const getRoomEdit = () => {
         dispatch(getRoom(id))
-        navigate("/rooms/" + id);
+        navigate("/rooms/editroom/" + id);
     }
+
     const getRoomDetails = () => {
         dispatch(getRoom(id))
         navigate("/rooms/" + id);
@@ -117,7 +118,7 @@ const RoomRow = ({ id, room, index, moveRow }) => {
             </DataContainer>
             <DataContainer>
                 <RoomText>{room.amenities.map((amenitie, index) => (
-                    <span key={index}>{amenitie}, </span>
+                    <span key={index}>{amenitie} </span>
                 ))}</RoomText>
             </DataContainer>
             <DataContainer>

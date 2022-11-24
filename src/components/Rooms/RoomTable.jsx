@@ -28,7 +28,7 @@ const RoomTable = ({ data }) => {
 
     const renderItem = useCallback((item, index) => {
         return (
-            <RoomRow key={index} id={item.id} room={item} index={index} moveRow={moveRow}></RoomRow>
+            <RoomRow key={item.id} id={item.id} room={item} index={index} moveRow={moveRow}></RoomRow>
         )
     })
     return (

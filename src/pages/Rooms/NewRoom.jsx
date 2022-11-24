@@ -17,12 +17,7 @@ const NewRoom = () => {
         price: "",
         offer: "",
         status: ""
-
     });
-
-    useEffect(() => {
-        console.log(room);
-    }, [room]);
 
     const createRoom = () => {
         dispatch(addNewRoom(room))

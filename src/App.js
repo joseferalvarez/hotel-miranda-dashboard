@@ -18,6 +18,7 @@ import Login from './pages/Login/Login';
 import Contact from './pages/Contact/Contact';
 import Navegation from './components/Navegation/Navegation';
 import Topbar from './components/Topbar/Topbar';
+import EditRoom from './pages/Rooms/EditRoom';
 
 function App() {
 
@@ -76,6 +77,12 @@ function App() {
               <Route path="/rooms/:idroom" action={({ params }) => { }} element={
                 <AuthProvider>
                   <Room />
+                </AuthProvider>}
+              />
+
+              <Route path="/rooms/editroom/:idroom" action={({ params }) => { }} element={
+                <AuthProvider>
+                  <EditRoom />
                 </AuthProvider>}
               />
 

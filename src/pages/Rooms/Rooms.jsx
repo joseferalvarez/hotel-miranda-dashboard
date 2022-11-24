@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import RoomTable from '../../components/Rooms/RoomTable';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -6,7 +6,6 @@ import { RoomsContainer } from './RoomsStyled';
 import { useDispatch, useSelector } from 'react-redux';
 import { getApiRooms } from '../../features/sliceRooms';
 import { Link } from 'react-router-dom';
-import { filterRooms } from '../../features/sliceRooms';
 import Select from '../../components/Blocks/Select';
 
 import {
@@ -22,22 +21,24 @@ const Rooms = () => {
 
     const dispatch = useDispatch();
     const { rooms } = useSelector((state) => state.roomsReducer);
+    const [roomList, setRoomList] = useState(rooms);
 
     useEffect(() => {
         if (rooms.length === 0) {
             dispatch(getApiRooms());
         }
-    }, [dispatch]);
+        setRoomList(rooms);
+    }, [rooms, dispatch]);
 
     const getAllRooms = () => {
-        dispatch(getApiRooms());
+        setRoomList(rooms);
     }
 
     const filterByType = (type) => {
-        setTimeout(() => {
-            dispatch(filterRooms(type));
-        }, 0);
-    }
+        setRoomList(rooms.filter(
+            (room) => room.status === type
+        ));
+    };
 
     return (
         <RoomsContainer>
@@ -56,7 +57,7 @@ const Rooms = () => {
                     </TableButtons>
                 </TableTools>
                 <DndProvider backend={HTML5Backend}>
-                    <RoomTable data={rooms}></RoomTable>
+                    <RoomTable data={roomList}></RoomTable>
                 </DndProvider>
             </div>
         </RoomsContainer>
