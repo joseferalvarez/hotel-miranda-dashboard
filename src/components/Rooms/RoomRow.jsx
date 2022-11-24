@@ -1,6 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { useDispatch } from 'react-redux';
+import { deleteRoom, getRoom } from '../../features/sliceRooms';
+import { useNavigate } from 'react-router';
 
 import {
     Row,
@@ -11,12 +14,31 @@ import {
     DataContainerButton,
     RoomText,
     RoomPrice,
-    RoomStatus
+    RoomStatus,
+    DropDown
 } from "./RoomRowStyled"
 
 
 
 const RoomRow = ({ id, room, index, moveRow }) => {
+
+    const [showOptions, setShowOptions] = useState(false);
+    const navigate = useNavigate();
+
+    const dispatch = useDispatch();
+
+    const eraseRoom = () => {
+        dispatch(deleteRoom(id));
+    }
+
+    const getRoomEdit = () => {
+        dispatch(getRoom(id))
+        navigate("/rooms/" + id);
+    }
+    const getRoomDetails = () => {
+        dispatch(getRoom(id))
+        navigate("/rooms/" + id);
+    }
 
     const ref = useRef(null);
     const [{ handlerId }, drop] = useDrop({
@@ -106,7 +128,16 @@ const RoomRow = ({ id, room, index, moveRow }) => {
             </DataContainer>
             <td><RoomStatus status={room.status ? "#5AD07A" : "#E23428"}>{room.status ? "Available" : "Booked"}</RoomStatus></td>
             <DataContainerButton>
-                <button><BsThreeDotsVertical className='icon' /></button>
+                <button onClick={() => setShowOptions(!showOptions)}><BsThreeDotsVertical className='icon' /></button>
+                {showOptions ?
+                    <DropDown>
+                        <ul>
+                            <li><button onClick={getRoomDetails}>Details Room {room.number}</button></li>
+                            <li><button onClick={getRoomEdit}>Edit Room {room.number}</button></li>
+                            <li><button onClick={eraseRoom}>Delete Room {room.number}</button></li>
+                        </ul>
+                    </DropDown>
+                    : null}
             </DataContainerButton>
         </Row>
     );

@@ -7,8 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getApiRooms } from '../../features/sliceRooms';
 import { Link } from 'react-router-dom';
 import { filterRooms } from '../../features/sliceRooms';
-
-import Button from '../../components/Blocks/Button';
 import Select from '../../components/Blocks/Select';
 
 import {
@@ -18,13 +16,17 @@ import {
     TableButtons
 } from '../../components/Blocks/Blocks';
 
+import { ButtonNew } from "../../components/Blocks/LinksStyled";
+
 const Rooms = () => {
 
     const dispatch = useDispatch();
     const { rooms } = useSelector((state) => state.roomsReducer);
 
     useEffect(() => {
-        dispatch(getApiRooms());
+        if (rooms.length === 0) {
+            dispatch(getApiRooms());
+        }
     }, [dispatch]);
 
     const getAllRooms = () => {
@@ -32,7 +34,6 @@ const Rooms = () => {
     }
 
     const filterByType = (type) => {
-        getAllRooms();
         setTimeout(() => {
             dispatch(filterRooms(type));
         }, 0);
@@ -48,9 +49,9 @@ const Rooms = () => {
                         <FilterButton onClick={() => filterByType(false)}>Booked Rooms</FilterButton>
                     </FilterTable>
                     <TableButtons>
-                        <Link to="/rooms/newroom">Hola</Link>
-                        <Button type="create" text="+ New Room">
-                        </Button>
+                        <ButtonNew>
+                            <Link to="/rooms/newroom">+ New Room</Link>
+                        </ButtonNew>
                         <Select type="white" options={["Newest"]}></Select>
                     </TableButtons>
                 </TableTools>

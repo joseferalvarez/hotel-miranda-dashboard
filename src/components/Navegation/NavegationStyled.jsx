@@ -12,7 +12,7 @@ const NavContainer = styled.div`
 const ArrowButton = styled.button`
     position: absolute;
     right: -50px;
-    top: 35px;
+    top: 45px;
     background-color: transparent;
     border: none;
     width: 25px;

@@ -37,8 +37,8 @@ const RoomTable = ({ data }) => {
                 <thead>
                     <tr>
                         <HeaderTitle>Room Name</HeaderTitle>
-                        <HeaderTitle>Room Type</HeaderTitle>
-                        <HeaderTitle>Amenities</HeaderTitle>
+                        <HeaderTitle>Bed Type</HeaderTitle>
+                        <HeaderTitle>Facilities</HeaderTitle>
                         <HeaderTitle>Rate</HeaderTitle>
                         <HeaderTitle>Offer Price</HeaderTitle>
                         <HeaderTitle>Status</HeaderTitle>

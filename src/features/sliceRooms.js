@@ -17,6 +17,7 @@ export const getApiRooms = createAsyncThunk(
 
 const initialState = {
     rooms: [],
+    room: []
 }
 export const sliceRooms = createSlice({
     name: "rooms",
@@ -42,7 +43,14 @@ export const sliceRooms = createSlice({
                 }
                 return room;
             });
-        }
+        },
+        getRoom: (state, action) => {
+            state.rooms.forEach((room) => {
+                if (room.id === action.payload) {
+                    state.room = room;
+                }
+            })
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(getApiRooms.fulfilled, (state, action) => {
@@ -53,5 +61,11 @@ export const sliceRooms = createSlice({
     }
 });
 
-export const { filterRooms, addNewRoom } = sliceRooms.actions;
+export const {
+    filterRooms,
+    addNewRoom,
+    deleteRoom,
+    getRoom
+} = sliceRooms.actions;
+
 export default sliceRooms.reducer;
