@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { addNewRoom } from "../../features/sliceRooms.js"
+import { addNewRoom, createNewRoom } from "../../features/sliceRooms.js"
 
 const NewRoom = () => {
 
@@ -20,7 +20,7 @@ const NewRoom = () => {
     });
 
     const createRoom = () => {
-        dispatch(addNewRoom(room))
+        dispatch(createNewRoom(room))
         console.log(rooms);
     }
 

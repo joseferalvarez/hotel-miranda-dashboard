@@ -143,7 +143,7 @@ const Room = () => {
             <PhotoContainer>
                 <img src={room.photo} alt=""></img>
             </PhotoContainer>
-        </RoomContainer >
+        </RoomContainer>
     );
 }
 

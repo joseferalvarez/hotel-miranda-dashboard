@@ -1,66 +1,71 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchApi } from "./fetchApi";
 
-const getAllRooms = new Promise((data) => {
-    setTimeout(() => {
-        data(fetchApi("Rooms"));
-    }, 200);
-})
-
 export const getApiRooms = createAsyncThunk(
-    "list/fetchRooms",
-    () => {
-        return getAllRooms
-            .then((data) => data);
+    "room/fetchRooms",
+    async () => {
+        return await fetchApi("Rooms");
+    }
+);
+
+export const createNewRoom = createAsyncThunk(
+    "room/CreateRoom", async (newRoom) => {
+        return await newRoom;
+    }
+);
+
+export const deleteRoom = createAsyncThunk(
+    "room/DeleteRoom", async (idRoom) => {
+        return await idRoom;
+    }
+);
+
+export const editRoom = createAsyncThunk(
+    "room/EditRoom", async (idRoom) => {
+        return await idRoom;
+    }
+);
+
+export const getRoom = createAsyncThunk(
+    "room/GetRoomDetails", async (idRoom) => {
+        return await idRoom;
     }
 );
 
 const initialState = {
     rooms: [],
-    room: []
+    room: null
 }
 export const sliceRooms = createSlice({
     name: "rooms",
     initialState,
-    reducers: {
-        addNewRoom: (state, action) => {
-            state.rooms = [...state.rooms, action.payload];
-        },
-        deleteRoom: (state, action) => {
-            state.rooms = state.rooms.filter(
-                (room) => room.id !== action.payload
-            )
-        },
-        editRoom: (state, action) => {
-            state.rooms = state.rooms.map((room) => {
-                if (room.id === action.payload.id) {
-                    room = action.payload;
-                }
-                return room;
-            });
-        },
-        getRoom: (state, action) => {
-            state.rooms.forEach((room) => {
-                if (room.id === action.payload) {
-                    state.room = room;
-                }
-            })
-        },
-    },
     extraReducers: (builder) => {
         builder.addCase(getApiRooms.fulfilled, (state, action) => {
             state.rooms = action.payload;
         }).addCase(getApiRooms.rejected, () => {
             console.error("No se han podido encontrar habitaciones.");
         });
+
+        builder.addCase(createNewRoom.fulfilled, (state, action) => {
+            state.rooms = [...state.rooms, action.payload];
+        });
+
+        builder.addCase(deleteRoom.fulfilled, (state, action) => {
+            state.rooms = state.rooms.filter(
+                (room) => room.id !== action.payload
+            );
+        });
+
+        builder.addCase(editRoom.fulfilled, (state, action) => {
+            state.rooms = state.rooms.map((room) => {
+                return room.id === action.payload.id ? action.payload : room;
+            });
+        });
+
+        builder.addCase(getRoom.fulfilled, (state, action) => {
+            state.room = state.rooms.find((room) => room.id === action.payload);
+        });
     }
 });
-
-export const {
-    addNewRoom,
-    editRoom,
-    deleteRoom,
-    getRoom
-} = sliceRooms.actions;
 
 export default sliceRooms.reducer;
