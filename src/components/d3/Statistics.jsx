@@ -6,45 +6,49 @@ import { axisRight } from 'd3';
 const data = [
     {
         day: "Lunes",
-        percentage: 50,
         money: 50,
+        percentage: 50,
     },
     {
         day: "Martes",
-        percentage: 70,
         money: 80,
+        percentage: 70,
     },
     {
         day: "Miercoles",
-        percentage: 20,
         money: 70,
+        percentage: 20,
     },
     {
         day: "Jueves",
-        percentage: 50,
         money: 30,
+        percentage: 50,
     },
     {
         day: "Viernes",
-        percentage: 10,
         money: 30,
+        percentage: 10,
     },
     {
         day: "Sabado",
-        percentage: 30,
         money: 90,
+        percentage: 30,
     },
     {
         day: "Domingo",
-        percentage: 100,
         money: 100,
+        percentage: 100,
     },
 ]
 
 const Statistics = () => {
 
+    const margin = { top: 30, right: 50, bottom: 30, left: 50 };
+    const width = 600 - margin.left - margin.right;
+    const height = 400 - margin.top - margin.bottom;
+
     const days = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
-    const subgroups = ["percentage", "money"];
+    const subgroups = ["money", "percentage"];
 
     const ref = useRef();
 
@@ -53,33 +57,36 @@ const Statistics = () => {
 
         const x = scaleBand()
             .domain(days)
-            .range([0, 400]);
+            .range([0, width]);
         svgElement.append("g")
-            .attr("transform", "translate(50, 310)")
+            .attr("color", "#6E6E6E")
+            .attr("transform", `translate(${margin.left}, ${height + margin.top})`)
             .call(axisBottom(x));
 
         const yLeft = scaleLinear()
-            .domain([200, 0])
-            .range([0, 300]);
+            .domain([0, 200])
+            .range([height, 0]);
         const axisYLeft = axisLeft(yLeft);
         axisYLeft.ticks(10)
             .tickFormat((value) => {
                 return value + "\u20AC";
             })
         svgElement.append("g")
-            .attr("transform", "translate(50, 10)")
+            .attr("color", "#6E6E6E")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`)
             .call(axisYLeft);
 
         const yRight = scaleLinear()
-            .domain([100, 0])
-            .range([0, 300]);
+            .domain([0, 100])
+            .range([height, 0]);
         const axisYRight = axisRight(yRight);
         axisYRight.ticks(4)
             .tickFormat((value) => {
                 return value + "%";
             })
         svgElement.append("g")
-            .attr("transform", "translate(450, 10)")
+            .attr("color", "#6E6E6E")
+            .attr("transform", `translate(${width + margin.left}, ${margin.top})`)
             .call(axisYRight);
 
         const xSubgroup = scaleBand()
@@ -89,7 +96,7 @@ const Statistics = () => {
 
         const color = scaleOrdinal()
             .domain(subgroups)
-            .range(["#61dafb", "#000000"]);
+            .range(["#135846", "#E23428"]);
 
         svgElement
             .append("g")
@@ -109,16 +116,18 @@ const Statistics = () => {
                 })
             })
             .enter().append("rect")
-            .attr("x", (d) => { return xSubgroup(d.item) })
-            .attr("y", (d) => { return yLeft(d.value) })
+            .attr("x", (d) => { return xSubgroup(d.item) + margin.left })
+            .attr("y", (d) => { return (d.item === subgroups[0] ? (yLeft(d.value) + margin.top) : (yRight(d.value) + margin.top)) })
             .attr("width", xSubgroup.bandwidth())
-            .attr("height", (d) => { return 300 - yLeft(d.value) })
-            .attr("fill", (d) => { return color(d.item) });
+            .attr("height", (d) => {
+                return (d.item === subgroups[0] ? (height - yLeft(d.value)) : (height - yRight(d.value)))
+            })
+            .attr("fill", (d) => { return color(d.item) })
 
     }, []);
 
     return (
-        <svg ref={ref} width="500" height="500">
+        <svg ref={ref} width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
         </svg>
     );
 }
