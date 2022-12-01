@@ -27,8 +27,10 @@ const Statistics = () => {
 
     useEffect(() => {
         const svgElement = select(ref.current);
-        svgElement.selectAll("*").remove();
-        createGraph(svgElement);
+        setTimeout(() => {
+            svgElement.selectAll("*").remove();
+            createGraph(svgElement);
+        }, 200)
 
     }, [graphWidth]);
 
