@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react';
-import { scaleLinear, select, axisBottom, scaleBand, color, scaleOrdinal, map } from 'd3';
+import { scaleLinear, select, axisBottom, scaleBand, scaleOrdinal } from 'd3';
 import { axisLeft } from 'd3';
 import { axisRight } from 'd3';
+import { FilterTable, FilterButton } from '../Blocks/Blocks';
+import styled from 'styled-components';
 
 const data = [
     {
@@ -41,10 +43,48 @@ const data = [
     },
 ]
 
+const FilterContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+
+    p{
+        color: #393939;
+        font-family: var(--font-poppins);
+        font-weight: 500;
+        font-size: 20px;
+    }
+`;
+
+const StatsContainer = styled.div`
+    display: flex;
+    gap: 50px;
+`;
+
+const Stat = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    p{
+        font-family: var(--font-poppins);
+        font-size: 14px;
+        &:nth-child(3){
+            font-size: 16px;
+            font-weight: 600;
+        }
+    }
+`;
+
+const Square = styled.div`
+    width: 13px;
+    height: 13px;
+    background-color: ${(props) => props.color};
+`;
+
 const Statistics = () => {
 
     const margin = { top: 30, right: 50, bottom: 30, left: 50 };
-    const width = 600 - margin.left - margin.right;
+    const width = 550 - margin.left - margin.right;
     const height = 400 - margin.top - margin.bottom;
 
     const days = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
@@ -53,6 +93,7 @@ const Statistics = () => {
     const ref = useRef();
 
     useEffect(() => {
+
         const svgElement = select(ref.current);
 
         const x = scaleBand()
@@ -126,9 +167,53 @@ const Statistics = () => {
 
     }, []);
 
+    const getTotalSales = () => {
+        let sales = 0;
+
+        data.forEach((item) => {
+            sales += item.money;
+        });
+
+        return sales;
+    }
+
+    const getOccupancyPercentage = () => {
+        let occupancy = 0;
+
+        data.forEach((item) => {
+            occupancy += item.percentage
+        })
+
+        occupancy = Math.round(occupancy / data.length);
+
+        return occupancy;
+    }
+
     return (
-        <svg ref={ref} width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
-        </svg>
+        <div>
+            <FilterContainer>
+                <p>Reservation Stats</p>
+                <FilterTable>
+                    <FilterButton>Daily</FilterButton>
+                    <FilterButton>Weekly</FilterButton>
+                    <FilterButton>Monthly</FilterButton>
+                </FilterTable>
+            </FilterContainer>
+            <StatsContainer>
+                <Stat>
+                    <Square color='#135846' />
+                    <p>Sales</p>
+                    <p>${getTotalSales()}</p>
+                </Stat>
+                <Stat>
+                    <Square color='#E23428' />
+                    <p>Occupation</p>
+                    <p>{getOccupancyPercentage()}%</p>
+                </Stat>
+            </StatsContainer>
+            <svg ref={ref} width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
+            </svg>
+        </div>
     );
 }
 
