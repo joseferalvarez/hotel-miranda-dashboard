@@ -1,101 +1,42 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { scaleLinear, select, axisBottom, scaleBand, scaleOrdinal } from 'd3';
 import { axisLeft } from 'd3';
 import { axisRight } from 'd3';
 import { FilterTable, FilterButton } from '../Blocks/Blocks';
-import styled from 'styled-components';
+import {
+    FilterContainer,
+    StatsContainer,
+    Stat,
+    Square
+} from "./StatisticsStyled.jsx"
 
-const data = [
-    {
-        day: "Lunes",
-        money: 50,
-        percentage: 50,
-    },
-    {
-        day: "Martes",
-        money: 80,
-        percentage: 70,
-    },
-    {
-        day: "Miercoles",
-        money: 70,
-        percentage: 20,
-    },
-    {
-        day: "Jueves",
-        money: 30,
-        percentage: 50,
-    },
-    {
-        day: "Viernes",
-        money: 30,
-        percentage: 10,
-    },
-    {
-        day: "Sabado",
-        money: 90,
-        percentage: 30,
-    },
-    {
-        day: "Domingo",
-        money: 100,
-        percentage: 100,
-    },
-]
-
-const FilterContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-
-    p{
-        color: #393939;
-        font-family: var(--font-poppins);
-        font-weight: 500;
-        font-size: 20px;
-    }
-`;
-
-const StatsContainer = styled.div`
-    display: flex;
-    gap: 50px;
-`;
-
-const Stat = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 15px;
-
-    p{
-        font-family: var(--font-poppins);
-        font-size: 14px;
-        &:nth-child(3){
-            font-size: 16px;
-            font-weight: 600;
-        }
-    }
-`;
-
-const Square = styled.div`
-    width: 13px;
-    height: 13px;
-    background-color: ${(props) => props.color};
-`;
+import data from "../../db/bookings.json";
 
 const Statistics = () => {
 
-    const margin = { top: 30, right: 50, bottom: 30, left: 50 };
-    const width = 550 - margin.left - margin.right;
+    const [graphWidth, setGraphWidth] = useState((window.innerWidth * 25) / 100);
+
+    const ref = useRef();
+
+    const margin = { top: 30, right: 35, bottom: 30, left: 35 };
+    const width = graphWidth - margin.left - margin.right;
     const height = 400 - margin.top - margin.bottom;
 
     const days = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
     const subgroups = ["money", "percentage"];
 
-    const ref = useRef();
-
     useEffect(() => {
-
         const svgElement = select(ref.current);
+        svgElement.selectAll("*").remove();
+        createGraph(svgElement);
 
+    }, [graphWidth]);
+
+    window.addEventListener("resize", () => {
+        setGraphWidth((window.innerWidth * 30) / 100);
+    })
+
+    const createGraph = (svgElement) => {
         const x = scaleBand()
             .domain(days)
             .range([0, width]);
@@ -105,12 +46,12 @@ const Statistics = () => {
             .call(axisBottom(x));
 
         const yLeft = scaleLinear()
-            .domain([0, 200])
+            .domain([0, getMaxSales()])
             .range([height, 0]);
         const axisYLeft = axisLeft(yLeft);
         axisYLeft.ticks(10)
             .tickFormat((value) => {
-                return value + "\u20AC";
+                return "$" + value;
             })
         svgElement.append("g")
             .attr("color", "#6E6E6E")
@@ -139,6 +80,18 @@ const Statistics = () => {
             .domain(subgroups)
             .range(["#135846", "#E23428"]);
 
+        const colorHover = scaleOrdinal()
+            .domain(subgroups)
+            .range(["#0e3f32", "#ca271c"]);
+
+        let div = select("body").append("div")
+            .style("opacity", 0)
+            .style("background-color", "#FFFFFF")
+            .style("padding", "5px")
+            .style("border-radius", "8px")
+            .style("box-shadow", "0px 16px 30px #00000014")
+            .style("font-family", "Poppins");
+
         svgElement
             .append("g")
             .selectAll("g")
@@ -157,15 +110,39 @@ const Statistics = () => {
                 })
             })
             .enter().append("rect")
-            .attr("x", (d) => { return xSubgroup(d.item) + margin.left })
+            .attr("x", (d) => { return xSubgroup(d.item) + margin.left + 2 })
             .attr("y", (d) => { return (d.item === subgroups[0] ? (yLeft(d.value) + margin.top) : (yRight(d.value) + margin.top)) })
-            .attr("width", xSubgroup.bandwidth())
+            .attr("width", xSubgroup.bandwidth() - 4)
             .attr("height", (d) => {
                 return (d.item === subgroups[0] ? (height - yLeft(d.value)) : (height - yRight(d.value)))
             })
             .attr("fill", (d) => { return color(d.item) })
+            .on("mouseover", (e, d) => {
 
-    }, []);
+                select(e.srcElement)
+                    .transition().duration("100")
+                    .attr("fill", (d) => colorHover(d.item))
+
+                div.transition()
+                    .duration("100")
+                    .style("opacity", 1)
+                div.html(d.item === subgroups[0]
+                    ? "$" + d.value
+                    : d.value + "%")
+                    .style("position", "absolute")
+                    .style("left", (e.pageX + 10) + "px")
+                    .style("top", (e.pageY - 5) + "px");
+            })
+            .on("mouseout", (e, d) => {
+                select(e.srcElement)
+                    .transition().duration("100")
+                    .attr("fill", (d) => { return color(d.item) })
+
+                div.transition()
+                    .duration("100")
+                    .style("opacity", 0)
+            })
+    }
 
     const getTotalSales = () => {
         let sales = 0;
@@ -187,6 +164,16 @@ const Statistics = () => {
         occupancy = Math.round(occupancy / data.length);
 
         return occupancy;
+    }
+
+    const getMaxSales = () => {
+        let max = 0;
+        data.forEach((item) => {
+            if (item.money > max) {
+                max = item.money;
+            }
+        });
+        return max;
     }
 
     return (
