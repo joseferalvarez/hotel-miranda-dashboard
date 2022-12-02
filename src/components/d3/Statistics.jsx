@@ -14,11 +14,16 @@ import data from "../../db/bookings.json";
 
 const Statistics = () => {
 
-    const [graphWidth, setGraphWidth] = useState((window.innerWidth * 25) / 100);
+    const [graphWidth, setGraphWidth] = useState((window.innerWidth * 30) / 100);
 
     const ref = useRef();
 
-    const margin = { top: 30, right: 35, bottom: 30, left: 35 };
+    const margin = {
+        top: 30,
+        right: 35,
+        bottom: 30,
+        left: 35
+    };
     const width = graphWidth - margin.left - margin.right;
     const height = 400 - margin.top - margin.bottom;
 
@@ -27,6 +32,7 @@ const Statistics = () => {
 
     useEffect(() => {
         const svgElement = select(ref.current);
+
         setTimeout(() => {
             svgElement.selectAll("*").remove();
             createGraph(svgElement);
@@ -39,18 +45,20 @@ const Statistics = () => {
     })
 
     const createGraph = (svgElement) => {
-        const x = scaleBand()
+
+        /*TODO: Recoger los dias de la base de datos*/
+        const scaleDays = scaleBand()
             .domain(days)
             .range([0, width]);
         svgElement.append("g")
             .attr("color", "#6E6E6E")
             .attr("transform", `translate(${margin.left}, ${height + margin.top})`)
-            .call(axisBottom(x));
+            .call(axisBottom(scaleDays));
 
-        const yLeft = scaleLinear()
+        const scaleSales = scaleLinear()
             .domain([0, getMaxSales()])
             .range([height, 0]);
-        const axisYLeft = axisLeft(yLeft);
+        const axisYLeft = axisLeft(scaleSales);
         axisYLeft.ticks(10)
             .tickFormat((value) => {
                 return "$" + value;
@@ -60,10 +68,10 @@ const Statistics = () => {
             .attr("transform", `translate(${margin.left}, ${margin.top})`)
             .call(axisYLeft);
 
-        const yRight = scaleLinear()
+        const scaleOccupancy = scaleLinear()
             .domain([0, 100])
             .range([height, 0]);
-        const axisYRight = axisRight(yRight);
+        const axisYRight = axisRight(scaleOccupancy);
         axisYRight.ticks(4)
             .tickFormat((value) => {
                 return value + "%";
@@ -73,9 +81,9 @@ const Statistics = () => {
             .attr("transform", `translate(${width + margin.left}, ${margin.top})`)
             .call(axisYRight);
 
-        const xSubgroup = scaleBand()
+        const scaleProperties = scaleBand()
             .domain(subgroups)
-            .range([0, x.bandwidth()])
+            .range([0, scaleDays.bandwidth()])
             .padding([0.05]);
 
         const color = scaleOrdinal()
@@ -86,7 +94,8 @@ const Statistics = () => {
             .domain(subgroups)
             .range(["#0e3f32", "#ca271c"]);
 
-        let div = select("body").append("div")
+        /*TODO: Cambiar el nombre*/
+        const div = select("body").append("div")
             .style("opacity", 0)
             .style("background-color", "#FFFFFF")
             .style("padding", "5px")
@@ -101,7 +110,7 @@ const Statistics = () => {
             .enter()
             .append("g")
             .attr("transform", (d) => {
-                return "translate(" + x(d.day) + ",0)";
+                return "translate(" + scaleDays(d.day) + ",0)";
             })
             .selectAll("rect")
             .data((d) => {
@@ -112,11 +121,11 @@ const Statistics = () => {
                 })
             })
             .enter().append("rect")
-            .attr("x", (d) => { return xSubgroup(d.item) + margin.left + 2 })
-            .attr("y", (d) => { return (d.item === subgroups[0] ? (yLeft(d.value) + margin.top) : (yRight(d.value) + margin.top)) })
-            .attr("width", xSubgroup.bandwidth() - 4)
+            .attr("x", (d) => { return scaleProperties(d.item) + margin.left + 2 })
+            .attr("y", (d) => { return (d.item === subgroups[0] ? (scaleSales(d.value) + margin.top) : (scaleOccupancy(d.value) + margin.top)) })
+            .attr("width", scaleProperties.bandwidth() - 4)
             .attr("height", (d) => {
-                return (d.item === subgroups[0] ? (height - yLeft(d.value)) : (height - yRight(d.value)))
+                return (d.item === subgroups[0] ? (height - scaleSales(d.value)) : (height - scaleOccupancy(d.value)))
             })
             .attr("fill", (d) => { return color(d.item) })
             .on("mouseover", (e, d) => {
