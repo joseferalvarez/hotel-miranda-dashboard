@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+/*TODO: optimizar las clases*/
 const CalendarContainer = styled.div`
     .fc-toolbar-chunk{
         font-family: var(--font-poppins);

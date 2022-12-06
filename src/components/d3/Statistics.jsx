@@ -40,6 +40,7 @@ const Statistics = () => {
 
     }, [graphWidth]);
 
+    /*TODO: Ver si se puede hacer de otra forma*/
     window.addEventListener("resize", () => {
         setGraphWidth((window.innerWidth * 30) / 100);
     })
@@ -128,6 +129,8 @@ const Statistics = () => {
                 return (d.item === subgroups[0] ? (height - scaleSales(d.value)) : (height - scaleOccupancy(d.value)))
             })
             .attr("fill", (d) => { return color(d.item) })
+
+            /*TODO: A veces falla el mouseover, buscar por que*/
             .on("mouseover", (e, d) => {
 
                 select(e.srcElement)
@@ -161,7 +164,6 @@ const Statistics = () => {
         data.forEach((item) => {
             sales += item.money;
         });
-
         return sales;
     }
 
@@ -173,7 +175,6 @@ const Statistics = () => {
         })
 
         occupancy = Math.round(occupancy / data.length);
-
         return occupancy;
     }
 
@@ -209,6 +210,8 @@ const Statistics = () => {
                     <p>{getOccupancyPercentage()}%</p>
                 </Stat>
             </StatsContainer>
+
+            {/*TODO: Cambiar el width y height a una sola variable*/}
             <svg ref={ref} width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
             </svg>
         </div>
