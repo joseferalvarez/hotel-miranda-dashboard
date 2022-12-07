@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchApi } from "./fetchApi";
 
 export const getApiUsers = createAsyncThunk(
-    "list/fetchRooms",
+    "users/fetchUser",
     async () => {
         return await fetchApi("Users");
     }
