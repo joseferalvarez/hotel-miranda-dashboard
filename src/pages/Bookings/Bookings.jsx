@@ -1,32 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import GuestsTable from '../../components/Bookings/GuestsTable';
 import { BookingsContainer } from './BookingsStyled';
 import { FilterTable, FilterButton, TableTools, TableButtons } from '../../components/Blocks/Blocks';
 import Select from '../../components/Blocks/Select';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterBookings, getApiBookings } from '../../features/sliceBookings';
+import { getApiBookings } from '../../features/sliceBookings';
 
 
 
 const Bookings = () => {
     const dispatch = useDispatch();
     const { bookings } = useSelector((state) => state.bookingsReducer);
+    const [bookingList, setBookingList] = useState(bookings);
 
     useEffect(() => {
-        dispatch(getApiBookings());
-    }, [dispatch]);
+        if (bookings.length === 0) {
+            dispatch(getApiBookings());
+        }
+        setBookingList(bookings);
+    }, [bookings, dispatch]);
 
     const getAllBookings = () => {
-        dispatch(getApiBookings());
+        setBookingList(bookings);
     }
 
     const filterByType = (type) => {
-        getAllBookings();
-        setTimeout(() => {
-            dispatch(filterBookings(type))
-        }
-            , 0);
-
+        setBookingList(bookings.filter(
+            (booking) => booking.state === type
+        ));
     }
 
     return (
@@ -44,7 +45,7 @@ const Bookings = () => {
                         <Select type="white" options={["Newest"]}></Select>
                     </TableButtons>
                 </TableTools>
-                <GuestsTable data={bookings}></GuestsTable>
+                <GuestsTable data={bookingList}></GuestsTable>
             </div>
         </BookingsContainer>
     );

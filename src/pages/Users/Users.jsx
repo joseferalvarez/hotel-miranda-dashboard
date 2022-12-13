@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import UsersTable from '../../components/Users/UsersTable';
-import { filterUsers, getApiUsers } from '../../features/sliceUsers';
+import { getApiUsers } from '../../features/sliceUsers';
 import { UsersContainer } from './UsersStyled';
 import Button from '../../components/Blocks/Button';
 import Select from '../../components/Blocks/Select';
@@ -16,20 +16,23 @@ import {
 const Users = () => {
     const dispatch = useDispatch();
     const { users } = useSelector((state) => state.usersReducer);
+    const [userList, setUserList] = useState(users);
 
     useEffect(() => {
-        dispatch(getApiUsers());
-    }, [dispatch]);
+        if (users.length === 0) {
+            dispatch(getApiUsers());
+        }
+        setUserList(users);
+    }, [users, dispatch]);
 
     const getAllUsers = () => {
-        dispatch(getApiUsers());
+        setUserList(users);
     }
 
     const filterByUsers = (type) => {
-        getAllUsers();
-        setTimeout(() => {
-            dispatch(filterUsers(type));
-        }, 0);
+        setUserList(users.filter(
+            (user) => user.state === type
+        ))
 
     }
 
@@ -47,7 +50,7 @@ const Users = () => {
                         <Select type="white" options={["Newest"]}></Select>
                     </TableButtons>
                 </TableTools>
-                <UsersTable data={users}></UsersTable>
+                <UsersTable data={userList}></UsersTable>
             </div>
         </UsersContainer>
     );
