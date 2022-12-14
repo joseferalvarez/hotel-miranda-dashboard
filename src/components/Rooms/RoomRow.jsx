@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useDispatch } from 'react-redux';
-import { deleteRoom, getRoom } from '../../features/sliceRooms';
+import { deleteRoom, getRoom } from '../../features/sliceRooms/sliceRooms';
 import { useNavigate } from 'react-router';
 
 import {

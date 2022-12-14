@@ -4,7 +4,7 @@ import { BookingsContainer } from './BookingsStyled';
 import { FilterTable, FilterButton, TableTools, TableButtons } from '../../components/Blocks/Blocks';
 import Select from '../../components/Blocks/Select';
 import { useDispatch, useSelector } from 'react-redux';
-import { getApiBookings } from '../../features/sliceBookings';
+import { getApiBookings } from '../../features/sliceBookings/sliceBookings';
 
 
 

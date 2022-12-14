@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import UsersTable from '../../components/Users/UsersTable';
-import { getApiUsers } from '../../features/sliceUsers';
+import { getApiUsers } from '../../features/sliceUsers/sliceUsers';
 import { UsersContainer } from './UsersStyled';
 import Button from '../../components/Blocks/Button';
 import Select from '../../components/Blocks/Select';

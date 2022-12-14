@@ -4,7 +4,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { RoomsContainer } from './RoomsStyled';
 import { useDispatch, useSelector } from 'react-redux';
-import { getApiRooms } from '../../features/sliceRooms';
+import { getApiRooms } from "../../features/sliceRooms/sliceRooms"
 import { Link } from 'react-router-dom';
 import Select from '../../components/Blocks/Select';
 

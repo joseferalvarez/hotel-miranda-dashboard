@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { addNewRoom, createNewRoom } from "../../features/sliceRooms.js"
+import { addNewRoom, createNewRoom } from "../../features/sliceRooms/sliceRooms.js"
 
 const NewRoom = () => {
 

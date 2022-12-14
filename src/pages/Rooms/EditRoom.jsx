@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { editRoom } from '../../features/sliceRooms';
+import { editRoom } from '../../features/sliceRooms/sliceRooms';
 
 const EditRoom = () => {
     const dispatch = useDispatch();
