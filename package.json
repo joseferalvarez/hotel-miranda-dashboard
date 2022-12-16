@@ -44,6 +44,11 @@
       "react-app/jest"
     ]
   },
+  "parserOptions": {
+    "project": [
+      "./tsconfig.json"
+    ]
+  },
   "browserslist": {
     "production": [
       ">0.2%",
