@@ -12,7 +12,8 @@ import {
     LogoContainer,
     InputContainer,
     Input,
-    Icon
+    Icon,
+    TempLog
 } from "./LoginStyled"
 
 import { FaUser } from "react-icons/fa"
@@ -21,8 +22,8 @@ import { RiLockPasswordFill } from "react-icons/ri";
 const Login = () => {
     const [log, setLog] = useContext(LoginContext);
 
-    const [email, setEmail] = useState("");
-    const [pass, setPass] = useState("");
+    const [email, setEmail] = useState("josefer@gmail.com");
+    const [pass, setPass] = useState("1234");
 
     let emailHard = log.email || "josefer@gmail.com";
     let passHard = "1234";
