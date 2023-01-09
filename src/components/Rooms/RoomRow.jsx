@@ -106,10 +106,10 @@ const RoomRow = ({ id, room, index, moveRow }) => {
         <Row key={room.id} ref={ref} data-handler-id={handlerId} opacity={opacity}>
             <td>
                 <RoomNameContainer>
-                    <img src={room.photo} alt="" />
+                    <img src={room.photos[0]} alt="" />
                     <div>
-                        <RoomId>#{room.id}</RoomId>
-                        <RoomNumber>{room.number}</RoomNumber>
+                        <RoomId>#{room._id}</RoomId>
+                        <RoomNumber>{room.numroom}</RoomNumber>
                     </div>
                 </RoomNameContainer>
             </td>
@@ -118,7 +118,7 @@ const RoomRow = ({ id, room, index, moveRow }) => {
             </DataContainer>
             <DataContainer>
                 <RoomText>{room.amenities.map((amenitie, index) => (
-                    <span key={index}>{amenitie} </span>
+                    <span key={index}>{amenitie}, </span>
                 ))}</RoomText>
             </DataContainer>
             <DataContainer>
@@ -133,9 +133,9 @@ const RoomRow = ({ id, room, index, moveRow }) => {
                 {showOptions ?
                     <DropDown>
                         <ul>
-                            <li><button onClick={getRoomDetails}>Details Room {room.number}</button></li>
-                            <li><button onClick={getRoomEdit}>Edit Room {room.number}</button></li>
-                            <li><button onClick={eraseRoom}>Delete Room {room.number}</button></li>
+                            <li><button onClick={getRoomDetails}>Details Room {room.numroom}</button></li>
+                            <li><button onClick={getRoomEdit}>Edit Room {room.numroom}</button></li>
+                            <li><button onClick={eraseRoom}>Delete Room {room.numroom}</button></li>
                         </ul>
                     </DropDown>
                     : null}

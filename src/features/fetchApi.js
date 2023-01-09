@@ -1,16 +1,18 @@
-import bookings from "../db/guest.json";
-import rooms from "../db/rooms.json";
-import users from "../db/users.json";
-
-export const fetchApi = (query) => {
-    switch (query) {
-        case "Bookings":
-            return bookings;
-        case "Rooms":
-            return rooms;
-        case "Users":
-            return users;
-        default:
-            return "";
-    }
-}
+export async function fetchApi(url, token) {
+    return await fetch(url, {
+        method: "GET",
+        mode: "cors",
+        cache: "default",
+        credentials: "same-origin",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer"
+    }).then((response) => {
+        return response.json();
+    }).then((data) => {
+        return data;
+    });
+};

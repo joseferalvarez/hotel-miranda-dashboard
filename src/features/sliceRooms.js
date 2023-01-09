@@ -4,7 +4,9 @@ import { fetchApi } from "./fetchApi";
 export const getApiRooms = createAsyncThunk(
     "room/fetchRooms",
     async () => {
-        return await fetchApi("Rooms");
+        const token = JSON.parse(localStorage.getItem("auth")).token;
+        console.log(token);
+        return await fetchApi(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms`, token);
     }
 );
 
