@@ -1,9 +1,7 @@
 import './App.css';
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { useReducer, useContext } from 'react';
-import { reduceLogin } from "./context/reduceLogin";
-import LoginContext from './context/contextLogin';
 import { AppContainer } from './AppStyled';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Bookings from "./pages/Bookings/Bookings";
@@ -19,116 +17,116 @@ import Contact from './pages/Contact/Contact';
 import Navegation from './components/Navegation/Navegation';
 import Topbar from './components/Topbar/Topbar';
 import EditRoom from './pages/Rooms/EditRoom';
+import { getLocalAuth } from './features/sliceLogin';
 
 function App() {
-
-  const getLocalEmail = () => {
-    return localStorage.getItem("login");
-  }
-
-  const [log, setLog] = useReducer(reduceLogin, JSON.parse(getLocalEmail()) || { auth: false, email: "" });
-
   return (
-    <LoginContext.Provider value={[log, setLog]}>
-      <HashRouter>
-        <AppContainer>
+    <HashRouter>
+      <AppContainer>
 
+        <SetMenu>
+          <Navegation></Navegation>
+        </SetMenu>
+
+        <div className='window-container'>
           <SetMenu>
-            <Navegation></Navegation>
+            <Topbar></Topbar>
           </SetMenu>
+          <Routes>
 
-          <div className='window-container'>
-            <SetMenu>
-              <Topbar></Topbar>
-            </SetMenu>
-            <Routes>
+            {/* login and dashboard */}
+            <Route path='/' element={
+              <AuthProvider>
+                <Dashboard />
+              </AuthProvider>}
+            />
+            <Route path='/login' element={<Login />} />
 
-              {/* login and dashboard */}
-              <Route path='/' element={
-                <AuthProvider>
-                  <Dashboard />
-                </AuthProvider>}
-              />
-              <Route path='/login' element={<Login />} />
+            {/* bookings */}
+            <Route path="/bookings" element={
+              <AuthProvider>
+                <Bookings />
+              </AuthProvider>
+            } />
+            <Route path='/bookings/:idguest' action={({ params }) => { }} element={
+              <AuthProvider>
+                <Guest />
+              </AuthProvider>}
+            />
 
-              {/* bookings */}
-              <Route path="/bookings" element={
-                <AuthProvider>
-                  <Bookings />
-                </AuthProvider>
-              } />
-              <Route path='/bookings/:idguest' action={({ params }) => { }} element={
-                <AuthProvider>
-                  <Guest />
-                </AuthProvider>}
-              />
+            {/* rooms */}
+            <Route path='/rooms' element={
+              <AuthProvider>
+                <Rooms />
+              </AuthProvider>}
+            />
+            <Route path='/rooms/newroom' element={
+              <AuthProvider>
+                <NewRoom />
+              </AuthProvider>}
+            />
+            <Route path="/rooms/:idroom" action={({ params }) => { }} element={
+              <AuthProvider>
+                <Room />
+              </AuthProvider>}
+            />
 
-              {/* rooms */}
-              <Route path='/rooms' element={
-                <AuthProvider>
-                  <Rooms />
-                </AuthProvider>}
-              />
-              <Route path='/rooms/newroom' element={
-                <AuthProvider>
-                  <NewRoom />
-                </AuthProvider>}
-              />
-              <Route path="/rooms/:idroom" action={({ params }) => { }} element={
-                <AuthProvider>
-                  <Room />
-                </AuthProvider>}
-              />
+            <Route path="/rooms/editroom/:idroom" action={({ params }) => { }} element={
+              <AuthProvider>
+                <EditRoom />
+              </AuthProvider>}
+            />
 
-              <Route path="/rooms/editroom/:idroom" action={({ params }) => { }} element={
-                <AuthProvider>
-                  <EditRoom />
-                </AuthProvider>}
-              />
-
-              {/* contact */}
-              <Route path="/contact" action={({ params }) => { }} element={
-                <AuthProvider>
-                  <Contact />
-                </AuthProvider>}
-              />
+            {/* contact */}
+            <Route path="/contact" action={({ params }) => { }} element={
+              <AuthProvider>
+                <Contact />
+              </AuthProvider>}
+            />
 
 
-              {/* users */}
-              <Route path="/users" element={
-                <AuthProvider>
-                  <Users />
-                </AuthProvider>}
-              />
-              <Route path="/users/newuser" element={
-                <AuthProvider>
-                  <NewUser />
-                </AuthProvider>} />
-              <Route path="/users/:iduser" action={({ params }) => { }} element={
-                <AuthProvider>
-                  <User />
-                </AuthProvider>}
-              />
+            {/* users */}
+            <Route path="/users" element={
+              <AuthProvider>
+                <Users />
+              </AuthProvider>}
+            />
+            <Route path="/users/newuser" element={
+              <AuthProvider>
+                <NewUser />
+              </AuthProvider>} />
+            <Route path="/users/:iduser" action={({ params }) => { }} element={
+              <AuthProvider>
+                <User />
+              </AuthProvider>}
+            />
 
-              <Route path="*" action={({ params }) => { }} element={<Dashboard />} />
+            <Route path="*" action={({ params }) => { }} element={<Dashboard />} />
 
-            </Routes>
-          </div>
-        </AppContainer>
-      </HashRouter>
-    </LoginContext.Provider>
+          </Routes>
+        </div>
+      </AppContainer>
+    </HashRouter>
   );
 }
 
 const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
-  const [log,] = useContext(LoginContext);
+  const dispatch = useDispatch();
+  const { user, token } = useSelector((state) => state.loginReducer);
+  const auth = JSON.parse(localStorage.getItem("auth"));
 
-  if (log.auth) {
+  if ((user && token) || auth) {
     return (
       children
     )
-  } else {
+  } else if ((!user || !token) && auth) {
+    dispatch(getLocalAuth(auth.user, auth.token));
+    return (
+      children
+    );
+  }
+  else {
     return (
       <Navigate to="/login"></Navigate>
     )
@@ -137,9 +135,10 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
 const SetMenu = ({ children }: { children: JSX.Element }) => {
 
-  const [log,] = useContext(LoginContext);
+  const { user, token } = useSelector((state) => state.loginReducer);
+  const auth = JSON.parse(localStorage.getItem("auth"));
 
-  if (log.auth) {
+  if ((user && token) || auth) {
     return (
       children
     )

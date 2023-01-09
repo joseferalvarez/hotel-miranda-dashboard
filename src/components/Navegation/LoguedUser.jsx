@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import LoginContext from '../../context/contextLogin';
+import React from 'react';
 import { Link } from "react-router-dom";
 
 import {
@@ -29,15 +28,13 @@ const LinkButton = styled.div`
 
 const LoguedUser = ({ user }) => {
 
-    const [log,] = useContext(LoginContext);
-
     return (
         <Card>
             <img className='image' src={user.photo} alt="" />
             <UserName>{user.name}</UserName>
-            <UserEmail>{log.email}</UserEmail>
+            <UserEmail>{user.email}</UserEmail>
             <LinkButton>
-                <Link to={"/users/" + log.email}>Edit user</Link>
+                <Link to={"/users/" + user.email}>Edit user</Link>
             </LinkButton>
         </Card>
     );

@@ -1,10 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Navigate } from 'react-router';
-import { login } from "../../context/actions";
 
 import Button from '../../components/Blocks/Button';
 import Logo from '../../components/Logo/Logo';
-import LoginContext from '../../context/contextLogin';
 
 import {
     LoginContainer,
@@ -12,32 +10,28 @@ import {
     LogoContainer,
     InputContainer,
     Input,
-    Icon,
-    TempLog
+    Icon
 } from "./LoginStyled"
 
 import { FaUser } from "react-icons/fa"
 import { RiLockPasswordFill } from "react-icons/ri";
+import { useDispatch, useSelector } from 'react-redux';
+import { getLogin } from '../../features/sliceLogin';
 
 const Login = () => {
-    const [log, setLog] = useContext(LoginContext);
+    const dispatch = useDispatch();
+    const { user, token } = useSelector((state) => state.loginReducer);
 
     const [email, setEmail] = useState("josefer@gmail.com");
     const [pass, setPass] = useState("1234");
 
-    let emailHard = log.email || "josefer@gmail.com";
-    let passHard = "1234";
+    const checkLogin = (e) => {
+        e.preventDefault();
 
-    const checkLogin = () => {
-        if (emailHard === email && passHard === pass) {
-            setLog(login({ auth: true, email: email }));
-            localStorage.setItem("login", JSON.stringify({ auth: true, email: email }));
-        } else {
-            alert("usuario o contraseña incorrectos");
-        }
+        dispatch(getLogin({ email: email, pass: pass }));
     }
 
-    if (!log.auth) {
+    if (!user || !token) {
         return (
             <LoginContainer>
                 <LoginCard>
