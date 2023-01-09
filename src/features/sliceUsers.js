@@ -1,10 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchApi } from "./fetchApi";
+import { fetchGET } from "./fetchApi";
 
 export const getApiUsers = createAsyncThunk(
     "users/fetchUser",
     async () => {
-        return await fetchApi("Users");
+        const token = JSON.parse(localStorage.getItem("auth")).token;
+
+        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/users`, token);
     }
 );
 

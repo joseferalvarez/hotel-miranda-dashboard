@@ -36,7 +36,7 @@ const UsersRow = ({ user }) => {
                     <img src={user.photo} alt="" />
                     <div>
                         <UserName>{user.name}</UserName>
-                        <UserData>#{user.id}</UserData>
+                        <UserData>#{user._id}</UserData>
                         <UserData>Joined on {user.date}</UserData>
                     </div>
                 </UserNameContainer>
@@ -58,7 +58,7 @@ const UsersRow = ({ user }) => {
             </DataContainer>
 
             <DataContainer>
-                <UserStatus status={user.state ? "#5AD07A" : "#E23428"}>{user.state ? "ACTIVE" : "INACTIVE"}</UserStatus>
+                <UserStatus status={user.status ? "#5AD07A" : "#E23428"}>{user.status ? "ACTIVE" : "INACTIVE"}</UserStatus>
             </DataContainer>
             <DataContainerButton>
                 <button><BsThreeDotsVertical className='icon' /></button>

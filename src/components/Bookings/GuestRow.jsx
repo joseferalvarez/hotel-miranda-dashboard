@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Checkbox } from '../Blocks/Blocks';
 
@@ -17,6 +17,26 @@ import {
 } from "./GuestRowStyled";
 
 const GuestRow = ({ guest }) => {
+
+    const [status, setStatus] = useState(0);
+
+    useEffect(() => {
+        switch (guest.status) {
+            case 0:
+                setStatus("CHECK OUT");
+                break;
+            case 1:
+                setStatus("CHECK IN");
+                break;
+            case 2:
+                setStatus("IN PROGRESS");
+                break;
+            default:
+                setStatus("CHECK OUT");
+                break;
+        }
+    }, []);
+
     return (
         <Row>
             <DataContainerCheckbox>
@@ -32,10 +52,10 @@ const GuestRow = ({ guest }) => {
             </DataContainerCheckbox>
             <td>
                 <GuestContainer>
-                    <img src={guest.photo} alt='' />
+                    <img src={guest.photos[0]} alt='' />
                     <div>
                         <GuestName>{guest.name}</GuestName>
-                        <GuestId>#{guest.id}</GuestId>
+                        <GuestId>#{guest._id}</GuestId>
                     </div>
                 </GuestContainer>
             </td>
@@ -50,10 +70,10 @@ const GuestRow = ({ guest }) => {
             </DataContainer>
             <td><Button type="notes" text="View Notes" enabled={guest.description}></Button></td>
             <DataContainer className='data-container__text'>
-                <p>{guest.typeroom} - {guest.numroom}</p>
+                <p>{guest.type} - {guest.numroom}</p>
             </DataContainer>
             <td>
-                <Status $type={guest.state}>{guest.state}</Status>
+                <Status $type={guest.status}>{status}</Status>
             </td>
             <DataContainerButton>
                 <button><BsThreeDotsVertical className='icon' /></button>

@@ -111,8 +111,8 @@ const Room = () => {
             <DataContainer>
                 <StateContainer>
                     <div>
-                        <RoomNumber>Room nº{room.number}</RoomNumber>
-                        <RoomId>#{room.id}</RoomId>
+                        <RoomNumber>Room nº{room.numroom}</RoomNumber>
+                        <RoomId>#{room._id}</RoomId>
                         <RoomType>{room.type}</RoomType>
                     </div>
                     <div>
@@ -141,7 +141,7 @@ const Room = () => {
                 </FacilitiesContainer>
             </DataContainer>
             <PhotoContainer>
-                <img src={room.photo} alt=""></img>
+                <img src={room.photos[0]} alt=""></img>
             </PhotoContainer>
         </RoomContainer>
     );

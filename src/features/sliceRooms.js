@@ -1,36 +1,41 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchApi } from "./fetchApi";
+import {
+    fetchGET,
+    fetchPOST,
+    fetchPUT,
+    fetchDELETE
+} from "./fetchApi";
+
+const token = JSON.parse(localStorage.getItem("auth")).token;
 
 export const getApiRooms = createAsyncThunk(
     "room/fetchRooms",
     async () => {
-        const token = JSON.parse(localStorage.getItem("auth")).token;
-        console.log(token);
-        return await fetchApi(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms`, token);
+        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms`, token);
     }
 );
 
 export const createNewRoom = createAsyncThunk(
     "room/CreateRoom", async (newRoom) => {
-        return await newRoom;
+        return await fetchPOST(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms`, token, { room: newRoom });
     }
 );
 
 export const deleteRoom = createAsyncThunk(
     "room/DeleteRoom", async (idRoom) => {
-        return await idRoom;
+        return await fetchDELETE(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms/${idRoom}`, token);
     }
 );
 
 export const editRoom = createAsyncThunk(
-    "room/EditRoom", async (idRoom) => {
-        return await idRoom;
+    "room/EditRoom", async (idRoom, newRoom) => {
+        return await fetchPUT(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms/${idRoom}`, token, { room: newRoom });
     }
 );
 
 export const getRoom = createAsyncThunk(
     "room/GetRoomDetails", async (idRoom) => {
-        return await idRoom;
+        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms/${idRoom}`, token);
     }
 );
 
@@ -49,23 +54,28 @@ export const sliceRooms = createSlice({
         });
 
         builder.addCase(createNewRoom.fulfilled, (state, action) => {
-            state.rooms = [...state.rooms, action.payload];
+            const newroom = action.payload.newroom;
+
+            state.rooms = [...state.rooms, newroom];
         });
 
         builder.addCase(deleteRoom.fulfilled, (state, action) => {
+            const oldroom = action.payload.oldroom;
+
             state.rooms = state.rooms.filter(
-                (room) => room.id !== action.payload
+                (room) => room._id !== oldroom._id
             );
         });
 
         builder.addCase(editRoom.fulfilled, (state, action) => {
             state.rooms = state.rooms.map((room) => {
-                return room.id === action.payload.id ? action.payload : room;
+                return room._id === action.payload._id ? action.payload : room;
             });
         });
 
         builder.addCase(getRoom.fulfilled, (state, action) => {
-            state.room = state.rooms.find((room) => room.id === action.payload);
+            const room = action.payload;
+            state.room = room;
         });
     }
 });

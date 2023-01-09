@@ -31,7 +31,7 @@ const Users = () => {
 
     const filterByUsers = (type) => {
         setUserList(users.filter(
-            (user) => user.state === type
+            (user) => user.status === type
         ))
 
     }
@@ -42,8 +42,8 @@ const Users = () => {
                 <TableTools>
                     <FilterTable>
                         <FilterButton onClick={getAllUsers}>All Employee</FilterButton>
-                        <FilterButton onClick={() => filterByUsers(true)}>Active Employee</FilterButton>
-                        <FilterButton onClick={() => filterByUsers(false)}>Inactive Employee</FilterButton>
+                        <FilterButton onClick={() => filterByUsers(1)}>Active Employee</FilterButton>
+                        <FilterButton onClick={() => filterByUsers(0)}>Inactive Employee</FilterButton>
                     </FilterTable>
                     <TableButtons>
                         <Button type="create" text="+ New Employee"></Button>

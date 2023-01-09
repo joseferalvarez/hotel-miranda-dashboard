@@ -46,8 +46,8 @@ const Rooms = () => {
                 <TableTools>
                     <FilterTable>
                         <FilterButton onClick={getAllRooms}>All Rooms</FilterButton>
-                        <FilterButton onClick={() => filterByType(true)}>Available Rooms</FilterButton>
-                        <FilterButton onClick={() => filterByType(false)}>Booked Rooms</FilterButton>
+                        <FilterButton onClick={() => filterByType(1)}>Available Rooms</FilterButton>
+                        <FilterButton onClick={() => filterByType(0)}>Booked Rooms</FilterButton>
                     </FilterTable>
                     <TableButtons>
                         <ButtonNew>

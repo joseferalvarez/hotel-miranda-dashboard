@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchApi } from "./fetchApi";
+import { fetchGET } from "./fetchApi";
 
 export const getApiContact = createAsyncThunk(
     "contact/fetchContacts",
     async () => {
-        return await fetchApi("Bookings");
+        return await fetchGET("Bookings");
     }
 );
 

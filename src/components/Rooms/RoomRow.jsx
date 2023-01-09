@@ -28,7 +28,7 @@ const RoomRow = ({ id, room, index, moveRow }) => {
     const dispatch = useDispatch();
 
     const eraseRoom = () => {
-        dispatch(deleteRoom(id));
+        dispatch(deleteRoom(room._id));
     }
 
     const getRoomEdit = () => {
@@ -37,8 +37,8 @@ const RoomRow = ({ id, room, index, moveRow }) => {
     }
 
     const getRoomDetails = () => {
-        dispatch(getRoom(id))
-        navigate("/rooms/" + id);
+        dispatch(getRoom(room._id));
+        navigate("/rooms/" + room._id);
     }
 
     const ref = useRef(null);

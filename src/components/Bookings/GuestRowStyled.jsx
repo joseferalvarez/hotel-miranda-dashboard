@@ -79,17 +79,17 @@ const Status = styled.p`
 
     ${(props) => {
         switch (props.$type) {
-            case "Check In":
+            case 1:
                 return css`
                     background-color: #E8FFEE;
                     color: #5AD07A;
             `;
-            case "Check Out":
+            case 0:
                 return css`
                     background-color: #FFEDEC;
                     color: #E23428;
             `;
-            case "In Progress":
+            case 2:
                 return css`
                     background-color: #fbfcc2;
                     color: #ffbb00;

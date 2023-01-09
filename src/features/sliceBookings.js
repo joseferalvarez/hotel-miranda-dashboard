@@ -1,10 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchApi } from "./fetchApi";
+import { fetchGET } from "./fetchApi";
 
 export const getApiBookings = createAsyncThunk(
     "bookings/fetchBookings",
     async () => {
-        return await fetchApi("Bookings");
+        const token = JSON.parse(localStorage.getItem("auth")).token;
+
+        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/bookings`, token);
     }
 );
 

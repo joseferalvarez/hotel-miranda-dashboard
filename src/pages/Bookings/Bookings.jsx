@@ -26,7 +26,7 @@ const Bookings = () => {
 
     const filterByType = (type) => {
         setBookingList(bookings.filter(
-            (booking) => booking.state === type
+            (booking) => booking.status === type
         ));
     }
 
@@ -36,9 +36,9 @@ const Bookings = () => {
                 <TableTools>
                     <FilterTable>
                         <FilterButton onClick={getAllBookings}>All Bookings</FilterButton>
-                        <FilterButton onClick={() => filterByType("Check In")}>Checking In</FilterButton>
-                        <FilterButton onClick={() => filterByType("Check Out")}>Checking Out</FilterButton>
-                        <FilterButton onClick={() => filterByType("In Progress")}>In Progress</FilterButton>
+                        <FilterButton onClick={() => filterByType(1)}>Checking In</FilterButton>
+                        <FilterButton onClick={() => filterByType(0)}>Checking Out</FilterButton>
+                        <FilterButton onClick={() => filterByType(2)}>In Progress</FilterButton>
                     </FilterTable>
                     <TableButtons>
                         <Select type="green" options={["1 November 2020 - 30 November 2020"]}></Select>
