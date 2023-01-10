@@ -1,36 +1,41 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchGET } from "./fetchApi";
+import {
+    fetchGET,
+    fetchPOST,
+    fetchDELETE,
+    fetchPUT
+} from "./fetchApi";
+
+const token = JSON.parse(localStorage.getItem("auth")).token;
 
 export const getApiUsers = createAsyncThunk(
     "users/fetchUser",
     async () => {
-        const token = JSON.parse(localStorage.getItem("auth")).token;
-
         return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/users`, token);
     }
 );
 
 export const createNewUser = createAsyncThunk(
     "user/CreateUser", async (newUser) => {
-        return await newUser;
+        return await fetchPOST(`${process.env.REACT_APP_LOCAL_DOMAIN}/users`, token, { user: newUser });
     }
 );
 
 export const deleteUser = createAsyncThunk(
     "user/DeleteUser", async (idUser) => {
-        return await idUser;
+        return await fetchDELETE(`${process.env.REACT_APP_LOCAL_DOMAIN}/users/${idUser}`, token);
     }
 );
 
 export const editUser = createAsyncThunk(
-    "user/EditUser", async (idUser) => {
-        return await idUser;
+    "user/EditUser", async (idUser, newUser) => {
+        return await fetchPUT(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms/${idUser}`, token, { room: newUser });
     }
 );
 
 export const getUser = createAsyncThunk(
     "user/GetUserDetails", async (idUser) => {
-        return await idUser;
+        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms/${idUser}`, token);
     }
 );
 
@@ -49,23 +54,29 @@ export const sliceUsers = createSlice({
         });
 
         builder.addCase(createNewUser.fulfilled, (state, action) => {
-            state.users = [...state.users, action.payload];
+            const newuser = action.payload.newuser;
+
+            state.users = [...state.users, newuser];
         });
 
         builder.addCase(deleteUser.fulfilled, (state, action) => {
+            const olduser = action.payload.olduser;
+
             state.users = state.users.filter(
-                (user) => user.id !== action.payload
+                (user) => user._id !== olduser._id
             );
         });
 
         builder.addCase(editUser.fulfilled, (state, action) => {
+
             state.users = state.users.map((user) => {
-                return user.id === action.payload.id ? action.payload : user;
+                return user._id === action.payload._id ? action.payload : user;
             });
         });
 
         builder.addCase(getUser.fulfilled, (state, action) => {
-            state.user = state.users.find((user) => user.id === action.payload);
+            const user = action.payload;
+            state.user = user;
         });
     }
 
