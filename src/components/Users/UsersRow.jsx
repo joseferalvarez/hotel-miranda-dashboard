@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { HiOutlinePhone, HiOutlineMail } from "react-icons/hi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Checkbox } from '../Blocks/Blocks';
+import { deleteUser } from "../../features/sliceUsers";
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 import {
     Row,
@@ -11,12 +14,30 @@ import {
     UserNameContainer,
     UserName,
     UserData,
-    UserStatus
+    UserStatus,
+    DropDown
 } from "./UsersRowStyled.jsx";
 
 
 
 const UsersRow = ({ user }) => {
+
+    const [showOptions, setShowOptions] = useState(false);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const eraseUser = () => {
+        dispatch(deleteUser())
+    };
+
+    const getUserEdit = () => {
+        navigate(`/users/edituser/${user._id}`);
+    }
+
+    const getUserDetails = () => {
+        navigate(`/users/${user._id}`);
+    }
+
     return (
         <Row>
             <DataContainer>
@@ -61,7 +82,15 @@ const UsersRow = ({ user }) => {
                 <UserStatus status={user.status ? "#5AD07A" : "#E23428"}>{user.status ? "ACTIVE" : "INACTIVE"}</UserStatus>
             </DataContainer>
             <DataContainerButton>
-                <button><BsThreeDotsVertical className='icon' /></button>
+                <button onClick={() => setShowOptions(!showOptions)}><BsThreeDotsVertical className='icon' /></button>
+                {showOptions ?
+                    <DropDown>
+                        <ul>
+                            <li><button onClick={getUserDetails}>User Details</button></li>
+                            <li><button onClick={getUserEdit}>Edit User</button></li>
+                            <li><button onClick={eraseUser}>Delete User</button></li>
+                        </ul>
+                    </DropDown> : null}
             </DataContainerButton>
         </Row>
     );

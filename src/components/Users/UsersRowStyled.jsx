@@ -42,18 +42,18 @@ const DataContainer = styled.td`
 const DataContainerButton = styled.div`
     vertical-align: top;
     padding-right: 30px;
-
+    position: relative;
     button{
         background-color: transparent;
         border: none;
         margin-left: 60px;
         margin-top: 15px;
-        width: 24px;
-        height: 24px;
+        &:focus{
+            outline: none;
+        }
         .icon{
             width: 25px;
             height: 25px;
-            padding-right: 30px;
         }
     }
 `;
@@ -93,6 +93,34 @@ const UserStatus = styled.p`
     text-align: center;
 `;
 
+const DropDown = styled.div`
+    display: block;
+    position: absolute;
+    background-color: white;
+    top: 90%;
+    left: 0%;
+    z-index: 2;
+    ul{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li{
+            text-decoration: none;
+            button{
+                margin: 0;
+                width:100%;
+                padding: 10px 15px;
+                display: block;
+                border: 1px solid #D4D4D4;
+                font-family: var(--font-poppins);
+                &:hover{
+                    background-color: #EBF1EF;
+                }
+            }
+        }
+    }
+`;
+
 export {
     Row,
     DataContainer,
@@ -101,5 +129,6 @@ export {
     UserNameContainer,
     UserName,
     UserData,
-    UserStatus
+    UserStatus,
+    DropDown
 }

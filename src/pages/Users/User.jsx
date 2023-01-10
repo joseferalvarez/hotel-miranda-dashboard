@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
-import LoginContext from "../../context/contextLogin";
-import { updateUser } from "../../context/actions";
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from "../../features/sliceUsers";
 
 const UserContainer = styled.div`
     width: 100%;
@@ -13,21 +13,24 @@ const UserContainer = styled.div`
 `;
 
 const User = () => {
-    let params = useParams();
+    const { user } = useSelector((state) => state.usersReducer);
+    const dispatch = useDispatch();
+    const params = useParams();
 
-    const [log, setLog] = useContext(LoginContext);
-    const [email, setEmail] = useState(log.email);
-
-    const changeUser = () => {
-        setLog(updateUser({ auth: true, email: email }));
-        localStorage.setItem("login", JSON.stringify({ auth: true, email: email }));
-    }
+    useEffect(() => {
+        dispatch(getUser(params.iduser));
+    }, []);
 
     return (
         <UserContainer>
-            <h1>user nº{params.iduser}</h1>
-            <input type="text" value={email} onChange={(e) => setEmail(e.target.value)}></input>
-            <button onClick={changeUser}>Edit User</button>
+            <h1>user nº {user._id}</h1>
+            <p>Name: {user.name}</p>
+            <p>position: {user.position}</p>
+            <p>email: {user.email}</p>
+            <p>date: {user.date}</p>
+            <p>description: {user.description}</p>
+            <p>phone: {user.phone}</p>
+            <p>status: {user.status ? "Active" : "Inactive"}</p>
         </UserContainer>
     );
 }

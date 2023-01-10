@@ -29,13 +29,13 @@ export const deleteUser = createAsyncThunk(
 
 export const editUser = createAsyncThunk(
     "user/EditUser", async (idUser, newUser) => {
-        return await fetchPUT(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms/${idUser}`, token, { room: newUser });
+        return await fetchPUT(`${process.env.REACT_APP_LOCAL_DOMAIN}/users/${idUser}`, token, { room: newUser });
     }
 );
 
 export const getUser = createAsyncThunk(
     "user/GetUserDetails", async (idUser) => {
-        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms/${idUser}`, token);
+        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/users/${idUser}`, token);
     }
 );
 

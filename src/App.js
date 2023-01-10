@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Bookings from "./pages/Bookings/Bookings";
-import Guest from "./pages/Bookings/Guest";
 import Rooms from "./pages/Rooms/Rooms";
 import NewRoom from "./pages/Rooms/NewRoom";
 import Room from "./pages/Rooms/Room";
@@ -18,6 +17,7 @@ import Navegation from './components/Navegation/Navegation';
 import Topbar from './components/Topbar/Topbar';
 import EditRoom from './pages/Rooms/EditRoom';
 import { getLocalAuth } from './features/sliceLogin';
+import Booking from './pages/Bookings/Booking';
 
 function App() {
   return (
@@ -48,9 +48,9 @@ function App() {
                 <Bookings />
               </AuthProvider>
             } />
-            <Route path='/bookings/:idguest' action={({ params }) => { }} element={
+            <Route path='/bookings/:idbooking' action={({ params }) => { }} element={
               <AuthProvider>
-                <Guest />
+                <Booking />
               </AuthProvider>}
             />
 

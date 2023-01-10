@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Checkbox } from '../Blocks/Blocks';
+import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { deleteBooking } from "../../features/sliceBookings.js";
 
 import Button from "../Blocks/Button";
 
@@ -13,15 +16,33 @@ import {
     GuestContainer,
     GuestName,
     GuestId,
-    Status
+    Status,
+    DropDown
 } from "./GuestRowStyled";
 
-const GuestRow = ({ guest }) => {
+const GuestRow = ({ booking }) => {
+
+    const [showOptions, setShowOptions] = useState(false);
+    const navigate = useNavigate();
+
+    const dispatch = useDispatch();
+
+    const eraseBooking = () => {
+        dispatch(deleteBooking(booking._id));
+    }
+
+    const getBookingEdit = () => {
+        navigate("/bookings/editbooking/" + booking._id);
+    }
+
+    const getBookingDetails = () => {
+        navigate("/bookings/" + booking._id);
+    }
 
     const [status, setStatus] = useState(0);
 
     useEffect(() => {
-        switch (guest.status) {
+        switch (booking.status) {
             case 0:
                 setStatus("CHECK OUT");
                 break;
@@ -52,31 +73,40 @@ const GuestRow = ({ guest }) => {
             </DataContainerCheckbox>
             <td>
                 <GuestContainer>
-                    <img src={guest.photos[0]} alt='' />
+                    <img src={booking.photos[0]} alt='' />
                     <div>
-                        <GuestName>{guest.name}</GuestName>
-                        <GuestId>#{guest._id}</GuestId>
+                        <GuestName>{booking.name}</GuestName>
+                        <GuestId>#{booking._id}</GuestId>
                     </div>
                 </GuestContainer>
             </td>
             <DataContainer className='data-container__text'>
-                <p>{guest.order}</p>
+                <p>{booking.order}</p>
             </DataContainer>
             <DataContainer className='data-container__text'>
-                <p>{guest.checkin}</p>
+                <p>{booking.checkin}</p>
             </DataContainer>
             <DataContainer className='data-container__text'>
-                <p>{guest.checkout}</p>
+                <p>{booking.checkout}</p>
             </DataContainer>
-            <td><Button type="notes" text="View Notes" enabled={guest.description}></Button></td>
+            <td><Button type="notes" text="View Notes" enabled={booking.description}></Button></td>
             <DataContainer className='data-container__text'>
-                <p>{guest.type} - {guest.numroom}</p>
+                <p>{booking.type} - {booking.numroom}</p>
             </DataContainer>
             <td>
-                <Status $type={guest.status}>{status}</Status>
+                <Status $type={booking.status}>{status}</Status>
             </td>
             <DataContainerButton>
-                <button><BsThreeDotsVertical className='icon' /></button>
+                <button onClick={() => setShowOptions(!showOptions)}><BsThreeDotsVertical className='icon' /></button>
+                {showOptions ?
+                    <DropDown>
+                        <ul>
+                            <li><button onClick={getBookingDetails}>Booking Details</button></li>
+                            <li><button onClick={getBookingEdit}>Edit Booking</button></li>
+                            <li><button onClick={eraseBooking}>Delete Booking</button></li>
+                        </ul>
+                    </DropDown>
+                    : null}
             </DataContainerButton>
         </Row>
     );

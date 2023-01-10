@@ -28,7 +28,7 @@ const GuestsTable = ({ data }) => {
             </thead>
             <tbody>
                 {data.map((obj, index) => (
-                    <GuestRow key={index} guest={obj} />
+                    <GuestRow key={index} booking={obj} />
                 ))}
             </tbody>
         </Table>

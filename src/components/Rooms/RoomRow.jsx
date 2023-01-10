@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useDispatch } from 'react-redux';
-import { deleteRoom, getRoom } from '../../features/sliceRooms';
+import { deleteRoom } from '../../features/sliceRooms';
 import { useNavigate } from 'react-router';
 
 import {
@@ -32,12 +32,10 @@ const RoomRow = ({ id, room, index, moveRow }) => {
     }
 
     const getRoomEdit = () => {
-        dispatch(getRoom(id))
-        navigate("/rooms/editroom/" + id);
+        navigate("/rooms/editroom/" + room._id);
     }
 
     const getRoomDetails = () => {
-        dispatch(getRoom(room._id));
         navigate("/rooms/" + room._id);
     }
 
@@ -133,9 +131,9 @@ const RoomRow = ({ id, room, index, moveRow }) => {
                 {showOptions ?
                     <DropDown>
                         <ul>
-                            <li><button onClick={getRoomDetails}>Details Room {room.numroom}</button></li>
-                            <li><button onClick={getRoomEdit}>Edit Room {room.numroom}</button></li>
-                            <li><button onClick={eraseRoom}>Delete Room {room.numroom}</button></li>
+                            <li><button onClick={getRoomDetails}>Room Details</button></li>
+                            <li><button onClick={getRoomEdit}>Edit Room</button></li>
+                            <li><button onClick={eraseRoom}>Delete Room</button></li>
                         </ul>
                     </DropDown>
                     : null}
