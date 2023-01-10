@@ -70,7 +70,7 @@ export const sliceUsers = createSlice({
         builder.addCase(editUser.fulfilled, (state, action) => {
 
             state.users = state.users.map((user) => {
-                return user._id === action.payload._id ? action.payload : user;
+                return user._id === action.payload._id ? action.payload.newuser : user;
             });
         });
 

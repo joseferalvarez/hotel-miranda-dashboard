@@ -1,36 +1,41 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchGET } from "./fetchApi";
+import {
+    fetchGET,
+    fetchPOST,
+    fetchPUT,
+    fetchDELETE
+} from "./fetchApi";
+
+const token = JSON.parse(localStorage.getItem("auth")).token;
 
 export const getApiBookings = createAsyncThunk(
     "bookings/fetchBookings",
     async () => {
-        const token = JSON.parse(localStorage.getItem("auth")).token;
-
         return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/bookings`, token);
     }
 );
 
 export const createNewBooking = createAsyncThunk(
     "bookings/CreateBooking", async (newBooking) => {
-        return await newBooking;
+        return await fetchPOST(`${process.env.REACT_APP_LOCAL_DOMAIN}/bookings`, token, { booking: newBooking });
     }
 );
 
 export const deleteBooking = createAsyncThunk(
     "bookings/DeleteBooking", async (idBooking) => {
-        return await idBooking;
+        return await fetchDELETE(`${process.env.REACT_APP_LOCAL_DOMAIN}/bookings/${idBooking}`, token);
     }
 );
 
 export const editBooking = createAsyncThunk(
-    "bookings/EditBooking", async (idBooking) => {
-        return await idBooking;
+    "bookings/EditBooking", async (idBooking, newBooking) => {
+        return await fetchPUT(`${process.env.REACT_APP_LOCAL_DOMAIN}/bookings/${idBooking}`, token, { booking: newBooking });
     }
 );
 
 export const getBooking = createAsyncThunk(
     "booking/GetBookingDetails", async (idBooking) => {
-        return await idBooking;
+        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/bookings/${idBooking}`, token);
     }
 );
 
@@ -49,23 +54,30 @@ export const sliceBookings = createSlice({
         });
 
         builder.addCase(createNewBooking.fulfilled, (state, action) => {
-            state.bookings = [...state.bookings, action.payload];
+            const newBooking = action.payload.newbooking;
+
+            state.bookings = [...state.bookings, newBooking];
         });
 
         builder.addCase(deleteBooking.fulfilled, (state, action) => {
+            const oldbooking = action.payload.oldbooking;
+
             state.bookings = state.bookings.filter(
-                (booking) => booking.id !== action.payload
+                (booking) => booking._id !== oldbooking._id
             );
         });
 
         builder.addCase(editBooking.fulfilled, (state, action) => {
+            const newBooking = action.payload.newbooking;
+
             state.bookings = state.rooms.map((booking) => {
-                return booking.id === action.payload.id ? action.payload : booking;
+                return booking._id === newBooking._id ? newBooking : booking;
             });
         });
 
         builder.addCase(getBooking.fulfilled, (state, action) => {
-            state.booking = state.bookings.find((booking) => booking.id === action.payload);
+            const booking = action.payload;
+            state.booking = booking;
         });
     }
 });
