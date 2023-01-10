@@ -27,7 +27,7 @@ const UsersRow = ({ user }) => {
     const dispatch = useDispatch();
 
     const eraseUser = () => {
-        dispatch(deleteUser())
+        dispatch(deleteUser(user._id));
     };
 
     const getUserEdit = () => {

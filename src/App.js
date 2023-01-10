@@ -18,6 +18,7 @@ import Topbar from './components/Topbar/Topbar';
 import EditRoom from './pages/Rooms/EditRoom';
 import { getLocalAuth } from './features/sliceLogin';
 import Booking from './pages/Bookings/Booking';
+import NewBooking from './pages/Bookings/NewBooking';
 
 function App() {
   return (
@@ -48,6 +49,13 @@ function App() {
                 <Bookings />
               </AuthProvider>
             } />
+
+            <Route path='/bookings/newbooking' element={
+              <AuthProvider>
+                <NewBooking />
+              </AuthProvider>}
+            />
+
             <Route path='/bookings/:idbooking' action={({ params }) => { }} element={
               <AuthProvider>
                 <Booking />

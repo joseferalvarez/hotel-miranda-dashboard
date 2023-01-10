@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from "react-redux";
-import { createNewRoom } from "../../features/sliceRooms.js"
+import { useDispatch } from "react-redux";
+import { createNewRoom } from "../../features/sliceRooms.js";
+import { useNavigate } from 'react-router';
 
 const NewRoom = () => {
 
     const dispatch = useDispatch();
-
-    const { rooms } = useSelector((state) => state.roomsReducer);
+    const navigate = useNavigate();
 
     const [room, setRoom] = useState({
         numroom: "",
@@ -20,7 +20,8 @@ const NewRoom = () => {
     });
 
     const createRoom = () => {
-        dispatch(createNewRoom(room))
+        dispatch(createNewRoom(room));
+        navigate("/rooms");
     }
 
     return (

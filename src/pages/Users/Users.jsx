@@ -12,11 +12,13 @@ import {
     TableButtons,
     TableTools
 } from '../../components/Blocks/Blocks';
+import { useNavigate } from 'react-router';
 
 const Users = () => {
     const dispatch = useDispatch();
     const { users } = useSelector((state) => state.usersReducer);
     const [userList, setUserList] = useState(users);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (users.length === 0) {
@@ -33,7 +35,10 @@ const Users = () => {
         setUserList(users.filter(
             (user) => user.status === type
         ))
+    }
 
+    const pageNewUser = () => {
+        navigate("/users/newuser");
     }
 
     return (
@@ -46,7 +51,7 @@ const Users = () => {
                         <FilterButton onClick={() => filterByUsers(0)}>Inactive Employee</FilterButton>
                     </FilterTable>
                     <TableButtons>
-                        <Button type="create" text="+ New Employee"></Button>
+                        <Button type="create" text="+ New Employee" click={pageNewUser}></Button>
                         <Select type="white" options={["Newest"]}></Select>
                     </TableButtons>
                 </TableTools>
