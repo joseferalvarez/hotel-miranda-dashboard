@@ -29,7 +29,7 @@ async function fetchPOST(url, token, newitem) {
         },
         redirect: "follow",
         referrerPolicy: "no-referrer",
-        body: JSON.stringify({ room: newitem })
+        body: JSON.stringify(newitem)
     }).then((response) => {
         return response.json();
     }).then((data) => {
@@ -49,7 +49,7 @@ async function fetchPUT(url, token, newitem) {
         },
         redirect: "follow",
         referrerPolicy: "no-referrer",
-        body: JSON.stringify({ room: newitem })
+        body: JSON.stringify(newitem)
     }).then((response) => {
         return response.json();
     }).then((data) => {

@@ -4,9 +4,9 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { RoomsContainer } from './RoomsStyled';
 import { useDispatch, useSelector } from 'react-redux';
-import { getApiRooms } from '../../features/sliceRooms';
 import { Link } from 'react-router-dom';
 import Select from '../../components/Blocks/Select';
+import { getAllRooms } from '../../actions/actions';
 
 import {
     TableTools,
@@ -25,12 +25,12 @@ const Rooms = () => {
 
     useEffect(() => {
         if (rooms.length === 0) {
-            dispatch(getApiRooms());
+            getAllRooms(dispatch);
         }
         setRoomList(rooms);
     }, [rooms, dispatch]);
 
-    const getAllRooms = () => {
+    const showAllRooms = () => {
         setRoomList(rooms);
     }
 
@@ -45,7 +45,7 @@ const Rooms = () => {
             <div className='content'>
                 <TableTools>
                     <FilterTable>
-                        <FilterButton onClick={getAllRooms}>All Rooms</FilterButton>
+                        <FilterButton onClick={showAllRooms}>All Rooms</FilterButton>
                         <FilterButton onClick={() => filterByType(1)}>Available Rooms</FilterButton>
                         <FilterButton onClick={() => filterByType(0)}>Booked Rooms</FilterButton>
                     </FilterTable>

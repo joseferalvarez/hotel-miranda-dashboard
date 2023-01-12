@@ -2,8 +2,8 @@ import React, { useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useDispatch } from 'react-redux';
-import { deleteRoom } from '../../features/sliceRooms';
 import { useNavigate } from 'react-router';
+import { deleteOneRoom } from '../../actions/actionsRoom';
 
 import {
     Row,
@@ -28,11 +28,7 @@ const RoomRow = ({ id, room, index, moveRow }) => {
     const dispatch = useDispatch();
 
     const eraseRoom = () => {
-        const data = {
-            id: room._id
-        };
-
-        dispatch(deleteRoom(room._id));
+        deleteOneRoom(dispatch, room._id);
     }
 
     const getRoomEdit = () => {

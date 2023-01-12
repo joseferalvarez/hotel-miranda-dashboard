@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { getRoom } from '../../features/sliceRooms';
+import { getOneRoom } from '../../actions/actions';
 
 import {
     RoomContainer,
@@ -25,16 +25,8 @@ const Room = () => {
     const params = useParams();
 
     useEffect(() => {
-        getRoomDetails();
+        getOneRoom(dispatch, params.idroom);
     }, []);
-
-    const getRoomDetails = () => {
-        const data = {
-            id: params.idroom
-        };
-
-        dispatch(getRoom(data));
-    };
 
     if (room) {
         return (

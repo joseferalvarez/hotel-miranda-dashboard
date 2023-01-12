@@ -17,7 +17,7 @@ export const getApiRooms = createAsyncThunk(
 
 export const createNewRoom = createAsyncThunk(
     "room/CreateRoom", async (data) => {
-        return await fetchPOST(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms`, token, data.room);
+        return await fetchPOST(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms`, token, { room: data.room });
     }
 );
 
@@ -29,7 +29,7 @@ export const deleteRoom = createAsyncThunk(
 
 export const editRoom = createAsyncThunk(
     "room/EditRoom", async (data) => {
-        return await fetchPUT(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms/${data.id}`, token, data.room);
+        return await fetchPUT(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms/${data.id}`, token, { room: data.room });
     }
 );
 

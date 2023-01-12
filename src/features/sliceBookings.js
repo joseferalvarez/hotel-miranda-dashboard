@@ -16,26 +16,26 @@ export const getApiBookings = createAsyncThunk(
 );
 
 export const createNewBooking = createAsyncThunk(
-    "bookings/CreateBooking", async (newBooking) => {
-        return await fetchPOST(`${process.env.REACT_APP_LOCAL_DOMAIN}/bookings`, token, { booking: newBooking });
+    "bookings/CreateBooking", async (data) => {
+        return await fetchPOST(`${process.env.REACT_APP_LOCAL_DOMAIN}/bookings`, token, { booking: data.booking });
     }
 );
 
 export const deleteBooking = createAsyncThunk(
-    "bookings/DeleteBooking", async (idBooking) => {
-        return await fetchDELETE(`${process.env.REACT_APP_LOCAL_DOMAIN}/bookings/${idBooking}`, token);
+    "bookings/DeleteBooking", async (data) => {
+        return await fetchDELETE(`${process.env.REACT_APP_LOCAL_DOMAIN}/bookings/${data.id}`, token);
     }
 );
 
 export const editBooking = createAsyncThunk(
-    "bookings/EditBooking", async (idBooking, newBooking) => {
-        return await fetchPUT(`${process.env.REACT_APP_LOCAL_DOMAIN}/bookings/${idBooking}`, token, { booking: newBooking });
+    "bookings/EditBooking", async (data) => {
+        return await fetchPUT(`${process.env.REACT_APP_LOCAL_DOMAIN}/bookings/${data.id}`, token, { booking: data.booking });
     }
 );
 
 export const getBooking = createAsyncThunk(
-    "booking/GetBookingDetails", async (idBooking) => {
-        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/bookings/${idBooking}`, token);
+    "booking/GetBookingDetails", async (data) => {
+        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/bookings/${data.id}`, token);
     }
 );
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { editRoom, getRoom } from '../../features/sliceRooms';
 import { useNavigate, useParams } from 'react-router';
+import { updateOneRoom, getOneRoom } from '../../actions/actions';
 
 const EditRoom = () => {
     const dispatch = useDispatch();
@@ -12,12 +12,7 @@ const EditRoom = () => {
     const [roomEdit, setRoomEdit] = useState(null);
 
     const setEditRoom = () => {
-        const data = {
-            id: room._id,
-            room: roomEdit
-        };
-
-        dispatch(editRoom(data));
+        updateOneRoom(dispatch, room._id, roomEdit);
         navigate("/rooms");
     }
 
@@ -33,7 +28,8 @@ const EditRoom = () => {
     }
 
     useEffect(() => {
-        dispatch(getRoom(params.idroom));
+        getOneRoom(dispatch, params.idroom);
+
         if (room) {
             setRoomEdit({
                 numroom: room.numroom,

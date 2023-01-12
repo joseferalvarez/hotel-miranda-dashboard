@@ -16,26 +16,26 @@ export const getApiContact = createAsyncThunk(
 );
 
 export const createNewContact = createAsyncThunk(
-    "contact/CreateContact", async (newContact) => {
-        return await fetchPOST(`${process.env.REACT_APP_LOCAL_DOMAIN}/contacts`, token, { contact: newContact });
+    "contact/CreateContact", async (data) => {
+        return await fetchPOST(`${process.env.REACT_APP_LOCAL_DOMAIN}/contacts`, token, { contact: data.contact });
     }
 );
 
 export const deleteContact = createAsyncThunk(
-    "contact/DeleteContact", async (idContact) => {
-        return await fetchDELETE(`${process.env.REACT_APP_LOCAL_DOMAIN}/contacts/${idContact}`, token);
+    "contact/DeleteContact", async (data) => {
+        return await fetchDELETE(`${process.env.REACT_APP_LOCAL_DOMAIN}/contacts/${data.id}`, token);
     }
 );
 
 export const editContact = createAsyncThunk(
-    "contact/EditContact", async (idContact, newContact) => {
-        return await fetchPUT(`${process.env.REACT_APP_LOCAL_DOMAIN}/contacts/${idContact}`, token, { room: newContact });
+    "contact/EditContact", async (data) => {
+        return await fetchPUT(`${process.env.REACT_APP_LOCAL_DOMAIN}/contacts/${data.id}`, token, { contact: data.contact });
     }
 );
 
 export const getContact = createAsyncThunk(
-    "contact/GetContactDetails", async (idContact) => {
-        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/contacts/${idContact}`, token);
+    "contact/GetContactDetails", async (data) => {
+        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/contacts/${data.id}`, token);
     }
 );
 

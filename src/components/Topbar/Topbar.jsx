@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AiOutlineMail, AiOutlineBell } from "react-icons/ai";
 import { useLocation } from 'react-router';
 import { FiLogOut } from "react-icons/fi";
@@ -9,19 +9,10 @@ import {
     IconContainer,
     Icon
 } from "./TopbarStyled";
-import LoginContext from '../../context/contextLogin';
-import { logout } from '../../context/actions';
 
 const Topbar = () => {
-
-    const [log, setLog] = useContext(LoginContext);
     let location = useLocation();
     const [title, setTitle] = useState("");
-
-    const goLogin = () => {
-        setLog(logout({ auth: false, email: log.email }));
-        localStorage.setItem("login", JSON.stringify({ auth: false, email: log.email }));
-    }
 
 
     useEffect(() => {
@@ -65,7 +56,7 @@ const Topbar = () => {
                         <p>8</p>
                     </div>
                 </Icon>
-                <Icon onClick={goLogin}>
+                <Icon>
                     <FiLogOut className='icon' />
                 </Icon>
             </IconContainer>

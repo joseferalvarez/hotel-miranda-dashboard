@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
-import { createNewRoom } from "../../features/sliceRooms.js";
 import { useNavigate } from 'react-router';
+import { createOneRoom } from '../../actions/actions';
 
 const NewRoom = () => {
 
@@ -20,11 +20,7 @@ const NewRoom = () => {
     });
 
     const createRoom = () => {
-        const data = {
-            room: room
-        };
-
-        dispatch(createNewRoom(data));
+        createOneRoom(dispatch, room);
         navigate("/rooms");
     }
 

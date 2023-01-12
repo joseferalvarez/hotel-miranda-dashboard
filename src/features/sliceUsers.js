@@ -16,26 +16,26 @@ export const getApiUsers = createAsyncThunk(
 );
 
 export const createNewUser = createAsyncThunk(
-    "user/CreateUser", async (newUser) => {
-        return await fetchPOST(`${process.env.REACT_APP_LOCAL_DOMAIN}/users`, token, { user: newUser });
+    "user/CreateUser", async (data) => {
+        return await fetchPOST(`${process.env.REACT_APP_LOCAL_DOMAIN}/users`, token, { user: data.user });
     }
 );
 
 export const deleteUser = createAsyncThunk(
-    "user/DeleteUser", async (idUser) => {
-        return await fetchDELETE(`${process.env.REACT_APP_LOCAL_DOMAIN}/users/${idUser}`, token);
+    "user/DeleteUser", async (data) => {
+        return await fetchDELETE(`${process.env.REACT_APP_LOCAL_DOMAIN}/users/${data.id}`, token);
     }
 );
 
 export const editUser = createAsyncThunk(
-    "user/EditUser", async (idUser, newUser) => {
-        return await fetchPUT(`${process.env.REACT_APP_LOCAL_DOMAIN}/users/${idUser}`, token, { room: newUser });
+    "user/EditUser", async (data) => {
+        return await fetchPUT(`${process.env.REACT_APP_LOCAL_DOMAIN}/users/${data.id}`, token, { user: data.user });
     }
 );
 
 export const getUser = createAsyncThunk(
-    "user/GetUserDetails", async (idUser) => {
-        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/users/${idUser}`, token);
+    "user/GetUserDetails", async (data) => {
+        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/users/${data.id}`, token);
     }
 );
 
