@@ -19,6 +19,7 @@ import EditRoom from './pages/Rooms/EditRoom';
 import { getLocalAuth } from './features/sliceLogin';
 import Booking from './pages/Bookings/Booking';
 import NewBooking from './pages/Bookings/NewBooking';
+import { getUserLocal } from './actions/actionsLogin';
 
 function App() {
   return (
@@ -129,7 +130,7 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
       children
     )
   } else if ((!user || !token) && auth) {
-    dispatch(getLocalAuth(auth.user, auth.token));
+    getUserLocal(dispatch);
     return (
       children
     );

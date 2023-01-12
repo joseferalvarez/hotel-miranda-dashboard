@@ -6,35 +6,43 @@ import {
     fetchDELETE
 } from "./fetchApi";
 
-const token = JSON.parse(localStorage.getItem("auth")).token;
-
 export const getApiContact = createAsyncThunk(
     "contact/fetchContacts",
     async () => {
+        const token = JSON.parse(localStorage.getItem("auth")).token;
+
         return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/contacts`, token);
     }
 );
 
 export const createNewContact = createAsyncThunk(
     "contact/CreateContact", async (data) => {
+        const token = JSON.parse(localStorage.getItem("auth")).token;
+
         return await fetchPOST(`${process.env.REACT_APP_LOCAL_DOMAIN}/contacts`, token, { contact: data.contact });
     }
 );
 
 export const deleteContact = createAsyncThunk(
     "contact/DeleteContact", async (data) => {
+        const token = JSON.parse(localStorage.getItem("auth")).token;
+
         return await fetchDELETE(`${process.env.REACT_APP_LOCAL_DOMAIN}/contacts/${data.id}`, token);
     }
 );
 
 export const editContact = createAsyncThunk(
     "contact/EditContact", async (data) => {
+        const token = JSON.parse(localStorage.getItem("auth")).token;
+
         return await fetchPUT(`${process.env.REACT_APP_LOCAL_DOMAIN}/contacts/${data.id}`, token, { contact: data.contact });
     }
 );
 
 export const getContact = createAsyncThunk(
     "contact/GetContactDetails", async (data) => {
+        const token = JSON.parse(localStorage.getItem("auth")).token;
+
         return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/contacts/${data.id}`, token);
     }
 );

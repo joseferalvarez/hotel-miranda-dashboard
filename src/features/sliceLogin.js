@@ -3,15 +3,15 @@ import fetchLogin from "./fetchLogin";
 
 export const getLogin = createAsyncThunk(
     "login/getLogin",
-    async (user) => {
-        return await fetchLogin(user);
+    async (data) => {
+        return await fetchLogin(data);
     }
 );
 
 export const getLocalAuth = createAsyncThunk(
     "login/getLocalAuth",
-    async (auth) => {
-        return await auth;
+    async (data) => {
+        return await data;
     }
 );
 
@@ -45,9 +45,9 @@ export const sliceLogin = createSlice({
             state.token = token;
         });
         builder.addCase(getLocalAuth.fulfilled, (state, action) => {
-            const auth = action.payload;
-            state.user = auth.user;
-            state.token = auth.token;
+            const data = action.payload;
+            state.user = data.user;
+            state.token = data.token;
         });
     }
 });

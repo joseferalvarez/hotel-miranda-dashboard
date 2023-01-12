@@ -5,21 +5,27 @@ import {
     getApiRooms,
     getRoom
 } from "../features/sliceRooms";
+import { getToken } from "../helpers/helpers";
 
 function getAllRooms(dispatch) {
-    dispatch(getApiRooms());
+    const data = {
+        token: getToken()
+    }
+    dispatch(getApiRooms(data));
 }
 
 function getOneRoom(dispatch, id) {
     const data = {
-        id: id
+        id: id,
+        token: getToken()
     };
     dispatch(getRoom(data));
 }
 
 function createOneRoom(dispatch, room) {
     const data = {
-        room: room
+        room: room,
+        token: getToken()
     };
     dispatch(createNewRoom(data));
 }
@@ -27,7 +33,8 @@ function createOneRoom(dispatch, room) {
 function updateOneRoom(dispatch, id, room) {
     const data = {
         id: id,
-        room: room
+        room: room,
+        token: getToken()
     };
 
     dispatch(editRoom(data));
@@ -35,7 +42,8 @@ function updateOneRoom(dispatch, id, room) {
 
 function deleteOneRoom(dispatch, id) {
     const data = {
-        id: id
+        id: id,
+        token: getToken()
     };
 
     dispatch(deleteRoom(data));

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import UsersTable from '../../components/Users/UsersTable';
-import { getApiUsers } from '../../features/sliceUsers';
 import { UsersContainer } from './UsersStyled';
 import Button from '../../components/Blocks/Button';
 import Select from '../../components/Blocks/Select';
@@ -13,6 +12,7 @@ import {
     TableTools
 } from '../../components/Blocks/Blocks';
 import { useNavigate } from 'react-router';
+import { getAllUsers } from '../../actions/actionsUser';
 
 const Users = () => {
     const dispatch = useDispatch();
@@ -22,12 +22,12 @@ const Users = () => {
 
     useEffect(() => {
         if (users.length === 0) {
-            dispatch(getApiUsers());
+            getAllUsers(dispatch);
         }
         setUserList(users);
     }, [users, dispatch]);
 
-    const getAllUsers = () => {
+    const showAllUsers = () => {
         setUserList(users);
     }
 
@@ -46,7 +46,7 @@ const Users = () => {
             <div className='content'>
                 <TableTools>
                     <FilterTable>
-                        <FilterButton onClick={getAllUsers}>All Employee</FilterButton>
+                        <FilterButton onClick={showAllUsers}>All Employee</FilterButton>
                         <FilterButton onClick={() => filterByUsers(1)}>Active Employee</FilterButton>
                         <FilterButton onClick={() => filterByUsers(0)}>Inactive Employee</FilterButton>
                     </FilterTable>

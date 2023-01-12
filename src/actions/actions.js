@@ -30,6 +30,11 @@ import {
     deleteOneContact
 } from "./actionsContact.js"
 
+import {
+    getUserDB,
+    getUserLocal
+} from "./actionsLogin.js";
+
 export {
     getAllRooms,
     getOneRoom,
@@ -50,5 +55,7 @@ export {
     getOneContact,
     createOneContact,
     updateOneContact,
-    deleteOneContact
+    deleteOneContact,
+    getUserDB,
+    getUserLocal
 }

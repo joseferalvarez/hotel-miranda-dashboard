@@ -16,7 +16,7 @@ import {
 import { FaUser } from "react-icons/fa"
 import { RiLockPasswordFill } from "react-icons/ri";
 import { useDispatch, useSelector } from 'react-redux';
-import { getLogin } from '../../features/sliceLogin';
+import { getUserDB } from '../../actions/actionsLogin';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const Login = () => {
     const checkLogin = (e) => {
         e.preventDefault();
 
-        dispatch(getLogin({ email: email, pass: pass }));
+        getUserDB(dispatch, email, pass);
     }
 
     if (!user || !token) {

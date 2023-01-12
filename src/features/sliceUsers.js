@@ -6,36 +6,34 @@ import {
     fetchPUT
 } from "./fetchApi";
 
-const token = JSON.parse(localStorage.getItem("auth")).token;
-
 export const getApiUsers = createAsyncThunk(
     "users/fetchUser",
-    async () => {
-        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/users`, token);
+    async (data) => {
+        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/users`, data.token);
     }
 );
 
 export const createNewUser = createAsyncThunk(
     "user/CreateUser", async (data) => {
-        return await fetchPOST(`${process.env.REACT_APP_LOCAL_DOMAIN}/users`, token, { user: data.user });
+        return await fetchPOST(`${process.env.REACT_APP_LOCAL_DOMAIN}/users`, data.token, { user: data.user });
     }
 );
 
 export const deleteUser = createAsyncThunk(
     "user/DeleteUser", async (data) => {
-        return await fetchDELETE(`${process.env.REACT_APP_LOCAL_DOMAIN}/users/${data.id}`, token);
+        return await fetchDELETE(`${process.env.REACT_APP_LOCAL_DOMAIN}/users/${data.id}`, data.token);
     }
 );
 
 export const editUser = createAsyncThunk(
     "user/EditUser", async (data) => {
-        return await fetchPUT(`${process.env.REACT_APP_LOCAL_DOMAIN}/users/${data.id}`, token, { user: data.user });
+        return await fetchPUT(`${process.env.REACT_APP_LOCAL_DOMAIN}/users/${data.id}`, data.token, { user: data.user });
     }
 );
 
 export const getUser = createAsyncThunk(
     "user/GetUserDetails", async (data) => {
-        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/users/${data.id}`, token);
+        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/users/${data.id}`, data.token);
     }
 );
 
