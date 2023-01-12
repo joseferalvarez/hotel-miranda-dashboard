@@ -25,8 +25,16 @@ const Room = () => {
     const params = useParams();
 
     useEffect(() => {
-        dispatch(getRoom(params.idroom));
+        getRoomDetails();
     }, []);
+
+    const getRoomDetails = () => {
+        const data = {
+            id: params.idroom
+        };
+
+        dispatch(getRoom(data));
+    };
 
     if (room) {
         return (

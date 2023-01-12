@@ -12,9 +12,13 @@ const EditRoom = () => {
     const [roomEdit, setRoomEdit] = useState(null);
 
     const setEditRoom = () => {
-        console.log(roomEdit);
-        dispatch(editRoom(room._id, roomEdit));
-        /* navigate("/rooms"); */
+        const data = {
+            id: room._id,
+            room: roomEdit
+        };
+
+        dispatch(editRoom(data));
+        navigate("/rooms");
     }
 
     const getStatusNumber = (status) => {

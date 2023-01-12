@@ -28,6 +28,10 @@ const RoomRow = ({ id, room, index, moveRow }) => {
     const dispatch = useDispatch();
 
     const eraseRoom = () => {
+        const data = {
+            id: room._id
+        };
+
         dispatch(deleteRoom(room._id));
     }
 

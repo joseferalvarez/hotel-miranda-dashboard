@@ -20,7 +20,11 @@ const NewRoom = () => {
     });
 
     const createRoom = () => {
-        dispatch(createNewRoom(room));
+        const data = {
+            room: room
+        };
+
+        dispatch(createNewRoom(data));
         navigate("/rooms");
     }
 
