@@ -5,14 +5,19 @@ import {
     getApiBookings,
     getBooking
 } from "../features/sliceBookings";
+import { getToken } from "../helpers/helpers";
 
 function getAllBookings(dispatch) {
-    dispatch(getApiBookings());
+    const data = {
+        token: getToken()
+    }
+    dispatch(getApiBookings(data));
 }
 
 function getOneBooking(dispatch, id) {
     const data = {
-        id: id
+        id: id,
+        token: getToken()
     };
 
     dispatch(getBooking(data));
@@ -20,7 +25,8 @@ function getOneBooking(dispatch, id) {
 
 function createOneBooking(dispatch, booking) {
     const data = {
-        booking: booking
+        booking: booking,
+        token: getToken()
     };
 
     dispatch(createNewBooking(data));
@@ -29,7 +35,8 @@ function createOneBooking(dispatch, booking) {
 function updateOneBooking(dispatch, id, booking) {
     const data = {
         id: id,
-        booking: booking
+        booking: booking,
+        token: getToken()
     };
 
     dispatch(editBooking(data));
@@ -37,7 +44,8 @@ function updateOneBooking(dispatch, id, booking) {
 
 function deleteOneBooking(dispatch, id) {
     const data = {
-        id: id
+        id: id,
+        token: getToken()
     };
 
     dispatch(deleteBooking(data));
