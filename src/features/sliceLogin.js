@@ -15,6 +15,13 @@ export const getLocalAuth = createAsyncThunk(
     }
 );
 
+export const setLogout = createAsyncThunk(
+    "login/setLogout",
+    async () => {
+        return await "";
+    }
+);
+
 const initialState = {
     user: {
         _id: null,
@@ -49,6 +56,10 @@ export const sliceLogin = createSlice({
             state.user = data.user;
             state.token = data.token;
         });
+        builder.addCase(setLogout.fulfilled, (state, action) => {
+            state.user = null;
+            state.token = null;
+        })
     }
 });
 

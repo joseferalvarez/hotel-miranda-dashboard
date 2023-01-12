@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AiOutlineMail, AiOutlineBell } from "react-icons/ai";
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { FiLogOut } from "react-icons/fi";
 
 import {
@@ -9,11 +9,19 @@ import {
     IconContainer,
     Icon
 } from "./TopbarStyled";
+import { useDispatch } from 'react-redux';
+import { logout } from '../../actions/actionsLogin';
 
 const Topbar = () => {
     let location = useLocation();
     const [title, setTitle] = useState("");
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
+    const doLogout = () => {
+        logout(dispatch);
+        navigate("/");
+    }
 
     useEffect(() => {
         switch (location.pathname) {
@@ -56,7 +64,7 @@ const Topbar = () => {
                         <p>8</p>
                     </div>
                 </Icon>
-                <Icon>
+                <Icon onClick={doLogout}>
                     <FiLogOut className='icon' />
                 </Icon>
             </IconContainer>
