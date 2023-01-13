@@ -116,7 +116,9 @@ const RoomRow = ({ id, room, index, moveRow }) => {
             </DataContainer>
             <DataContainer>
                 <RoomText>{room.amenities.map((amenitie, index) => (
-                    <span key={index}>{amenitie}, </span>
+                    index < room.amenities.length - 1 ?
+                        <span key={index}>{amenitie}, </span> :
+                        <span key={index}>{amenitie}</span>
                 ))}</RoomText>
             </DataContainer>
             <DataContainer>

@@ -1,7 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
-import { updateOneRoom, getOneRoom } from '../../actions/actions';
+import { getOneRoom } from '../../actions/actions';
+import RoomForm from '../../components/Rooms/RoomForm';
+import styled from 'styled-components';
+
+const FormContainer = styled.div`
+    display: flex;
+    height: 100%;
+`;
 
 const EditRoom = () => {
     const dispatch = useDispatch();
@@ -9,63 +16,20 @@ const EditRoom = () => {
     const params = useParams();
     const navigate = useNavigate();
 
-    const [roomEdit, setRoomEdit] = useState(null);
-
-    const setEditRoom = () => {
-        updateOneRoom(dispatch, room._id, roomEdit);
-        navigate("/rooms");
-    }
-
-    const getStatusNumber = (status) => {
-        switch (status) {
-            case "Available":
-                return 1;
-            case "Booked":
-                return 0;
-            default:
-                return 0;
-        }
-    }
+    /*  const setEditRoom = () => {
+         updateOneRoom(dispatch, room._id, roomEdit);
+         navigate("/rooms");
+     } */
 
     useEffect(() => {
         getOneRoom(dispatch, params.idroom);
-
-        if (room) {
-            setRoomEdit({
-                numroom: room.numroom,
-                photos: room.photos,
-                type: room.type,
-                amenities: room.amenities,
-                price: room.price,
-                offer: room.offer,
-                status: room.status,
-                cancellation: room.cancellation
-            });
-        }
     }, []);
 
-    if (room && roomEdit) {
+    if (room) {
         return (
-            <div>
-                <h1>Edit Room Nº{room._id}</h1>
-                <input type="number" placeholder="Number" value={roomEdit.numroom} onChange={(e) => setRoomEdit({ ...roomEdit, numroom: e.target.value })}></input>
-                <input type="text" placeholder="Photo" value={roomEdit.photos} onChange={(e) => setRoomEdit({ ...roomEdit, photos: e.target.value })}></input>
-                <select value={roomEdit.type} onChange={(e) => setRoomEdit({ ...roomEdit, type: e.target.value })}>
-                    <option>Single Bed</option>
-                    <option>Double Bed</option>
-                    <option>Double Superior</option>
-                    <option>Suite</option>
-                </select>
-                <p>amenities</p>
-                <input type="text" placeholder="price" value={roomEdit.price} onChange={(e) => setRoomEdit({ ...roomEdit, price: e.target.value })}></input>
-                <input type="text" placeholder="offer" value={roomEdit.offer} onChange={(e) => setRoomEdit({ ...roomEdit, offer: e.target.value })}></input>
-                <select onChange={(e) => setRoomEdit({ ...roomEdit, status: getStatusNumber(e.target.value) })}>
-                    <option>Available</option>
-                    <option>Booked</option>
-                </select>
-
-                <button onClick={setEditRoom}>Editar habitacion</button>
-            </div>
+            <FormContainer>
+                <RoomForm room={room}></RoomForm>
+            </FormContainer>
         );
     } else {
         return (
