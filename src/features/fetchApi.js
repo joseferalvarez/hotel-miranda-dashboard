@@ -1,75 +1,57 @@
-async function fetchGET(url, token) {
-    return await fetch(url, {
-        method: "GET",
-        mode: "cors",
-        cache: "default",
-        credentials: "same-origin",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        },
-        redirect: "follow",
-        referrerPolicy: "no-referrer"
-    }).then((response) => {
+import { getToken } from "../helpers/helpers";
+
+const FETCH_OPTIONS = ["GET", "POST", "PUT", "DELETE"];
+
+const fetchData = {
+    method: "",
+    mode: "cors",
+    cache: "default",
+    credentials: "same-origin",
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${getToken()}`
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+    body: null
+};
+
+async function fetchGET(url) {
+    fetchData.method = FETCH_OPTIONS[0];
+
+    return await fetch(url, fetchData).then((response) => {
         return response.json();
     }).then((data) => {
         return data;
     });
 };
 
-async function fetchPOST(url, token, newitem) {
-    return await fetch(url, {
-        method: "POST",
-        mode: "cors",
-        cache: "default",
-        credentials: "same-origin",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        },
-        redirect: "follow",
-        referrerPolicy: "no-referrer",
-        body: JSON.stringify(newitem)
-    }).then((response) => {
+async function fetchPOST(url, newitem) {
+    fetchData.method = FETCH_OPTIONS[1];
+    fetchData.body = JSON.stringify(newitem);
+
+    return await fetch(url, fetchData).then((response) => {
         return response.json();
     }).then((data) => {
         return data;
     });
 }
 
-async function fetchPUT(url, token, newitem) {
-    return await fetch(url, {
-        method: "PUT",
-        mode: "cors",
-        cache: "default",
-        credentials: "same-origin",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        },
-        redirect: "follow",
-        referrerPolicy: "no-referrer",
-        body: JSON.stringify(newitem)
-    }).then((response) => {
+async function fetchPUT(url, newitem) {
+    fetchData.method = FETCH_OPTIONS[2];
+    fetchData.body = JSON.stringify(newitem);
+
+    return await fetch(url, fetchData).then((response) => {
         return response.json();
     }).then((data) => {
         return data;
     });
 }
 
-async function fetchDELETE(url, token) {
-    return await fetch(url, {
-        method: "DELETE",
-        mode: "cors",
-        cache: "default",
-        credentials: "same-origin",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        },
-        redirect: "follow",
-        referrerPolicy: "no-referrer"
-    }).then((response) => {
+async function fetchDELETE(url) {
+    fetchData.method = FETCH_OPTIONS[3];
+
+    return await fetch(url, fetchData).then((response) => {
         return response.json();
     }).then((data) => {
         return data;

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router';
 import { createOneRoom } from '../../actions/actions';
+import RoomForm from '../../components/Rooms/RoomForm';
 
 const NewRoom = () => {
 
@@ -42,6 +43,8 @@ const NewRoom = () => {
             <input type="text" placeholder="cancellation" value={room.cancellation} onChange={(e) => setRoom({ ...room, cancellation: e.target.value })}></input>
 
             <button onClick={createRoom}>crear habitacion</button>
+
+            <RoomForm></RoomForm>
         </div>
     );
 }

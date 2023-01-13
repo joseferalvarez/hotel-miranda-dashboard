@@ -5,19 +5,14 @@ import {
     getApiUsers,
     getUser
 } from "../features/sliceUsers";
-import { getToken } from "../helpers/helpers";
 
 function getAllUsers(dispatch) {
-    const data = {
-        token: getToken()
-    };
-    dispatch(getApiUsers(data));
+    dispatch(getApiUsers());
 }
 
 function getOneUser(dispatch, id) {
     const data = {
-        id: id,
-        token: getToken()
+        id: id
     }
 
     dispatch(getUser(data));
@@ -25,8 +20,7 @@ function getOneUser(dispatch, id) {
 
 function createOneUser(dispatch, user) {
     const data = {
-        user: user,
-        token: getToken()
+        user: user
     }
 
     dispatch(createNewUser(data));
@@ -35,8 +29,7 @@ function createOneUser(dispatch, user) {
 function updateOneUser(dispatch, id, user) {
     const data = {
         id: id,
-        user: user,
-        token: getToken()
+        user: user
     };
 
     dispatch(editUser(data));
@@ -44,8 +37,7 @@ function updateOneUser(dispatch, id, user) {
 
 function deleteOneUser(dispatch, id) {
     const data = {
-        id: id,
-        token: getToken()
+        id: id
     };
 
     dispatch(deleteUser(data))

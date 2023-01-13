@@ -5,19 +5,14 @@ import {
     getApiContact,
     getContact
 } from "../features/sliceContact";
-import { getToken } from "../helpers/helpers"
 
 function getAllContacts(dispatch) {
-    const data = {
-        token: getToken()
-    }
-    dispatch(getApiContact(data));
+    dispatch(getApiContact());
 }
 
 function getOneContact(dispatch, id) {
     const data = {
-        id: id,
-        token: getToken()
+        id: id
     };
 
     dispatch(getContact(data));
@@ -25,8 +20,7 @@ function getOneContact(dispatch, id) {
 
 function createOneContact(dispatch, contact) {
     const data = {
-        contact: contact,
-        token: getToken()
+        contact: contact
     };
 
     dispatch(createNewContact(data));
@@ -35,16 +29,14 @@ function createOneContact(dispatch, contact) {
 function updateOneContact(dispatch, id, contact) {
     const data = {
         id: id,
-        contact: contact,
-        token: getToken()
+        contact: contact
     };
     dispatch(editContact(data));
 }
 
 function deleteOneContact(dispatch, id) {
     const data = {
-        id: id,
-        token: getToken()
+        id: id
     };
 
     dispatch(deleteContact(data))

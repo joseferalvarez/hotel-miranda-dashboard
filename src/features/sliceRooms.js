@@ -8,32 +8,32 @@ import {
 
 export const getApiRooms = createAsyncThunk(
     "room/fetchRooms",
-    async (data) => {
-        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms`, data.token);
+    async () => {
+        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms`);
     }
 );
 
 export const createNewRoom = createAsyncThunk(
     "room/CreateRoom", async (data) => {
-        return await fetchPOST(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms`, data.token, { room: data.room });
+        return await fetchPOST(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms`, { room: data.room });
     }
 );
 
 export const deleteRoom = createAsyncThunk(
     "room/DeleteRoom", async (data) => {
-        return await fetchDELETE(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms/${data.id}`, data.token);
+        return await fetchDELETE(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms/${data.id}`);
     }
 );
 
 export const editRoom = createAsyncThunk(
     "room/EditRoom", async (data) => {
-        return await fetchPUT(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms/${data.id}`, data.token, { room: data.room });
+        return await fetchPUT(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms/${data.id}`, { room: data.room });
     }
 );
 
 export const getRoom = createAsyncThunk(
     "room/GetRoomDetails", async (data) => {
-        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms/${data.id}`, data.token);
+        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/rooms/${data.id}`);
     }
 );
 
