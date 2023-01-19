@@ -3,7 +3,8 @@ import {
     getOneRoom,
     createOneRoom,
     updateOneRoom,
-    deleteOneRoom
+    deleteOneRoom,
+    resetRoom
 } from "./actionsRoom.js"
 
 import {
@@ -11,7 +12,8 @@ import {
     getOneUser,
     createOneUser,
     updateOneUser,
-    deleteOneUser
+    deleteOneUser,
+    resetUser
 } from "./actionsUser.js";
 
 import {
@@ -42,11 +44,13 @@ export {
     createOneRoom,
     updateOneRoom,
     deleteOneRoom,
+    resetRoom,
     getAllUsers,
     getOneUser,
     createOneUser,
     updateOneUser,
     deleteOneUser,
+    resetUser,
     getAllBookings,
     getOneBooking,
     createOneBooking,

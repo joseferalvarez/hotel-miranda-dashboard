@@ -1,30 +1,30 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { getOneRoom, resetRoom } from '../../actions/actions';
-import RoomForm from '../../components/Rooms/RoomForm';
+import { getOneUser, resetUser } from '../../actions/actions';
 import styled from 'styled-components';
 import LoaderSpinner from '../../components/Blocks/LoaderSpinner';
+import UserForm from '../../components/Users/UserForm';
 
 const FormContainer = styled.div`
     display: flex;
     height: 100%;
 `;
 
-const EditRoom = () => {
+const EditUser = () => {
     const dispatch = useDispatch();
-    const { room } = useSelector((state) => state.roomsReducer);
+    const { user } = useSelector((state) => state.usersReducer);
     const params = useParams();
 
     useEffect(() => {
-        resetRoom(dispatch);
-        getOneRoom(dispatch, params.idroom);
+        resetUser(dispatch);
+        getOneUser(dispatch, params.iduser);
     }, []);
 
-    if (room) {
+    if (user) {
         return (
             <FormContainer>
-                <RoomForm room={room}></RoomForm>
+                <UserForm user={user}></UserForm>
             </FormContainer>
         );
     } else {
@@ -32,6 +32,7 @@ const EditRoom = () => {
             <LoaderSpinner></LoaderSpinner>
         );
     }
+
 }
 
-export default EditRoom;
+export default EditUser;

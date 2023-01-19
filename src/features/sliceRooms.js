@@ -44,6 +44,13 @@ const initialState = {
 export const sliceRooms = createSlice({
     name: "rooms",
     initialState,
+    reducers: {
+        resetRoomState: (state, action) => {
+            if (state.room) {
+                state.room = null;
+            }
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(getApiRooms.fulfilled, (state, action) => {
             state.rooms = action.payload;
@@ -79,5 +86,9 @@ export const sliceRooms = createSlice({
         });
     }
 });
+
+export const {
+    resetRoomState
+} = sliceRooms.actions;
 
 export default sliceRooms.reducer;

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { getOneRoom } from '../../actions/actions';
+import { getOneRoom, resetRoom } from '../../actions/actions';
 
 import {
     RoomContainer,
@@ -18,6 +18,7 @@ import {
     Facilitie,
     PhotoContainer
 } from "./RoomStyled.jsx";
+import LoaderSpinner from '../../components/Blocks/LoaderSpinner';
 
 const Room = () => {
     const { room } = useSelector((state) => state.roomsReducer);
@@ -25,6 +26,7 @@ const Room = () => {
     const params = useParams();
 
     useEffect(() => {
+        resetRoom(dispatch);
         getOneRoom(dispatch, params.idroom);
     }, []);
 
@@ -70,7 +72,7 @@ const Room = () => {
         );
     } else {
         return (
-            <p>Habitacion no encontrada</p>
+            <LoaderSpinner></LoaderSpinner>
         )
     }
 }

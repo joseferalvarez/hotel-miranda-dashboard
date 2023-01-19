@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { HiOutlinePhone, HiOutlineMail } from "react-icons/hi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Checkbox } from '../Blocks/Blocks';
-import { deleteUser } from "../../features/sliceUsers";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 
@@ -17,6 +16,7 @@ import {
     UserStatus,
     DropDown
 } from "./UsersRowStyled.jsx";
+import { deleteOneUser } from '../../actions/actions';
 
 
 
@@ -27,7 +27,7 @@ const UsersRow = ({ user }) => {
     const dispatch = useDispatch();
 
     const eraseUser = () => {
-        dispatch(deleteUser(user._id));
+        deleteOneUser(dispatch, user._id);
     };
 
     const getUserEdit = () => {

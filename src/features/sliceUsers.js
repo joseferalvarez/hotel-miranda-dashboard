@@ -44,6 +44,13 @@ const initialState = {
 export const sliceUsers = createSlice({
     name: "users",
     initialState,
+    reducers: {
+        resetUserState: (state, action) => {
+            if (state.user) {
+                state.user = null;
+            }
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(getApiUsers.fulfilled, (state, action) => {
             state.users = action.payload;
@@ -66,9 +73,10 @@ export const sliceUsers = createSlice({
         });
 
         builder.addCase(editUser.fulfilled, (state, action) => {
+            const newuser = action.payload.newuser;
 
             state.users = state.users.map((user) => {
-                return user._id === action.payload._id ? action.payload.newuser : user;
+                return user._id === newuser._id ? newuser : user;
             });
         });
 
@@ -80,4 +88,5 @@ export const sliceUsers = createSlice({
 
 });
 
+export const { resetUserState } = sliceUsers.actions;
 export default sliceUsers.reducer;

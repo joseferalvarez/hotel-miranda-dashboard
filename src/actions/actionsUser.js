@@ -3,7 +3,8 @@ import {
     deleteUser,
     editUser,
     getApiUsers,
-    getUser
+    getUser,
+    resetUserState
 } from "../features/sliceUsers";
 
 function getAllUsers(dispatch) {
@@ -43,10 +44,15 @@ function deleteOneUser(dispatch, id) {
     dispatch(deleteUser(data))
 }
 
+function resetUser(dispatch) {
+    dispatch(resetUserState());
+}
+
 export {
     getAllUsers,
     getOneUser,
     createOneUser,
     updateOneUser,
-    deleteOneUser
+    deleteOneUser,
+    resetUser
 }

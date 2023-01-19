@@ -3,7 +3,8 @@ import {
     deleteRoom,
     editRoom,
     getApiRooms,
-    getRoom
+    getRoom,
+    resetRoomState
 } from "../features/sliceRooms";
 
 function getAllRooms(dispatch) {
@@ -41,10 +42,15 @@ function deleteOneRoom(dispatch, id) {
     dispatch(deleteRoom(data));
 }
 
+function resetRoom(dispatch) {
+    dispatch(resetRoomState());
+}
+
 export {
     getAllRooms,
     getOneRoom,
     createOneRoom,
     updateOneRoom,
-    deleteOneRoom
+    deleteOneRoom,
+    resetRoom
 }

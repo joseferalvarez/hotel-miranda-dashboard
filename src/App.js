@@ -20,6 +20,7 @@ import { getLocalAuth } from './features/sliceLogin';
 import Booking from './pages/Bookings/Booking';
 import NewBooking from './pages/Bookings/NewBooking';
 import { getUserLocal } from './actions/actionsLogin';
+import EditUser from './pages/Users/EditUser';
 
 function App() {
   return (
@@ -107,6 +108,11 @@ function App() {
             <Route path="/users/:iduser" action={({ params }) => { }} element={
               <AuthProvider>
                 <User />
+              </AuthProvider>}
+            />
+            <Route path="/users/edituser/:iduser" action={({ params }) => { }} element={
+              <AuthProvider>
+                <EditUser />
               </AuthProvider>}
             />
 
