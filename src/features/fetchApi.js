@@ -2,6 +2,8 @@ import { getToken } from "../helpers/helpers";
 
 const FETCH_OPTIONS = ["GET", "POST", "PUT", "DELETE"];
 
+const token = getToken();
+
 const fetchData = {
     method: "",
     mode: "cors",
@@ -9,7 +11,7 @@ const fetchData = {
     credentials: "same-origin",
     headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${getToken()}`
+        "Authorization": `Bearer ${token}`
     },
     redirect: "follow",
     referrerPolicy: "no-referrer",

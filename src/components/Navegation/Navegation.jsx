@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import LoguedUser from './LoguedUser';
 import Logo from '../Logo/Logo';
@@ -19,19 +19,24 @@ import { BiKey } from "react-icons/bi";
 import { BsCalendarCheck } from "react-icons/bs";
 import { FaUserFriends, FaArrowsAltH } from "react-icons/fa";
 import { AiFillHome, AiFillContacts, AiFillHeart } from "react-icons/ai";
+import { useDispatch, useSelector } from 'react-redux';
+import { getActualUser } from '../../actions/actions';
 
 
 
 const Navegation = () => {
 
-    let user = {
-        photo: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-        name: "Sashenka Gouthier",
-        email: "sgouthier0@aboutads.info",
-    }
+    const { userdata } = useSelector((state) => state.loginReducer);
+    const dispatch = useDispatch();
+    const localUser = JSON.parse(localStorage.getItem("auth"));
 
     const [display, setDisplay] = useState(0);
     const location = useLocation();
+
+    useEffect(() => {
+        getActualUser(dispatch, localUser._id);
+        console.log(userdata);
+    }, []);
 
     const displayMenu = () => {
         setDisplay(!display)
@@ -74,7 +79,7 @@ const Navegation = () => {
             </Navigation>
 
             <UserCard>
-                <LoguedUser user={user}></LoguedUser>
+                <LoguedUser user={userdata}></LoguedUser>
             </UserCard>
 
             <NavigationDescription>Hotel Miranda Admin Dashboard</NavigationDescription>

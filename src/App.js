@@ -16,7 +16,6 @@ import Contact from './pages/Contact/Contact';
 import Navegation from './components/Navegation/Navegation';
 import Topbar from './components/Topbar/Topbar';
 import EditRoom from './pages/Rooms/EditRoom';
-import { getLocalAuth } from './features/sliceLogin';
 import Booking from './pages/Bookings/Booking';
 import NewBooking from './pages/Bookings/NewBooking';
 import { getUserLocal } from './actions/actionsLogin';

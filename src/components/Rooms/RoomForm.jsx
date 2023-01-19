@@ -88,6 +88,8 @@ const RoomForm = ({ room }) => {
         cancellation: ""
     });
 
+    const [file, setFile] = useState(null);
+
     useEffect(() => {
         if (room) {
             setRoomForm({
@@ -160,6 +162,9 @@ const RoomForm = ({ room }) => {
                         <Facilitie key={index} color='#E23428' bcolor={"#FFEDEC"} onClick={(e) => addAmenity(e.currentTarget.textContent)}>{amenity}</Facilitie>
                 ))}
             </FacilitiesContainer>
+            <div>
+                <input type="file" multiple accept="image/*" onChange={(e) => setFile(e.target.files)} />
+            </div>
             <div>
                 {room ?
                     <Button type={"create"} text={"Update room"} click={() => editRoom()}></Button> :

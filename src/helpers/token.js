@@ -1,5 +1,7 @@
 function getToken() {
-    return JSON.parse(localStorage.getItem("auth")).token;
+    if (localStorage.getItem("auth")) {
+        return JSON.parse(localStorage.getItem("auth")).token;
+    }
 }
 
 export default getToken;

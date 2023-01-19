@@ -28,16 +28,22 @@ const LinkButton = styled.div`
 
 const LoguedUser = ({ user }) => {
 
-    return (
-        <Card>
-            <img className='image' src={user.photo} alt="" />
-            <UserName>{user.name}</UserName>
-            <UserEmail>{user.email}</UserEmail>
-            <LinkButton>
-                <Link to={"/users/" + user.email}>Edit user</Link>
-            </LinkButton>
-        </Card>
-    );
+    if (user) {
+        return (
+            <Card>
+                <img className='image' src={user.photo} alt="" />
+                <UserName>{user.name}</UserName>
+                <UserEmail>{user.email}</UserEmail>
+                <LinkButton>
+                    <Link to={"/users/" + user.email}>Edit user</Link>
+                </LinkButton>
+            </Card>
+        );
+    } else {
+        return (
+            <></>
+        );
+    }
 }
 
 

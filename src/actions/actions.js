@@ -35,7 +35,8 @@ import {
 import {
     getUserDB,
     getUserLocal,
-    logout
+    logout,
+    getActualUser
 } from "./actionsLogin.js";
 
 export {
@@ -63,5 +64,6 @@ export {
     deleteOneContact,
     getUserDB,
     getUserLocal,
-    logout
+    logout,
+    getActualUser
 }

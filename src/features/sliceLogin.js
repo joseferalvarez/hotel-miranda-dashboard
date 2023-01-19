@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import fetchLogin from "./fetchLogin";
+import { fetchGET } from "./fetchApi";
 
 export const getLogin = createAsyncThunk(
     "login/getLogin",
@@ -22,13 +23,20 @@ export const setLogout = createAsyncThunk(
     }
 );
 
+export const getCurrentUser = createAsyncThunk(
+    "user/GetCurrentUser", async (data) => {
+        return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/users/${data.id}`);
+    }
+);
+
 const initialState = {
     user: {
         _id: null,
         email: null
     },
 
-    token: null
+    token: null,
+    userdata: null
 };
 
 export const sliceLogin = createSlice({
@@ -60,6 +68,10 @@ export const sliceLogin = createSlice({
             state.user = null;
             state.token = null;
         })
+        builder.addCase(getCurrentUser.fulfilled, (state, action) => {
+            const user = action.payload;
+            state.userdata = user;
+        });
     }
 });
 

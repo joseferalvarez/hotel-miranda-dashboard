@@ -71,6 +71,8 @@ const UserForm = ({ user }) => {
         pass: ""
     });
 
+    const [file, setFile] = useState(null);
+
     useEffect(() => {
         if (user) {
             setUserForm(user);
@@ -78,14 +80,20 @@ const UserForm = ({ user }) => {
     }, []);
 
     const editUser = () => {
+        setUserForm({ ...userForm, date: getActualDate() });
         updateOneUser(dispatch, user._id, userForm);
         navigate("/users");
     }
 
     const createUser = () => {
+        setUserForm({ ...userForm, date: getActualDate() });
         createOneUser(dispatch, userForm);
         navigate("/users");
     }
+
+    const getActualDate = () => {
+        return new Date(Date.now()).toISOString();
+    };
 
     return (
         <FormContainer>
@@ -107,6 +115,9 @@ const UserForm = ({ user }) => {
                 <InputText type="password" placeholder='Password' value={userForm.pass} onChange={(e) => setUserForm({ ...userForm, pass: e.target.value })}></InputText>
                 <InputTextArea type="text" placeholder='description' value={userForm.description} onChange={(e) => setUserForm({ ...userForm, description: e.target.value })}></InputTextArea>
             </InputContainer>
+            <div>
+                <input type="file" multiple accept="image/*" onChange={(e) => setFile(e.target.files)} />
+            </div>
             <div>
                 {user ?
                     <Button type={"create"} text={"Update user"} click={() => editUser()}></Button> :

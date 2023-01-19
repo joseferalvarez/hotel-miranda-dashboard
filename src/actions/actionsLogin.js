@@ -1,4 +1,4 @@
-import { getLocalAuth, getLogin, setLogout } from "../features/sliceLogin";
+import { getLocalAuth, getLogin, setLogout, getCurrentUser } from "../features/sliceLogin";
 
 function getUserDB(dispatch, email, password) {
     const data = {
@@ -24,8 +24,17 @@ function logout(dispatch) {
     dispatch(setLogout());
 }
 
+function getActualUser(dispatch, id) {
+    const data = {
+        id: id
+    }
+
+    dispatch(getCurrentUser(data));
+}
+
 export {
     getUserDB,
     getUserLocal,
-    logout
+    logout,
+    getActualUser
 };

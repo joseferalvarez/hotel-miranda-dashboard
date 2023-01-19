@@ -7,13 +7,13 @@ const SpinnerContainer = styled.div`
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    margin-top: 100px;
 `;
 
 const LoaderSpinner = () => {
     return (
         <SpinnerContainer>
-            <BounceLoader size={200} color='#135846' speedMultiplier={0.8}></BounceLoader>
+            <BounceLoader size={100} color='#135846' speedMultiplier={0.8}></BounceLoader>
         </SpinnerContainer>
     );
 }
