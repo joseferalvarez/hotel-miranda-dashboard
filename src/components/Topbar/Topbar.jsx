@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AiOutlineMail, AiOutlineBell } from "react-icons/ai";
+import { AiOutlineMail } from "react-icons/ai";
 import { useLocation, useNavigate } from 'react-router';
 import { FiLogOut } from "react-icons/fi";
 
@@ -9,19 +9,30 @@ import {
     IconContainer,
     Icon
 } from "./TopbarStyled";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../actions/actionsLogin';
+import { getAllContacts } from '../../actions/actionsContact';
 
 const Topbar = () => {
     let location = useLocation();
     const [title, setTitle] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { contacts } = useSelector((state) => state.contactReducer)
+    const [messages, setMessages] = useState(0);
 
     const doLogout = () => {
         logout(dispatch);
         navigate("/");
     }
+
+    useEffect(() => {
+        getAllContacts(dispatch);
+    }, []);
+
+    useEffect(() => {
+        setMessages(contacts.reduce((count, contact) => contact.archived ? count + 1 : count + 0, 0));
+    }, [contacts]);
 
     useEffect(() => {
         switch (location.pathname) {
@@ -45,6 +56,10 @@ const Topbar = () => {
         }
     }, [location]);
 
+    const navigateContacts = () => {
+        navigate("/contact");
+    };
+
     return (
         <TopbarContainer>
             <TopbarTitle>
@@ -52,17 +67,13 @@ const Topbar = () => {
             </TopbarTitle>
 
             <IconContainer>
-                <Icon>
+                <Icon onClick={navigateContacts}>
                     <AiOutlineMail className='icon' />
-                    <div className='notification'>
-                        <p>5</p>
-                    </div>
-                </Icon>
-                <Icon>
-                    <AiOutlineBell className='icon' />
-                    <div className='notification'>
-                        <p>8</p>
-                    </div>
+                    {messages ?
+                        <div className='notification'>
+                            <p>{messages}</p>
+                        </div> :
+                        <></>}
                 </Icon>
                 <Icon onClick={doLogout}>
                     <FiLogOut className='icon' />

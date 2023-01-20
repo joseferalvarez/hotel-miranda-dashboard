@@ -62,7 +62,7 @@ export const sliceContact = createSlice({
         builder.addCase(deleteContact.fulfilled, (state, action) => {
             const oldcontact = action.payload.oldcontact;
 
-            state.contact = state.contact.filter(
+            state.contacts = state.contacts.filter(
                 (contact) => contact._id !== oldcontact._id
             );
         });
@@ -70,8 +70,8 @@ export const sliceContact = createSlice({
         builder.addCase(editContact.fulfilled, (state, action) => {
             const newContact = action.payload.newcontact;
 
-            state.contacts = state.rooms.map((contact) => {
-                return contact.id === newContact._id ? newContact : contact;
+            state.contacts = state.contacts.map((contact) => {
+                return contact._id === newContact._id ? newContact : contact;
             });
         });
 

@@ -1,24 +1,60 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useState } from 'react';
+import styled, { css } from 'styled-components';
 import { RxCrossCircled, RxCheckCircled } from "react-icons/rx";
+import { useDispatch } from 'react-redux';
+import { updateOneContact } from '../../actions/actionsContact';
 
 const Contact = styled.div`
     width: 430px;
     height: 275px;
     background-color: #FFFFFF;
     border-radius: 20px;
+    position: relative;
+
+    .button{
+        position: absolute;
+        bottom: 5px;
+        right: 15px;
+        background-color: transparent;
+        border: none;
+        font-size: 24px;
+        color: #5AD07A;
+    }
 `;
 
 const Comment = styled.p`
-    height: 100px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    ${(props) => {
+        if (props.big) {
+            return css`
+                overflow: scroll;
+                height: 100%;
+            `;
+        } else {
+            return css`
+                overflow: hidden;
+                text-overflow: ellipsis;
+                height: 100px;
+            `;
+        }
+    }}
+    transition: all 0.3s;
     font-family: var(--font-poppins);
     color: #4E4E4E;
     padding: 5%;
 `;
 const User = styled.div`
-    display: flex;
+    ${(props) => {
+        if (props.big) {
+            return css`
+                display: none;
+            `;
+        } else {
+            return css`
+                display: flex;
+            `;
+        }
+    }}
+
     padding: 5%;
 `;
 
@@ -61,27 +97,46 @@ const Buttons = styled.div`
 
 const ContactCard = ({ contact }) => {
 
+    const dispatch = useDispatch();
+    const [doBigger, setDoBigger] = useState(false);
+
+    const setArchived = () => {
+        updateOneContact(dispatch, contact._id, { ...contact, archived: 0 });
+    };
+
     const formatDate = (date) => {
+        const month = (1000 * 60 * 60 * 24 * 30);
+        const days = (1000 * 60 * 60 * 24);
+        const hours = (1000 * 60 * 60);
+        const minutes = (1000 * 60);
+
         const actualDate = new Date(Date.now()).getTime();
         const messageDate = new Date(date).getTime();
-        const month = (1000 * 60 * 60 * 24 * 30);
-
         const formatDate = actualDate - messageDate;
 
-        return Math.floor(formatDate / month);
+        if (Math.floor(formatDate / month) > 0) {
+            return `${Math.floor(formatDate / month)} months ago`;
+        } else if (Math.floor(formatDate / days) > 0) {
+            return `${Math.floor(formatDate / days)} days ago`;
+        } else if (Math.floor(formatDate / hours) > 0) {
+            return `${Math.floor(formatDate / hours)} hours ago`;
+        } else {
+            return `${Math.floor(formatDate / minutes)} minutes ago`;
+        }
     }
 
     return (
         <Contact>
-            <Comment>{contact.comment}</Comment>
+            <Comment big={doBigger}>{contact.comment}</Comment>
+            {doBigger ? <button className='button' onClick={() => setDoBigger(!doBigger)}><RxCheckCircled /></button> : <></>}
             <User>
                 <Data>
                     <p>{contact.customer}</p>
-                    <p>{formatDate(contact.date)} months ago</p>
+                    <p>{formatDate(contact.date)}</p>
                 </Data>
                 <Buttons>
-                    <button><RxCheckCircled /></button>
-                    <button><RxCrossCircled /></button>
+                    <button onClick={() => setDoBigger(!doBigger)}><RxCheckCircled /></button>
+                    <button onClick={setArchived}><RxCrossCircled /></button>
                 </Buttons>
             </User>
         </Contact>
