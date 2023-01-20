@@ -52,7 +52,6 @@ const ContactRow = ({ contact }) => {
                 <div>
                     <p>{contact.header}</p>
                     <p>{contact.comment}</p>
-                    <p>{contact.archived}</p>
                 </div>
             </td>
             <td>
