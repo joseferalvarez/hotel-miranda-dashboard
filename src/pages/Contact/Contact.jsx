@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ContactContainer } from './ContactStyled';
-import LoaderSpinner from '../../components/Blocks/LoaderSpinner';
+import ContactList from '../../components/Contacts/ContactList';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllContacts } from '../../actions/actionsContact';
 
 const Contact = () => {
+
+    const dispatch = useDispatch();
+    const { contacts } = useSelector((state) => state.contactReducer);
+
+    useEffect(() => {
+        getAllContacts(dispatch);
+    }, []);
+
     return (
         <ContactContainer>
-            <h1>contact</h1>
-
-            <LoaderSpinner></LoaderSpinner>
+            <ContactList contacts={contacts}></ContactList>
         </ContactContainer>
     );
 }

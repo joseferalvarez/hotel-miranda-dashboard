@@ -21,6 +21,7 @@ import { FaUserFriends, FaArrowsAltH } from "react-icons/fa";
 import { AiFillHome, AiFillContacts, AiFillHeart } from "react-icons/ai";
 import { useDispatch, useSelector } from 'react-redux';
 import { getActualUser } from '../../actions/actions';
+import LoaderSpinner from '../Blocks/LoaderSpinner';
 
 
 
@@ -34,8 +35,7 @@ const Navegation = () => {
     const location = useLocation();
 
     useEffect(() => {
-        getActualUser(dispatch, localUser._id);
-        console.log(userdata);
+        getActualUser(dispatch, localUser.user._id);
     }, []);
 
     const displayMenu = () => {
@@ -78,9 +78,10 @@ const Navegation = () => {
                 </ul>
             </Navigation>
 
-            <UserCard>
-                <LoguedUser user={userdata}></LoguedUser>
-            </UserCard>
+            {userdata ?
+                <UserCard>
+                    <LoguedUser user={userdata}></LoguedUser>
+                </UserCard> : <LoaderSpinner></LoaderSpinner>}
 
             <NavigationDescription>Hotel Miranda Admin Dashboard</NavigationDescription>
             <NavigationRights>@2022 All Rights Reserved</NavigationRights>

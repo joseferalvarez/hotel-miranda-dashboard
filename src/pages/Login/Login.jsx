@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router';
 
 import Button from '../../components/Blocks/Button';
@@ -27,7 +27,6 @@ const Login = () => {
 
     const checkLogin = (e) => {
         e.preventDefault();
-
         getUserDB(dispatch, email, pass);
     }
 
