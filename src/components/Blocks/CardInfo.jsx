@@ -1,6 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { BiBed } from "react-icons/bi";
+import { IoIosLogOut, IoIosLogIn } from "react-icons/io";
+import { BsFillCalendar2CheckFill } from "react-icons/bs";
 
 const Card = styled.div`
     width: 20%;
@@ -25,9 +27,22 @@ const Card = styled.div`
 `;
 
 const Icon = styled.div`
+${(props) => {
+        if (props.typebooking === "Checkin" || props.typebooking === "Checkout" || props.typebooking === "NewBookings") {
+            return css`
+                background-color: #FFEDEC;
+                color: #E23428;
+            `;
+        } else if (props.typebooking === "Available") {
+            return css`
+                background-color: #E23428;
+                color: #FFEDEC;
+            `;
+        }
+    }}
+
     width: 50px;
     height: 50px;
-    background-color: blue;
     border-radius: 9px;
     display: flex;
     justify-content: center;
@@ -37,19 +52,45 @@ const Icon = styled.div`
 `;
 
 const CardInfo = ({ data }) => {
-    return (
-        <Card>
-            <div>
-                <Icon>
+
+    const setIcon = () => {
+        switch (data.type) {
+            case "NewBookings":
+                return (
                     <BiBed />
-                </Icon>
-            </div>
-            <div>
-                <p>8170</p>
-                <p>New Booking</p>
-            </div>
-        </Card>
-    );
+                );
+            case "Checkin":
+                return (
+                    <IoIosLogOut />
+                );
+            case "Checkout":
+                return (
+                    <IoIosLogIn />
+                );
+            case "Available":
+                return (
+                    <BsFillCalendar2CheckFill />
+                );
+            default:
+                break;
+        }
+    }
+
+    if (data) {
+        return (
+            <Card>
+                <div>
+                    <Icon typebooking={data.type}>
+                        {setIcon()}
+                    </Icon>
+                </div>
+                <div>
+                    <p>{data.number}</p>
+                    <p>{data.text}</p>
+                </div>
+            </Card>
+        );
+    }
 }
 
 export default CardInfo;
