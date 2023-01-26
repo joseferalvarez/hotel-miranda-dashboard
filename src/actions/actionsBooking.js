@@ -14,7 +14,6 @@ function getOneBooking(dispatch, id) {
     const data = {
         id: id
     };
-
     dispatch(getBooking(data));
 }
 
