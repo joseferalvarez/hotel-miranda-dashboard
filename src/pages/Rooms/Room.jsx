@@ -19,6 +19,7 @@ import {
     PhotoContainer
 } from "./RoomStyled.jsx";
 import LoaderSpinner from '../../components/Blocks/LoaderSpinner';
+import PhotoSlider from '../../components/Blocks/PhotoSlider';
 
 const Room = () => {
     const { room } = useSelector((state) => state.roomsReducer);
@@ -66,7 +67,7 @@ const Room = () => {
                     </FacilitiesContainer>
                 </DataContainer>
                 <PhotoContainer>
-                    <img src={room.photos[0]} alt=""></img>
+                    <PhotoSlider photos={room.photos}></PhotoSlider>
                 </PhotoContainer>
             </RoomContainer>
         );

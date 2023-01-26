@@ -3,11 +3,19 @@ import styled from 'styled-components';
 import Calendar from '../../components/Calendar/Calendar';
 import Statistics from '../../components/d3/Statistics';
 import { DashboardContainer } from './DashboardStyled';
+import CardInfo from '../../components/Blocks/CardInfo';
 
 const CardsView = styled.div`
     display: flex;
     gap: 5%;
     margin: 0 5%;
+`;
+
+const Info = styled.div`
+    display: flex;
+    justify-content: center;
+    gap: 3%;
+    margin: 5% 0;
 `;
 
 const CalendarView = styled.div`
@@ -32,7 +40,12 @@ const StatsView = styled.div`
 const Dashboard = () => {
     return (
         <DashboardContainer>
-            <h1>Dashboard</h1>
+            <Info>
+                <CardInfo></CardInfo>
+                <CardInfo></CardInfo>
+                <CardInfo></CardInfo>
+                <CardInfo></CardInfo>
+            </Info>
 
             <CardsView>
                 <CalendarView>

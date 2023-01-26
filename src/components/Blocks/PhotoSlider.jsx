@@ -6,6 +6,13 @@ import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 
 const Slide = styled.div`
     position: relative;
+    height: 100%;
+
+    div{
+        height: 100%;
+        border-radius: 0 20px 20px 0;
+    }
+
     button{
         display: flex;
         justify-content: center;
@@ -99,10 +106,12 @@ const PhotoSlider = ({ photos, text }) => {
             </Swiper>
             <ButtonLeft onClick={handlePrev}><HiArrowLeft /></ButtonLeft>
             <ButtonRight onClick={handleNext}><HiArrowRight /></ButtonRight>
-            <Text>
-                <p>{text.type}</p>
-                <p>{text.description}</p>
-            </Text>
+            {text ?
+                <Text>
+                    <p>{text.type}</p>
+                    <p>{text.description}</p>
+                </Text> :
+                <></>}
         </Slide>
     );
 }
