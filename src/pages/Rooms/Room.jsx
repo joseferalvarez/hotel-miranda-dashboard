@@ -19,7 +19,7 @@ import {
     PhotoContainer
 } from "./RoomStyled.jsx";
 import PhotoSlider from '../../components/Blocks/PhotoSlider';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, Slide } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
 const Room = () => {
@@ -70,12 +70,12 @@ const Room = () => {
                 <PhotoContainer>
                     <PhotoSlider photos={room.photos}></PhotoSlider>
                 </PhotoContainer>
-                <ToastContainer position='bottom-right' autoClose={1500} theme='dark' />
+                <ToastContainer position='bottom-right' theme='dark' transition={Slide} />
             </RoomContainer>
         );
     } else {
         return (
-            <ToastContainer position='bottom-right' autoClose={1500} theme='dark' />
+            <ToastContainer position='bottom-right' theme='dark' transition={Slide} />
         );
     }
 

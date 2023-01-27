@@ -57,57 +57,104 @@ export const sliceContact = createSlice({
     },
     extraReducers: (builder) => {
 
+        const TOAST_ID = ["GET_ALL_CONTACTS", "POST_ONE_CONTACT", "DELETE_ONE_CONTACT", "PUT_ONE_CONTACT", "GET_ONE_CONTACT"];
+
         /* Promise builder of getApiContact (GET all contacts)*/
-        builder.addCase(getApiContact.fulfilled, (state, action) => {
+        builder.addCase(getApiContact.pending, () => {
+            toast("Looking for contacts...", { toastId: TOAST_ID[0], autoClose: false });
+        }).addCase(getApiContact.fulfilled, (state, action) => {
             state.contacts = action.payload;
-            toast.success("Contacts loaded succesfully");
+            toast.update(TOAST_ID[0], {
+                render: "Contacts loaded succesfully",
+                type: toast.TYPE.SUCCESS,
+                autoClose: 1500
+            });
         }).addCase(getApiContact.rejected, () => {
-            toast.error("Contacts not found");
-        }).addCase(getApiContact.pending, () => {
-            toast.loading("Looking for contacts...");
+            toast.update(TOAST_ID[0], {
+                render: "Contacts not found",
+                type: toast.TYPE.ERROR,
+                autoClose: 1500
+            });
         });
 
         /* Promise builder of createNewContact (POST a new contact) */
-        builder.addCase(createNewContact.fulfilled, (state, action) => {
+        builder.addCase(createNewContact.pending, () => {
+            toast("Creating the new contact...", { toastId: TOAST_ID[1], autoClose: false });
+        }).addCase(createNewContact.fulfilled, (state, action) => {
             const newcontact = action.payload.newcontact;
             state.contacts = [...state.contacts, newcontact];
-            toast.success(`Contact ${newcontact.customer} created succesfully`);
+            toast.update(TOAST_ID[1], {
+                render: `Contact ${newcontact.customer} created succesfully`,
+                type: toast.TYPE.SUCCESS,
+                autoClose: 1500
+            });
         }).addCase(createNewContact.rejected, () => {
-            toast.error("There has been an error creating the contact");
-        }).addCase(createNewContact.pending, () => {
-            toast.loading("Creating the new contact...");
+            toast.update(TOAST_ID[1], {
+                render: "There has been an error creating the contact",
+                type: toast.TYPE.ERROR,
+                autoClose: 1500
+            });
         });
 
         /* Promise builder of deleteContact (DELETE an existing contact)*/
-        builder.addCase(deleteContact.fulfilled, (state, action) => {
+        builder.addCase(deleteContact.pending, () => {
+            toast("Deleting the contact...", { toastId: TOAST_ID[2], autoClose: false });
+        }).addCase(deleteContact.fulfilled, (state, action) => {
             const oldcontact = action.payload.oldcontact;
             state.contacts = state.contacts.filter(
                 (contact) => contact._id !== oldcontact._id
             );
-            toast.success(`Contact ${oldcontact.customer} deleted succesfully`);
+            toast.update(TOAST_ID[2], {
+                render: `Contact ${oldcontact.customer} deleted succesfully`,
+                type: toast.TYPE.SUCCESS,
+                autoClose: 1500
+            });
         }).addCase(deleteContact.rejected, () => {
-            toast.error("There has been an error deleting the contact");
-        }).addCase(deleteContact.pending, () => {
-            toast.loading("Deleting the contact...");
+            toast.update(TOAST_ID[2], {
+                render: "There has been an error deleting the contact",
+                type: toast.TYPE.ERROR,
+                autoClose: 1500
+            });
         });
 
         /* Promise builder of editContact (PUT an existing contact)*/
-        builder.addCase(editContact.fulfilled, (state, action) => {
+        builder.addCase(editContact.pending, () => {
+            toast("Updating the contact...", { toastId: TOAST_ID[3], autoClose: false });
+        }).addCase(editContact.fulfilled, (state, action) => {
             const newContact = action.payload.newcontact;
             state.contacts = state.contacts.map((contact) => {
                 return contact._id === newContact._id ? newContact : contact;
             });
-            toast.success(`Contact ${newContact.customer} updated succesfully`);
+            toast.update(TOAST_ID[3], {
+                render: `Contact ${newContact.customer} updated succesfully`,
+                type: toast.TYPE.SUCCESS,
+                autoClose: 1500
+            });
         }).addCase(editContact.rejected, () => {
-            toast.error("There has been an error updating the contact");
-        }).addCase(editContact.pending, () => {
-            toast.loading("Updating the contact");
+            toast.update(TOAST_ID[3], {
+                render: "There has been an error updating the contact",
+                type: toast.TYPE.ERROR,
+                autoClose: 1500
+            });
         });
 
-        builder.addCase(getContact.fulfilled, (state, action) => {
+        /* Promise builder of getContact (GET a single contact)*/
+        builder.addCase(getContact.pending, () => {
+            toast("Loading contact...", { toastId: TOAST_ID[4], autoClose: false });
+        }).addCase(getContact.fulfilled, (state, action) => {
             const contact = action.payload;
-
             state.contact = contact;
+            toast.update(TOAST_ID[4], {
+                render: `Contact ${contact.customer} loaded`,
+                type: toast.TYPE.SUCCESS,
+                autoClose: 1500
+            });
+        }).addCase(getContact.rejected, () => {
+            toast.update(TOAST_ID[4], {
+                render: "There has been an error loading the contact",
+                type: toast.TYPE.ERROR,
+                autoClose: 1500
+            });
         });
     }
 });

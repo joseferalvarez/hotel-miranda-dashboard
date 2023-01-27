@@ -17,7 +17,7 @@ import {
 
 import { ButtonNew } from "../../components/Blocks/LinksStyled";
 import LoaderSpinner from '../../components/Blocks/LoaderSpinner';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, Slide } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
 const Rooms = () => {
@@ -30,8 +30,11 @@ const Rooms = () => {
         if (rooms.length === 0) {
             getAllRooms(dispatch);
         }
-        setRoomList(rooms);
     }, []);
+
+    useEffect(() => {
+        setRoomList(rooms);
+    }, [rooms]);
 
     const showAllRooms = () => {
         setRoomList(rooms);
@@ -63,13 +66,13 @@ const Rooms = () => {
                     <DndProvider backend={HTML5Backend}>
                         <RoomTable data={roomList}></RoomTable>
                     </DndProvider>
-                    <ToastContainer position='bottom-right' autoClose={1500} theme='dark' />
+                    <ToastContainer position='bottom-right' theme='dark' transition={Slide} />
                 </div>
             </RoomsContainer>
         );
     } else {
         return (
-            <LoaderSpinner></LoaderSpinner>
+            <ToastContainer position='bottom-right' theme='dark' transition={Slide} />
         );
     }
 }

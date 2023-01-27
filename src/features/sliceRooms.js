@@ -64,62 +64,104 @@ export const sliceRooms = createSlice({
     },
     extraReducers: (builder) => {
 
+        const TOAST_ID = ["GET_ALL_ROOMS", "POST_ONE_ROOM", "DELETE_ONE_ROOM", "PUT_ONE_ROOM", "GET_ONE_ROOM"];
+
         /* Promise builder of getApiRooms (GET all rooms)*/
-        builder.addCase(getApiRooms.fulfilled, (state, action) => {
+        builder.addCase(getApiRooms.pending, () => {
+            toast("Looking for rooms...", { toastId: TOAST_ID[0], autoClose: false });
+        }).addCase(getApiRooms.fulfilled, (state, action) => {
             state.rooms = action.payload;
-            toast.success("Rooms loaded succesfully");
+            toast.update(TOAST_ID[0], {
+                render: "Rooms loaded succesfully",
+                type: toast.TYPE.SUCCESS,
+                autoClose: 1500
+            });
         }).addCase(getApiRooms.rejected, () => {
-            toast.error("Rooms not found");
-        }).addCase(getApiRooms.pending, () => {
-            toast.loading("Looking for rooms...");
+            toast.update(TOAST_ID[0], {
+                render: "Rooms not found",
+                type: toast.TYPE.ERROR,
+                autoClose: 1500
+            });
         });
 
         /* Promise builder of createNewRoom (POST a new room) */
-        builder.addCase(createNewRoom.fulfilled, (state, action) => {
+        builder.addCase(createNewRoom.pending, () => {
+            toast("Creating the new room...", { toastId: TOAST_ID[1], autoClose: false });
+        }).addCase(createNewRoom.fulfilled, (state, action) => {
             const newroom = action.payload.newroom;
             state.rooms = [...state.rooms, newroom];
-            toast.success(`Room ${newroom.numroom} created succesfully`);
+            toast.update(TOAST_ID[1], {
+                render: `Room ${newroom.numroom} created succesfully`,
+                type: toast.TYPE.SUCCESS,
+                autoClose: 1500
+            });
         }).addCase(createNewRoom.rejected, () => {
-            toast.error("There has been an error creating the room");
-        }).addCase(createNewRoom.pending, () => {
-            toast.loading("Creating the new room...");
+            toast.update(TOAST_ID[1], {
+                render: "There has been an error creating the room",
+                type: toast.TYPE.ERROR,
+                autoClose: 1500
+            });
         });
 
         /* Promise builder of deleteRoom (DELETE an existing room)*/
-        builder.addCase(deleteRoom.fulfilled, (state, action) => {
+        builder.addCase(deleteRoom.pending, () => {
+            toast("Deleting the room...", { toastId: TOAST_ID[2], autoClose: false });
+        }).addCase(deleteRoom.fulfilled, (state, action) => {
             const oldroom = action.payload.oldroom;
             state.rooms = state.rooms.filter(
                 (room) => room._id !== oldroom._id
             );
-            toast.success(`Room ${oldroom.numroom} deleted succesfully`);
+            toast.update(TOAST_ID[2], {
+                render: `Room ${oldroom.numroom} deleted succesfully`,
+                type: toast.TYPE.SUCCESS,
+                autoClose: 1500
+            });
         }).addCase(deleteRoom.rejected, () => {
-            toast.error("There has been an error deleting the room");
-        }).addCase(deleteRoom.pending, () => {
-            toast.loading("Deleting the room...");
+            toast.update(TOAST_ID[2], {
+                render: "There has been an error deleting the room",
+                type: toast.TYPE.ERROR,
+                autoClose: 1500
+            });
         });
 
         /* Promise builder of editRoom (PUT an existing room)*/
-        builder.addCase(editRoom.fulfilled, (state, action) => {
+        builder.addCase(editRoom.pending, () => {
+            toast("Updating the room...", { toastId: TOAST_ID[3], autoClose: false });
+        }).addCase(editRoom.fulfilled, (state, action) => {
             const newRoom = action.payload.newroom;
             state.rooms = state.rooms.map((room) => {
                 return room._id === newRoom._id ? newRoom : room;
             });
-            toast.success(`Room ${newRoom.numroom} updated succesfully`);
+            toast.update(TOAST_ID[3], {
+                render: `Room ${newRoom.numroom} updated succesfully`,
+                type: toast.TYPE.SUCCESS,
+                autoClose: 1500
+            });
         }).addCase(editRoom.rejected, () => {
-            toast.error("There has been an error updating the room");
-        }).addCase(editRoom.pending, () => {
-            toast.loading("Updating the room");
+            toast.update(TOAST_ID[3], {
+                render: "There has been an error updating the room",
+                type: toast.TYPE.ERROR,
+                autoClose: 1500
+            });
         });
 
         /* Promise builder of getRoom (GET a single room)*/
-        builder.addCase(getRoom.fulfilled, (state, action) => {
+        builder.addCase(getRoom.pending, () => {
+            toast("Loading room...", { toastId: TOAST_ID[4], autoClose: false });
+        }).addCase(getRoom.fulfilled, (state, action) => {
             const room = action.payload;
             state.room = room;
-            toast.success(`Room ${room.numroom} loaded`);
+            toast.update(TOAST_ID[4], {
+                render: `Room ${room.numroom} loaded`,
+                type: toast.TYPE.SUCCESS,
+                autoClose: 1500
+            });
         }).addCase(getRoom.rejected, () => {
-            toast.error("There has been an error loading the room");
-        }).addCase(getRoom.pending, () => {
-            toast.loading("Loading room...");
+            toast.update(TOAST_ID[4], {
+                render: "There has been an error loading the room",
+                type: toast.TYPE.ERROR,
+                autoClose: 1500
+            });
         });
     }
 });

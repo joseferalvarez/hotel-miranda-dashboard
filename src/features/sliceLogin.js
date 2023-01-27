@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import fetchLogin from "./fetchLogin";
 import { fetchGET } from "./fetchApi";
 
+/* Get login user from database */
 export const getLogin = createAsyncThunk(
     "login/getLogin",
     async (data) => {
@@ -9,6 +10,7 @@ export const getLogin = createAsyncThunk(
     }
 );
 
+/* Looking for local auth user and token */
 export const getLocalAuth = createAsyncThunk(
     "login/getLocalAuth",
     async (data) => {
@@ -16,6 +18,7 @@ export const getLocalAuth = createAsyncThunk(
     }
 );
 
+/* Log out from app */
 export const setLogout = createAsyncThunk(
     "login/setLogout",
     async () => {
@@ -23,12 +26,14 @@ export const setLogout = createAsyncThunk(
     }
 );
 
+/* Get the actual user from database */
 export const getCurrentUser = createAsyncThunk(
     "user/GetCurrentUser", async (data) => {
         return await fetchGET(`${process.env.REACT_APP_LOCAL_DOMAIN}/users/${data.id}`);
     }
 );
 
+/* Initial state when slice load */
 const initialState = {
     user: {
         _id: null,
@@ -39,6 +44,7 @@ const initialState = {
     userdata: null
 };
 
+/* Login slice */
 export const sliceLogin = createSlice({
     name: "login",
     initialState,

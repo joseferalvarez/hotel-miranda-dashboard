@@ -64,62 +64,105 @@ export const sliceUsers = createSlice({
     },
     extraReducers: (builder) => {
 
+        const TOAST_ID = ["GET_ALL_USERS", "POST_ONE_USER", "DELETE_ONE_USER", "PUT_ONE_USER", "GET_ONE_USER"];
+
         /* Promise builder of getApiUsers (GET all users)*/
-        builder.addCase(getApiUsers.fulfilled, (state, action) => {
+        builder.addCase(getApiUsers.pending, () => {
+            toast("Looking for users...", { toastId: TOAST_ID[0], autoClose: false });
+        }).addCase(getApiUsers.fulfilled, (state, action) => {
             state.users = action.payload;
-            toast.success("Users loaded succesfully");
+            toast.update(TOAST_ID[0], {
+                render: "Users loaded succesfully",
+                type: toast.TYPE.SUCCESS,
+                autoClose: 1500
+            });
         }).addCase(getApiUsers.rejected, () => {
-            toast.error("Users not found");
-        }).addCase(getApiUsers.pending, () => {
-            toast.loading("Looking for users...");
+            toast.update(TOAST_ID[0], {
+                render: "Users not found",
+                type: toast.TYPE.ERROR,
+                autoClose: 1500
+            });
         });
 
         /* Promise builder of createNewUser (POST a new user) */
-        builder.addCase(createNewUser.fulfilled, (state, action) => {
+        builder.addCase(createNewUser.pending, () => {
+            toast("Creating the new user...", { toastId: TOAST_ID[1], autoClose: false });
+        }).addCase(createNewUser.fulfilled, (state, action) => {
             const newuser = action.payload.newuser;
             state.users = [...state.users, newuser];
-            toast.success(`User ${newuser.name} created succesfully`);
+            toast.update(TOAST_ID[1], {
+                render: `User ${newuser.name} created succesfully`,
+                type: toast.TYPE.SUCCESS,
+                autoClose: 1500
+            });
         }).addCase(createNewUser.rejected, () => {
-            toast.error("There has been an error creating the user");
-        }).addCase(createNewUser.pending, () => {
-            toast.loading("Creating the new user...");
+            toast.update(TOAST_ID[1], {
+                render: "There has been an error creating the user",
+                type: toast.TYPE.ERROR,
+                autoClose: 1500
+            });
         });
 
         /* Promise builder of deleteUser (DELETE an existing user) */
-        builder.addCase(deleteUser.fulfilled, (state, action) => {
+        builder.addCase(deleteUser.pending, () => {
+            toast("Deleting the user...", { toastId: TOAST_ID[2], autoClose: false });
+        }).addCase(deleteUser.fulfilled, (state, action) => {
             const olduser = action.payload.olduser;
             state.users = state.users.filter(
                 (user) => user._id !== olduser._id
             );
-            toast.success(`User ${olduser.name} deleted succesfully`);
+            toast.update(TOAST_ID[2], {
+                render: `User ${olduser.name} deleted succesfully`,
+                type: toast.TYPE.SUCCESS,
+                autoClose: 1500
+            });
         }).addCase(deleteUser.rejected, () => {
-            toast.error("There has been an error deleting the user");
-        }).addCase(deleteUser.pending, () => {
-            toast.loading("Deleting the user...");
+            toast.update(TOAST_ID[2], {
+                render: "There has been an error deleting the user",
+                type: toast.TYPE.ERROR,
+                autoClose: 1500
+            });
         });
 
         /* Promise builder of editUser (PUT an existing user)*/
-        builder.addCase(editUser.fulfilled, (state, action) => {
+        builder.addCase(editUser.pending, () => {
+            toast("Updating the user...", { toastId: TOAST_ID[3], autoClose: false });
+        }).addCase(editUser.fulfilled, (state, action) => {
             const newuser = action.payload.newuser;
             state.users = state.users.map((user) => {
                 return user._id === newuser._id ? newuser : user;
             });
-            toast.success(`User ${newuser.name} updated succesfully`);
+            toast.update(TOAST_ID[3], {
+                render: `User ${newuser.name} updated succesfully`,
+                type: toast.TYPE.SUCCESS,
+                autoClose: 1500
+            });
         }).addCase(editUser.rejected, () => {
-            toast.error("There has been an error updating the user");
-        }).addCase(editUser.pending, () => {
-            toast.loading("Updating the user");
+            toast.update(TOAST_ID[3], {
+                render: "There has been an error updating the user",
+                type: toast.TYPE.ERROR,
+                autoClose: 1500
+            });
         });
 
         /* Promise builder of getUser (GET an existing user) */
-        builder.addCase(getUser.fulfilled, (state, action) => {
+        builder.addCase(getUser.pending, () => {
+            toast("Loading user...", { toastId: TOAST_ID[4], autoClose: false });
+        }).addCase(getUser.fulfilled, (state, action) => {
             const user = action.payload;
             state.user = user;
-            toast.success(`User ${user.name} loaded`);
+            toast.update(TOAST_ID[4], {
+                render: `User ${user.name} loaded`,
+                type: toast.TYPE.SUCCESS,
+                autoClose: 1500
+            });
+            toast.success();
         }).addCase(getUser.rejected, () => {
-            toast.error("There has been an error loading the user");
-        }).addCase(getUser.pending, () => {
-            toast.loading("Loading user...");
+            toast.update(TOAST_ID[4], {
+                render: "There has been an error loading the user",
+                type: toast.TYPE.ERROR,
+                autoClose: 1500
+            });
         });
     }
 });
