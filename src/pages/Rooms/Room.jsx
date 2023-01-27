@@ -18,8 +18,9 @@ import {
     Facilitie,
     PhotoContainer
 } from "./RoomStyled.jsx";
-import LoaderSpinner from '../../components/Blocks/LoaderSpinner';
 import PhotoSlider from '../../components/Blocks/PhotoSlider';
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const Room = () => {
     const { room } = useSelector((state) => state.roomsReducer);
@@ -69,13 +70,15 @@ const Room = () => {
                 <PhotoContainer>
                     <PhotoSlider photos={room.photos}></PhotoSlider>
                 </PhotoContainer>
+                <ToastContainer position='bottom-right' autoClose={1500} theme='dark' />
             </RoomContainer>
         );
     } else {
         return (
-            <LoaderSpinner></LoaderSpinner>
-        )
+            <ToastContainer position='bottom-right' autoClose={1500} theme='dark' />
+        );
     }
+
 }
 
 export default Room;

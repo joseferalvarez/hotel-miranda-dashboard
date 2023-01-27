@@ -17,6 +17,8 @@ import {
 
 import { ButtonNew } from "../../components/Blocks/LinksStyled";
 import LoaderSpinner from '../../components/Blocks/LoaderSpinner';
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const Rooms = () => {
 
@@ -29,7 +31,7 @@ const Rooms = () => {
             getAllRooms(dispatch);
         }
         setRoomList(rooms);
-    }, [rooms, dispatch]);
+    }, []);
 
     const showAllRooms = () => {
         setRoomList(rooms);
@@ -61,6 +63,7 @@ const Rooms = () => {
                     <DndProvider backend={HTML5Backend}>
                         <RoomTable data={roomList}></RoomTable>
                     </DndProvider>
+                    <ToastContainer position='bottom-right' autoClose={1500} theme='dark' />
                 </div>
             </RoomsContainer>
         );
