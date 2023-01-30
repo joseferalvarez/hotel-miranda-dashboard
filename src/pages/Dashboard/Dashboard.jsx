@@ -77,7 +77,17 @@ const Dashboard = () => {
             week.push(today - time);
             time = time + DAY;
         }
-        return week;
+        return week.sort();
+    }
+
+    const getEvents = () => {
+        return bookings.map((booking) => {
+            return {
+                title: `${booking.name} - ${booking.numroom}`,
+                start: new Date(booking.checkin).toISOString(),
+                end: new Date(booking.checkout).toISOString()
+            }
+        });
     }
 
     const getWeekStats = (week) => {
@@ -115,7 +125,8 @@ const Dashboard = () => {
 
             stats.push(day);
         }
-        return stats.sort((a, b) => a.date - b.date);
+
+        return stats;
     }
 
     /* Use Effects*/
@@ -184,7 +195,7 @@ const Dashboard = () => {
 
             <CardsView>
                 <CalendarView>
-                    <Calendar></Calendar>
+                    <Calendar events={getEvents()}></Calendar>
                 </CalendarView>
                 <StatsView>
                     <Statistics stats={getWeekStats(getWeekDays())}></Statistics>

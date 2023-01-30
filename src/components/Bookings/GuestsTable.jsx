@@ -8,15 +8,6 @@ const GuestsTable = ({ data }) => {
         <Table>
             <thead>
                 <tr>
-                    <HeaderTitle>
-                        <Checkbox>
-                            <input type="checkbox" className="checkbox-input" id="checkbox" />
-                            <label>
-                                <span className="checkbox">
-                                </span>
-                            </label>
-                        </Checkbox>
-                    </HeaderTitle>
                     <HeaderTitle>Guest</HeaderTitle>
                     <HeaderTitle>Order Date</HeaderTitle>
                     <HeaderTitle>Check In</HeaderTitle>

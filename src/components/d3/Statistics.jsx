@@ -35,9 +35,9 @@ const Statistics = ({ stats }) => {
     useEffect(() => {
         const stData = stats.map((day) => {
             return {
-                day: statsDAYS_WEEK[new Date(day.date).getDay()],
-                money: stats.amount / 100,
-                percentage: (stats.count * 100) / bookings.length
+                day: DAYS_WEEK[new Date(day.date).getDay()],
+                money: day.amount / 100,
+                percentage: (day.count * 100) / bookings.length
             };
         });
         setData(stData);
@@ -48,16 +48,13 @@ const Statistics = ({ stats }) => {
             createGraph(svgElement);
         }, 200)
 
-    }, [graphWidth]);
+    }, [graphWidth, stats]);
 
-    /*TODO: Ver si se puede hacer de otra forma*/
     window.addEventListener("resize", () => {
         setGraphWidth((window.innerWidth * 30) / 100);
     })
 
     const createGraph = (svgElement) => {
-
-        /*TODO: Recoger los dias de la base de datos*/
         const scaleDays = scaleBand()
             .domain(days)
             .range([0, width]);
@@ -198,7 +195,7 @@ const Statistics = ({ stats }) => {
         return max;
     }
 
-    if (stats) {
+    if (data) {
         return (
             <div>
                 <FilterContainer>
@@ -216,8 +213,6 @@ const Statistics = ({ stats }) => {
                         <p>{getOccupancyPercentage()}%</p>
                     </Stat>
                 </StatsContainer>
-
-                {/*TODO: Cambiar el width y height a una sola variable*/}
                 <svg ref={ref} width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
                 </svg>
             </div>

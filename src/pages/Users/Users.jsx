@@ -52,7 +52,6 @@ const Users = () => {
                     </FilterTable>
                     <TableButtons>
                         <Button type="create" text="+ New Employee" click={pageNewUser}></Button>
-                        <Select type="white" options={["Newest"]}></Select>
                     </TableButtons>
                 </TableTools>
                 <UsersTable data={userList}></UsersTable>

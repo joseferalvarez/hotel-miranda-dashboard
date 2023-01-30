@@ -60,17 +60,6 @@ const GuestRow = ({ booking }) => {
 
     return (
         <Row>
-            <DataContainerCheckbox>
-                <CheckboxContainer>
-                    <Checkbox>
-                        <input type="checkbox" />
-                        <label>
-                            <span>
-                            </span>
-                        </label>
-                    </Checkbox>
-                </CheckboxContainer>
-            </DataContainerCheckbox>
             <td>
                 <GuestContainer>
                     <img src={booking.photos[0]} alt='' />

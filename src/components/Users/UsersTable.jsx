@@ -12,15 +12,6 @@ const UsersTable = ({ data }) => {
             <Table>
                 <thead>
                     <tr>
-                        <HeaderTitle>
-                            <Checkbox>
-                                <input type="checkbox" className="checkbox-input" id="checkbox" />
-                                <label>
-                                    <span className="checkbox">
-                                    </span>
-                                </label>
-                            </Checkbox>
-                        </HeaderTitle>
                         <HeaderTitle>Name</HeaderTitle>
                         <HeaderTitle>Job Desk</HeaderTitle>
                         <HeaderTitle>Contact</HeaderTitle>

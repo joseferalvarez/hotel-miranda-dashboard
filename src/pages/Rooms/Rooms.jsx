@@ -60,7 +60,6 @@ const Rooms = () => {
                             <ButtonNew>
                                 <Link to="/rooms/newroom">+ New Room</Link>
                             </ButtonNew>
-                            <Select type="white" options={["Newest"]}></Select>
                         </TableButtons>
                     </TableTools>
                     <DndProvider backend={HTML5Backend}>

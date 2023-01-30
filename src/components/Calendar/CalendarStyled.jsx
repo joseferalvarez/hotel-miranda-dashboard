@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-/*TODO: optimizar las clases*/
 const CalendarContainer = styled.div`
     .fc-toolbar-chunk{
         font-family: var(--font-poppins);
@@ -41,20 +40,18 @@ const CalendarContainer = styled.div`
         height: 53px;
     }
 
-    .fc-daygrid-day-frame{
-        height: 100%;
-    }
-
     .fc-daygrid-day-top{
         display: flex;
-        width: 100%;
-        height: 100%;
         justify-content: center;
         align-items: center;
     }
 
-    .fc-daygrid-day-events{
+    .fc-event-time{
         display: none;
+    }
+
+    .fc-daygrid-day-events{
+        opacity: 0.95;
     }
 `;
 

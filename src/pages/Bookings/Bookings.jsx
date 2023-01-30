@@ -40,9 +40,6 @@ const Bookings = () => {
                         <FilterButton onClick={() => filterByType(0)}>Checking Out</FilterButton>
                         <FilterButton onClick={() => filterByType(2)}>In Progress</FilterButton>
                     </FilterTable>
-                    <TableButtons>
-                        <Select type="white" options={["Newest"]}></Select>
-                    </TableButtons>
                 </TableTools>
                 <GuestsTable data={bookingList}></GuestsTable>
             </div>

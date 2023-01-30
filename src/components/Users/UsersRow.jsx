@@ -40,18 +40,6 @@ const UsersRow = ({ user }) => {
 
     return (
         <Row>
-            <DataContainer>
-                <CheckboxContainer>
-                    <Checkbox>
-                        <input type="checkbox" />
-                        <label>
-                            <span>
-                            </span>
-                        </label>
-                    </Checkbox>
-                </CheckboxContainer>
-            </DataContainer>
-
             <td>
                 <UserNameContainer>
                     <img src={user.photo} alt="" />
