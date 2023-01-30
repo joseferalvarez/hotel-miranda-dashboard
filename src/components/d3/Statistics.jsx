@@ -2,19 +2,19 @@ import React, { useEffect, useRef, useState } from 'react';
 import { scaleLinear, select, axisBottom, scaleBand, scaleOrdinal } from 'd3';
 import { axisLeft } from 'd3';
 import { axisRight } from 'd3';
-import { FilterTable, FilterButton } from '../Blocks/Blocks';
 import {
     FilterContainer,
     StatsContainer,
     Stat,
     Square
 } from "./StatisticsStyled.jsx"
+import { useSelector } from 'react-redux';
 
-import data from "../../db/bookings.json";
-
-const Statistics = () => {
+const Statistics = ({ stats }) => {
 
     const [graphWidth, setGraphWidth] = useState((window.innerWidth * 30) / 100);
+    const [data, setData] = useState(null);
+    const { bookings } = useSelector((state) => state.bookingsReducer);
 
     const ref = useRef();
 
@@ -27,12 +27,22 @@ const Statistics = () => {
     const width = graphWidth - margin.left - margin.right;
     const height = 400 - margin.top - margin.bottom;
 
-    const days = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
+    const DAYS_WEEK = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
+
+    const days = stats.map((day) => DAYS_WEEK[new Date(day.date).getDay()]);
     const subgroups = ["money", "percentage"];
 
     useEffect(() => {
-        const svgElement = select(ref.current);
+        const stData = stats.map((day) => {
+            return {
+                day: statsDAYS_WEEK[new Date(day.date).getDay()],
+                money: stats.amount / 100,
+                percentage: (stats.count * 100) / bookings.length
+            };
+        });
+        setData(stData);
 
+        const svgElement = select(ref.current);
         setTimeout(() => {
             svgElement.selectAll("*").remove();
             createGraph(svgElement);
@@ -188,34 +198,33 @@ const Statistics = () => {
         return max;
     }
 
-    return (
-        <div>
-            <FilterContainer>
-                <p>Reservation Stats</p>
-                <FilterTable>
-                    <FilterButton>Daily</FilterButton>
-                    <FilterButton>Weekly</FilterButton>
-                    <FilterButton>Monthly</FilterButton>
-                </FilterTable>
-            </FilterContainer>
-            <StatsContainer>
-                <Stat>
-                    <Square color='#135846' />
-                    <p>Sales</p>
-                    <p>${getTotalSales()}</p>
-                </Stat>
-                <Stat>
-                    <Square color='#E23428' />
-                    <p>Occupation</p>
-                    <p>{getOccupancyPercentage()}%</p>
-                </Stat>
-            </StatsContainer>
+    if (stats) {
+        return (
+            <div>
+                <FilterContainer>
+                    <p>Reservation Stats</p>
+                </FilterContainer>
+                <StatsContainer>
+                    <Stat>
+                        <Square color='#135846' />
+                        <p>Sales</p>
+                        <p>${getTotalSales()}</p>
+                    </Stat>
+                    <Stat>
+                        <Square color='#E23428' />
+                        <p>Occupation</p>
+                        <p>{getOccupancyPercentage()}%</p>
+                    </Stat>
+                </StatsContainer>
 
-            {/*TODO: Cambiar el width y height a una sola variable*/}
-            <svg ref={ref} width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
-            </svg>
-        </div>
-    );
+                {/*TODO: Cambiar el width y height a una sola variable*/}
+                <svg ref={ref} width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
+                </svg>
+            </div>
+        );
+    } else {
+        return (<></>);
+    }
 }
 
 export default Statistics;

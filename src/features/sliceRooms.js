@@ -68,19 +68,21 @@ export const sliceRooms = createSlice({
 
         /* Promise builder of getApiRooms (GET all rooms)*/
         builder.addCase(getApiRooms.pending, () => {
-            toast("Looking for rooms...", { toastId: TOAST_ID[0], autoClose: false });
+            toast("Looking for rooms...", { toastId: TOAST_ID[0], autoClose: false, containerId: "GET_ALL_ROOMS" });
         }).addCase(getApiRooms.fulfilled, (state, action) => {
             state.rooms = action.payload;
             toast.update(TOAST_ID[0], {
                 render: "Rooms loaded succesfully",
                 type: toast.TYPE.SUCCESS,
-                autoClose: 1500
+                autoClose: 1500,
+                containerId: "GET_ALL_ROOMS"
             });
         }).addCase(getApiRooms.rejected, () => {
             toast.update(TOAST_ID[0], {
                 render: "Rooms not found",
                 type: toast.TYPE.ERROR,
-                autoClose: 1500
+                autoClose: 1500,
+                containerId: "GET_ALL_ROOMS"
             });
         });
 

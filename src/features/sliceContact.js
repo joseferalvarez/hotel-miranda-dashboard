@@ -61,7 +61,7 @@ export const sliceContact = createSlice({
 
         /* Promise builder of getApiContact (GET all contacts)*/
         builder.addCase(getApiContact.pending, () => {
-            toast("Looking for contacts...", { toastId: TOAST_ID[0], autoClose: false });
+            toast("Looking for contacts...", { toastId: TOAST_ID[0], autoClose: false, containerId: TOAST_ID[0] });
         }).addCase(getApiContact.fulfilled, (state, action) => {
             state.contacts = action.payload;
             toast.update(TOAST_ID[0], {

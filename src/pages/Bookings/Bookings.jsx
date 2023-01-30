@@ -41,7 +41,6 @@ const Bookings = () => {
                         <FilterButton onClick={() => filterByType(2)}>In Progress</FilterButton>
                     </FilterTable>
                     <TableButtons>
-                        <Select type="green" options={["1 November 2020 - 30 November 2020"]}></Select>
                         <Select type="white" options={["Newest"]}></Select>
                     </TableButtons>
                 </TableTools>

@@ -66,13 +66,13 @@ const Rooms = () => {
                     <DndProvider backend={HTML5Backend}>
                         <RoomTable data={roomList}></RoomTable>
                     </DndProvider>
-                    <ToastContainer position='bottom-right' theme='dark' transition={Slide} />
+                    <ToastContainer containerId={"GET_ALL_ROOMS"} enableMultiContainer position='bottom-right' theme='dark' transition={Slide} />
                 </div>
             </RoomsContainer>
         );
     } else {
         return (
-            <ToastContainer position='bottom-right' theme='dark' transition={Slide} />
+            <ToastContainer containerId={"GET_ALL_ROOMS"} enableMultiContainer position='bottom-right' theme='dark' transition={Slide} />
         );
     }
 }

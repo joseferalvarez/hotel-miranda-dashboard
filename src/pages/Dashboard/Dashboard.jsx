@@ -66,6 +66,58 @@ const Dashboard = () => {
         return rooms.reduce((count, room) => room.status === 1 ? count + 1 : count, 0);
     }
 
+    const getWeekDays = () => {
+        const week = [];
+        const DAY = 1000 * 60 * 60 * 24;
+        let time = 0;
+
+        for (let i = 0; i < 7; i++) {
+            let today = new Date(Date.now()).getTime();
+
+            week.push(today - time);
+            time = time + DAY;
+        }
+        return week;
+    }
+
+    const getWeekStats = (week) => {
+        const weekbookings = [];
+        const stats = [];
+
+        bookings.forEach((booking) => {
+            const checkin = new Date(booking.checkin).getTime();
+            const checkout = new Date(booking.checkout).getTime();
+
+            for (let i = 0; i < week.length; i++) {
+                const day = new Date(week[i]).getTime();
+                if (day >= checkin && day <= checkout) {
+                    weekbookings.push({
+                        checkin: checkin,
+                        checkout: checkout,
+                        price: booking.price
+                    });
+                }
+            }
+        });
+
+        for (let i = 0; i < week.length; i++) {
+            let day = {
+                date: week[i],
+                amount: 0,
+                count: 0
+            };
+
+            for (let j = 0; j < weekbookings.length; j++) {
+                if (week[i] >= weekbookings[j].checkin && week[i] <= weekbookings[j].checkout) {
+                    day = { ...day, amount: day.amount + weekbookings[j].price, count: day.count + 1 }
+                }
+            }
+
+            stats.push(day);
+        }
+        return stats.sort((a, b) => a.date - b.date);
+    }
+
     /* Use Effects*/
     useEffect(() => {
         if (bookings.length === 0) {
@@ -119,6 +171,8 @@ const Dashboard = () => {
         text: "Rooms available now"
     });
 
+
+
     return (
         <DashboardContainer>
             <Info>
@@ -133,7 +187,7 @@ const Dashboard = () => {
                     <Calendar></Calendar>
                 </CalendarView>
                 <StatsView>
-                    <Statistics></Statistics>
+                    <Statistics stats={getWeekStats(getWeekDays())}></Statistics>
                 </StatsView>
             </CardsView>
 
