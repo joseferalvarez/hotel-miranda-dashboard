@@ -22,8 +22,8 @@ const Login = () => {
     const dispatch = useDispatch();
     const { user, token } = useSelector((state) => state.loginReducer);
 
-    const [email, setEmail] = useState("josefer@gmail.com");
-    const [pass, setPass] = useState("1234");
+    const [email, setEmail] = useState("joseferalvarezromero@gmail.com");
+    const [pass, setPass] = useState("Tryn7izvTI$29#2Zg#");
 
     const checkLogin = (e) => {
         e.preventDefault();

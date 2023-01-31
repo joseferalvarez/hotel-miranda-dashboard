@@ -62,7 +62,7 @@ const Text = styled.div`
     max-height: 150px;
     overflow: hidden;
     z-index: 2;
-    bottom: 50px;
+    bottom: 30px;
     left: 0;
     color: white;
     font-family: var(--font-poppins);

@@ -14,7 +14,7 @@ import { getTotalSales, getOccupancyPercentage, getMaxSales } from '../../helper
 
 const Statistics = ({ stats }) => {
 
-    const [graphWidth, setGraphWidth] = useState(450);
+    const graphWidth = 450;
     const [data, setData] = useState(null);
     const { bookings } = useSelector((state) => state.bookingsReducer);
 
@@ -42,12 +42,14 @@ const Statistics = ({ stats }) => {
                 percentage: (day.count * 100) / bookings.length
             };
         });
-        const svgElement = select(ref.current);
         setData(stData);
+    }, [stats]);
 
+    useEffect(() => {
+        const svgElement = select(ref.current);
         svgElement.selectAll("*").remove();
         createGraph(svgElement);
-    }, [stats]);
+    }, [data]);
 
     const createGraph = (svgElement) => {
         const scaleDays = scaleBand()
@@ -97,9 +99,8 @@ const Statistics = ({ stats }) => {
             .domain(subgroups)
             .range(["#0e3f32", "#ca271c"]);
 
-        /*TODO: Cambiar el nombre*/
         const div = select("body").append("div")
-            .style("opacity", 0)
+            .style("display", "none")
             .style("background-color", "#FFFFFF")
             .style("padding", "5px")
             .style("border-radius", "8px")
@@ -131,8 +132,6 @@ const Statistics = ({ stats }) => {
                 return (d.item === subgroups[0] ? (height - scaleSales(d.value)) : (height - scaleOccupancy(d.value)))
             })
             .attr("fill", (d) => { return color(d.item) })
-
-            /*TODO: A veces falla el mouseover, buscar por que*/
             .on("mouseover", (e, d) => {
 
                 select(e.srcElement)
@@ -141,7 +140,7 @@ const Statistics = ({ stats }) => {
 
                 div.transition()
                     .duration("100")
-                    .style("opacity", 1)
+                    .style("display", "inline-block")
                 div.html(d.item === subgroups[0]
                     ? "$" + d.value
                     : d.value + "%")
@@ -156,7 +155,7 @@ const Statistics = ({ stats }) => {
 
                 div.transition()
                     .duration("100")
-                    .style("opacity", 0)
+                    .style("display", "none")
             })
     }
 

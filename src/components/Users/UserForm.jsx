@@ -5,6 +5,7 @@ import Button from '../Blocks/Button';
 import { createOneUser, updateOneUser } from '../../actions/actionsUser';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { ToastContainer, toast, Slide } from 'react-toastify';
 
 const FormContainer = styled.div`
     background-color: white;
@@ -80,15 +81,17 @@ const UserForm = ({ user }) => {
     }, []);
 
     const editUser = () => {
-        setUserForm({ ...userForm, date: getActualDate() });
-        updateOneUser(dispatch, user._id, userForm);
-        navigate("/users");
+        if (user._id === "63d9240a6862fdb477837201") {
+            toast.error("You cannot modify the administrator");
+        } else {
+            setUserForm({ ...userForm, date: getActualDate() });
+            updateOneUser(dispatch, user._id, userForm);
+        }
     }
 
     const createUser = () => {
         setUserForm({ ...userForm, date: getActualDate() });
         createOneUser(dispatch, userForm);
-        navigate("/users");
     }
 
     const getActualDate = () => {
@@ -96,34 +99,37 @@ const UserForm = ({ user }) => {
     };
 
     return (
-        <FormContainer>
-            <SelectContainer>
-                <Select value={userForm.status} onChange={(e) => setUserForm({ ...userForm, status: Number(e.target.value) })}>
-                    <option value={1}>Active</option>
-                    <option value={0}>Inactive</option>
-                </Select>
-                <Select value={userForm.position} onChange={(e) => setUserForm({ ...userForm, position: e.target.value })}>
-                    <option value={"Manager"}>Manager</option>
-                    <option value={"Room service"}>Room service</option>
-                    <option value={"Reception"}>Reception</option>
-                </Select>
-            </SelectContainer>
-            <InputContainer>
-                <InputText type="text" placeholder='Full name' value={userForm.name} onChange={(e) => setUserForm({ ...userForm, name: e.target.value })}></InputText>
-                <InputText type="text" placeholder='Email' value={userForm.email} onChange={(e) => setUserForm({ ...userForm, email: e.target.value })}></InputText>
-                <InputText type="text" placeholder='Phone' value={userForm.phone} onChange={(e) => setUserForm({ ...userForm, phone: e.target.value })}></InputText>
-                <InputText type="password" placeholder='Password' value={userForm.pass} onChange={(e) => setUserForm({ ...userForm, pass: e.target.value })}></InputText>
-                <InputTextArea type="text" placeholder='description' value={userForm.description} onChange={(e) => setUserForm({ ...userForm, description: e.target.value })}></InputTextArea>
-            </InputContainer>
-            <div>
-                <input type="file" multiple accept="image/*" onChange={(e) => setFile(e.target.files)} />
-            </div>
-            <div>
-                {user ?
-                    <Button type={"create"} text={"Update user"} click={() => editUser()}></Button> :
-                    <Button type={"create"} text={"Create new user"} click={() => createUser()} enabled></Button>}
-            </div>
-        </FormContainer>
+        <>
+            <FormContainer>
+                <SelectContainer>
+                    <Select value={userForm.status} onChange={(e) => setUserForm({ ...userForm, status: Number(e.target.value) })}>
+                        <option value={1}>Active</option>
+                        <option value={0}>Inactive</option>
+                    </Select>
+                    <Select value={userForm.position} onChange={(e) => setUserForm({ ...userForm, position: e.target.value })}>
+                        <option value={"Manager"}>Manager</option>
+                        <option value={"Room service"}>Room service</option>
+                        <option value={"Reception"}>Reception</option>
+                    </Select>
+                </SelectContainer>
+                <InputContainer>
+                    <InputText type="text" placeholder='Full name' value={userForm.name} onChange={(e) => setUserForm({ ...userForm, name: e.target.value })}></InputText>
+                    <InputText type="text" placeholder='Email' value={userForm.email} onChange={(e) => setUserForm({ ...userForm, email: e.target.value })}></InputText>
+                    <InputText type="text" placeholder='Phone' value={userForm.phone} onChange={(e) => setUserForm({ ...userForm, phone: e.target.value })}></InputText>
+                    <InputText type="password" placeholder='Password' value={userForm.pass} onChange={(e) => setUserForm({ ...userForm, pass: e.target.value })}></InputText>
+                    <InputTextArea type="text" placeholder='description' value={userForm.description} onChange={(e) => setUserForm({ ...userForm, description: e.target.value })}></InputTextArea>
+                </InputContainer>
+                <div>
+                    <input type="file" multiple accept="image/*" onChange={(e) => setFile(e.target.files)} />
+                </div>
+                <div>
+                    {user ?
+                        <Button type={"create"} text={"Update user"} click={() => editUser()}></Button> :
+                        <Button type={"create"} text={"Create new user"} click={() => createUser()} enabled></Button>}
+                </div>
+            </FormContainer>
+            <ToastContainer position='bottom-right' theme='dark' autoClose={1500} transition={Slide} />
+        </>
     );
 }
 

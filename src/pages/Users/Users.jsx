@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import UsersTable from '../../components/Users/UsersTable';
 import { UsersContainer } from './UsersStyled';
 import Button from '../../components/Blocks/Button';
-import Select from '../../components/Blocks/Select';
 
 import {
     FilterTable,
@@ -13,6 +12,7 @@ import {
 } from '../../components/Blocks/Blocks';
 import { useNavigate } from 'react-router';
 import { getAllUsers } from '../../actions/actionsUser';
+import { ToastContainer, Slide } from 'react-toastify';
 
 const Users = () => {
     const dispatch = useDispatch();
@@ -56,6 +56,7 @@ const Users = () => {
                 </TableTools>
                 <UsersTable data={userList}></UsersTable>
             </div>
+            <ToastContainer position='bottom-right' autoClose={1500} theme='dark' transition={Slide} />
         </UsersContainer>
     );
 }

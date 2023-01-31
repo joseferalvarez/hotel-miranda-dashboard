@@ -68,6 +68,7 @@ const UserNameContainer = styled.div`
     display: flex;
     align-items: center;
     gap: 28px;
+    margin-left: 30px;
 
     img{
         border-radius: 8px;

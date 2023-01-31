@@ -91,7 +91,6 @@ const GuestRow = ({ booking }) => {
                     <DropDown>
                         <ul>
                             <li><button onClick={getBookingDetails}>Booking Details</button></li>
-                            <li><button onClick={getBookingEdit}>Edit Booking</button></li>
                             <li><button onClick={eraseBooking}>Delete Booking</button></li>
                         </ul>
                     </DropDown>

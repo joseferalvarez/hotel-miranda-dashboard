@@ -4,6 +4,7 @@ import ContactList from '../../components/Contacts/ContactList';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllContacts } from '../../actions/actionsContact';
 import ContactTable from '../../components/Contacts/ContactTable';
+import { SwiperContainer } from '../Dashboard/DashboardStyled';
 
 const Contact = () => {
 
@@ -23,7 +24,9 @@ const Contact = () => {
 
     return (
         <ContactContainer>
-            <ContactList contacts={filterContacts}></ContactList>
+            <SwiperContainer>
+                <ContactList contacts={filterContacts}></ContactList>
+            </SwiperContainer>
             <div className='content'>
                 <ContactTable contacts={contacts}></ContactTable>
             </div>

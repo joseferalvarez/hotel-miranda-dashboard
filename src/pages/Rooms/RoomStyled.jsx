@@ -7,7 +7,7 @@ const RoomContainer = styled.div`
     border-radius: 12px;
 `;
 const DataContainer = styled.div`
-    width: 40%;
+    width: 100%;
     padding: 3% 5% 3% 5%;
 
     hr{
@@ -92,7 +92,7 @@ const Facilitie = styled.p`
 `;
 
 const PhotoContainer = styled.div`
-    width: 50%;
+    width: 700px;
     img{
         object-fit: cover;
         width: 100%;

@@ -30,7 +30,7 @@ const BookingCard = styled.div`
 `;
 
 const Data = styled.div`
-    width: 50%;
+    width: 100%;
     font-family: var(--font-poppins);
 `;
 
@@ -78,11 +78,6 @@ const DescRoom = styled.div`
 `;
 const FacilitiesRoom = styled.div`
     margin: 7% 0 0 10%;
-
-    p:first-child{
-        font-size: 14px;
-        color: #6E6E6E;
-    }
 `;
 
 const FacilitiesContainer = styled.div`
@@ -100,7 +95,7 @@ const Facilitie = styled.p`
 `;
 
 const Slider = styled.div`
-    width: 50%;
+    width: 700px;
 `;
 
 

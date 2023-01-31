@@ -17,6 +17,7 @@ import {
     DropDown
 } from "./UsersRowStyled.jsx";
 import { deleteOneUser } from '../../actions/actions';
+import { toast } from 'react-toastify';
 
 
 
@@ -27,7 +28,11 @@ const UsersRow = ({ user }) => {
     const dispatch = useDispatch();
 
     const eraseUser = () => {
-        deleteOneUser(dispatch, user._id);
+        if (user._id === "63d9240a6862fdb477837201") {
+            toast.error("You cannot delete the administrator");
+        } else {
+            deleteOneUser(dispatch, user._id);
+        }
     };
 
     const getUserEdit = () => {
