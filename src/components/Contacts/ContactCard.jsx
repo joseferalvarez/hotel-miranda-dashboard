@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { RxCrossCircled, RxCheckCircled } from "react-icons/rx";
 import { useDispatch } from 'react-redux';
@@ -10,6 +10,8 @@ const Contact = styled.div`
     background-color: #FFFFFF;
     border-radius: 20px;
     position: relative;
+    box-shadow: 5px 5px 5px #00000008;
+    margin: 10px;
 
     .button{
         position: absolute;

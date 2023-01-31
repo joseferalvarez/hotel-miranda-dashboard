@@ -59,7 +59,7 @@ export const sliceBookings = createSlice({
 
         /* Promise builder of getApiBookings (GET all bookings)*/
         builder.addCase(getApiBookings.pending, () => {
-            toast("Looking for bookings...", { toastId: TOAST_ID[0], autoClose: false });
+            toast("Looking for bookings...", { toastId: TOAST_ID[0], autoClose: false, containerId: "GET_ALL_BOOKINGS_TOAST" });
         }).addCase(getApiBookings.fulfilled, (state, action) => {
             state.bookings = action.payload;
             toast.update(TOAST_ID[0], {

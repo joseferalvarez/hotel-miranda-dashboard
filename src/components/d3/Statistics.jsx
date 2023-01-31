@@ -9,10 +9,12 @@ import {
     Square
 } from "./StatisticsStyled.jsx"
 import { useSelector } from 'react-redux';
+import { getTotalSales, getOccupancyPercentage, getMaxSales } from '../../helpers/graph.js';
+
 
 const Statistics = ({ stats }) => {
 
-    const [graphWidth, setGraphWidth] = useState((window.innerWidth * 30) / 100);
+    const [graphWidth, setGraphWidth] = useState(450);
     const [data, setData] = useState(null);
     const { bookings } = useSelector((state) => state.bookingsReducer);
 
@@ -20,9 +22,9 @@ const Statistics = ({ stats }) => {
 
     const margin = {
         top: 30,
-        right: 35,
+        right: 40,
         bottom: 30,
-        left: 35
+        left: 40
     };
     const width = graphWidth - margin.left - margin.right;
     const height = 400 - margin.top - margin.bottom;
@@ -40,19 +42,12 @@ const Statistics = ({ stats }) => {
                 percentage: (day.count * 100) / bookings.length
             };
         });
+        const svgElement = select(ref.current);
         setData(stData);
 
-        const svgElement = select(ref.current);
-        setTimeout(() => {
-            svgElement.selectAll("*").remove();
-            createGraph(svgElement);
-        }, 200)
-
-    }, [graphWidth, stats]);
-
-    window.addEventListener("resize", () => {
-        setGraphWidth((window.innerWidth * 30) / 100);
-    })
+        svgElement.selectAll("*").remove();
+        createGraph(svgElement);
+    }, [stats]);
 
     const createGraph = (svgElement) => {
         const scaleDays = scaleBand()
@@ -64,7 +59,7 @@ const Statistics = ({ stats }) => {
             .call(axisBottom(scaleDays));
 
         const scaleSales = scaleLinear()
-            .domain([0, getMaxSales()])
+            .domain([0, getMaxSales(data)])
             .range([height, 0]);
         const axisYLeft = axisLeft(scaleSales);
         axisYLeft.ticks(10)
@@ -165,36 +160,6 @@ const Statistics = ({ stats }) => {
             })
     }
 
-    const getTotalSales = () => {
-        let sales = 0;
-
-        data.forEach((item) => {
-            sales += item.money;
-        });
-        return sales;
-    }
-
-    const getOccupancyPercentage = () => {
-        let occupancy = 0;
-
-        data.forEach((item) => {
-            occupancy += item.percentage
-        })
-
-        occupancy = Math.round(occupancy / data.length);
-        return occupancy;
-    }
-
-    const getMaxSales = () => {
-        let max = 0;
-        data.forEach((item) => {
-            if (item.money > max) {
-                max = item.money;
-            }
-        });
-        return max;
-    }
-
     if (data) {
         return (
             <div>
@@ -205,12 +170,12 @@ const Statistics = ({ stats }) => {
                     <Stat>
                         <Square color='#135846' />
                         <p>Sales</p>
-                        <p>${getTotalSales()}</p>
+                        <p>${getTotalSales(data)}</p>
                     </Stat>
                     <Stat>
                         <Square color='#E23428' />
                         <p>Occupation</p>
-                        <p>{getOccupancyPercentage()}%</p>
+                        <p>{getOccupancyPercentage(data)}%</p>
                     </Stat>
                 </StatsContainer>
                 <svg ref={ref} width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>

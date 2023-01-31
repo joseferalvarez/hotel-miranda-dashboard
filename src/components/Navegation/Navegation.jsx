@@ -81,7 +81,7 @@ const Navegation = () => {
             {userdata ?
                 <UserCard>
                     <LoguedUser user={userdata}></LoguedUser>
-                </UserCard> : <LoaderSpinner></LoaderSpinner>}
+                </UserCard> : <></>}
 
             <NavigationDescription>Hotel Miranda Admin Dashboard</NavigationDescription>
             <NavigationRights>@2022 All Rights Reserved</NavigationRights>
