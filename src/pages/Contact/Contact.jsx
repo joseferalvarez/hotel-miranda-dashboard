@@ -13,7 +13,9 @@ const Contact = () => {
     const [filterContacts, setFilterContacts] = useState(null);
 
     useEffect(() => {
-        getAllContacts(dispatch);
+        if (!contacts.length) {
+            getAllContacts(dispatch);
+        }
     }, []);
 
     useEffect(() => {

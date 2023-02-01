@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { HiOutlinePhone, HiOutlineMail } from "react-icons/hi";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { Checkbox } from '../Blocks/Blocks';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 
@@ -9,7 +8,6 @@ import {
     Row,
     DataContainer,
     DataContainerButton,
-    CheckboxContainer,
     UserNameContainer,
     UserName,
     UserData,

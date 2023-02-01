@@ -5,7 +5,6 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { RoomsContainer } from './RoomsStyled';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Select from '../../components/Blocks/Select';
 import { getAllRooms } from '../../actions/actions';
 
 import {
@@ -16,9 +15,6 @@ import {
 } from '../../components/Blocks/Blocks';
 
 import { ButtonNew } from "../../components/Blocks/LinksStyled";
-import LoaderSpinner from '../../components/Blocks/LoaderSpinner';
-import { ToastContainer, Slide } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
 
 const Rooms = () => {
 
@@ -65,13 +61,12 @@ const Rooms = () => {
                     <DndProvider backend={HTML5Backend}>
                         <RoomTable data={roomList}></RoomTable>
                     </DndProvider>
-                    <ToastContainer containerId={"GET_ALL_ROOMS"} enableMultiContainer position='bottom-right' theme='dark' transition={Slide} />
                 </div>
             </RoomsContainer>
         );
     } else {
         return (
-            <ToastContainer containerId={"GET_ALL_ROOMS"} enableMultiContainer position='bottom-right' theme='dark' transition={Slide} />
+            <></>
         );
     }
 }

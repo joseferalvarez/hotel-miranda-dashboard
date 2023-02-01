@@ -20,6 +20,8 @@ import Booking from './pages/Bookings/Booking';
 import NewBooking from './pages/Bookings/NewBooking';
 import { getUserLocal } from './actions/actionsLogin';
 import EditUser from './pages/Users/EditUser';
+import { ToastContainer, Slide } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -119,6 +121,7 @@ function App() {
 
           </Routes>
         </div>
+        <ToastContainer position='bottom-right' theme='dark' transition={Slide} />
       </AppContainer>
     </HashRouter>
   );

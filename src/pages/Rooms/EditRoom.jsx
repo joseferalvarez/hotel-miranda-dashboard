@@ -4,7 +4,6 @@ import { useParams } from 'react-router';
 import { getOneRoom, resetRoom } from '../../actions/actions';
 import RoomForm from '../../components/Rooms/RoomForm';
 import styled from 'styled-components';
-import LoaderSpinner from '../../components/Blocks/LoaderSpinner';
 
 const FormContainer = styled.div`
     display: flex;
@@ -29,7 +28,7 @@ const EditRoom = () => {
         );
     } else {
         return (
-            <LoaderSpinner></LoaderSpinner>
+            <></>
         );
     }
 }

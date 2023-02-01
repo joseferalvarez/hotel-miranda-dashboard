@@ -8,7 +8,6 @@ import { getAllRooms } from '../../actions/actionsRoom';
 import { getAllContacts } from '../../actions/actionsContact';
 import ContactList from '../../components/Contacts/ContactList';
 import { countNewBookings, countCheckin, countCheckout, countAvailableRooms, getWeekDays, getEvents, getWeekData, getWeekStats } from '../../helpers/helpers';
-import ToastDashboard from '../../components/Toast/ToastDashboard';
 import { DashboardContainer, CardsView, Info, CalendarView, StatsView, SwiperContainer } from "./DashboardStyled";
 
 const Dashboard = () => {
@@ -66,7 +65,6 @@ const Dashboard = () => {
             <SwiperContainer>
                 <ContactList contacts={contacts}></ContactList>
             </SwiperContainer>
-            <ToastDashboard />
         </DashboardContainer>
     );
 }
