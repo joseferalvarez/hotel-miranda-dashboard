@@ -1,10 +1,27 @@
+/** React */
 import React, { useEffect, useState } from 'react';
-import { InputText, InputTextArea } from "../Blocks/InputText";
-import Button from '../Blocks/Button';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
+
+/** Redux */
+import { useDispatch } from 'react-redux';
 import { createOneRoom, updateOneRoom } from '../../actions/actions';
-import { FormContainer, FacilitiesContainer, Facilitie, SelectContainer, InputContainer, Select } from "../../Styles/Rooms/RoomForm";
+
+/** Components */
+import {
+    InputText,
+    InputTextArea
+} from "../Blocks/InputText";
+
+/** Styles */
+import {
+    FormContainer,
+    FacilitiesContainer,
+    Facilitie,
+    SelectContainer,
+    InputContainer,
+} from "../../Styles/Rooms/RoomForm";
+import { Select } from "../../Styles/Common/Select";
+import Button from '../Blocks/Button';
 
 
 
@@ -24,8 +41,6 @@ const RoomForm = ({ room }) => {
         status: 0,
         cancellation: ""
     });
-
-    const [file, setFile] = useState(null);
 
     useEffect(() => {
         if (room) {
@@ -90,6 +105,7 @@ const RoomForm = ({ room }) => {
                 <InputText type="number" placeholder='Room number' value={roomForm.numroom} onChange={(e) => setRoomForm({ ...roomForm, numroom: e.target.value })}></InputText>
                 <InputText type="number" placeholder='Room price' value={roomForm.price} onChange={(e) => setRoomForm({ ...roomForm, price: e.target.value })}></InputText>
                 <InputText type="number" placeholder='Room offer' value={roomForm.offer} onChange={(e) => setRoomForm({ ...roomForm, offer: e.target.value })}></InputText>
+                <InputText type="text" placeholder='Photo URL' value={roomForm.photos} onChange={(e) => setRoomForm({ ...roomForm, photos: [e.target.value] })} />
                 <InputTextArea type="text" placeholder='Cancellation' value={roomForm.cancellation} onChange={(e) => setRoomForm({ ...roomForm, cancellation: e.target.value })}></InputTextArea>
             </InputContainer>
             <FacilitiesContainer>
@@ -99,9 +115,6 @@ const RoomForm = ({ room }) => {
                         <Facilitie key={index} color='#E23428' bcolor={"#FFEDEC"} onClick={(e) => addAmenity(e.currentTarget.textContent)}>{amenity}</Facilitie>
                 ))}
             </FacilitiesContainer>
-            <div>
-                <input type="file" multiple accept="image/*" onChange={(e) => setFile(e.target.files)} />
-            </div>
             <div>
                 {room ?
                     <Button type={"create"} text={"Update room"} click={() => editRoom()}></Button> :

@@ -67,10 +67,10 @@ const RoomRow = ({ room }) => {
                 ))}</RoomText>
             </DataContainer>
             <DataContainer>
-                <RoomPrice>${room.price}<span>/night</span></RoomPrice>
+                <RoomPrice>${(room.price / 100).toFixed(2)}<span>/night</span></RoomPrice>
             </DataContainer>
             <DataContainer>
-                <RoomPrice>${room.offer}<span>/night</span></RoomPrice>
+                <RoomPrice>${(((100 - room.offer) * room.price) / 10000).toFixed(2)}<span>/night</span></RoomPrice>
             </DataContainer>
             <td><RoomStatus status={room.status ? "#5AD07A" : "#E23428"}>{room.status ? "Available" : "Booked"}</RoomStatus></td>
             <DataContainerButton>

@@ -1,8 +1,11 @@
+/** React */
 import React from 'react';
 import RoomRow from './RoomRow';
 
+/** Styles */
 import { Table, HeaderTitle } from '../../Styles/Common/Table';
 
+/** Component */
 const RoomTable = ({ data }) => {
     return (
         <div>

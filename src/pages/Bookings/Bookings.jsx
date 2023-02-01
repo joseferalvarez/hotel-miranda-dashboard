@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import GuestsTable from '../../components/Bookings/GuestsTable';
 import { BookingsContainer } from './BookingsStyled';
-import { FilterTable, FilterButton, TableTools, TableButtons } from '../../components/Blocks/Blocks';
-import Select from '../../components/Blocks/Select';
+import { FilterTable, FilterButton, TableTools } from '../../components/Blocks/Blocks';
 import { useDispatch, useSelector } from 'react-redux';
 import { getApiBookings } from '../../features/sliceBookings';
 

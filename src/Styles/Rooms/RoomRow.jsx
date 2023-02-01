@@ -95,5 +95,5 @@ export {
     DataContainerButton,
     RoomText,
     RoomPrice,
-    RoomStatus,
+    RoomStatus
 }

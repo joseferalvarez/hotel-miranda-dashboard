@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 const FormContainer = styled.div`
     display: flex;
-    height: 100%;
+    margin-top: 50px;
 `;
 
 const EditRoom = () => {
