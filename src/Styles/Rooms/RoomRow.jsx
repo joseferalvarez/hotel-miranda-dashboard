@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 
 const Row = styled.tr`
-    opacity: ${props => props.opacity || 1};
     border-top: 1px solid #D4D4D4;
-
     &:hover{
         box-shadow: 0px 4px 30px #00000014;
     }
@@ -30,11 +28,9 @@ const RoomNameContainer = styled.div`
 const RoomId = styled.p`
     font-size: 14px;
     color: #799283;
-    font-family: var(--font-poppins);
 `;
 
 const RoomNumber = styled.p`
-    font-family: var(--font-poppins);
     font-weight: 500;
     color: #393939;
 `;
@@ -43,7 +39,7 @@ const DataContainer = styled.td`
     vertical-align: bottom;
 `;
 
-const DataContainerButton = styled.div`
+const DataContainerButton = styled.td`
     vertical-align: top;
     padding-right: 30px;
     position: relative;
@@ -63,7 +59,6 @@ const DataContainerButton = styled.div`
 `;
 
 const RoomText = styled.p`
-    font-family: var(--font-poppins);
     padding-left: 30px;
     max-width: 300px;
     font-weight: 500;
@@ -71,7 +66,6 @@ const RoomText = styled.p`
 `;
 
 const RoomPrice = styled.p`
-    font-family: var(--font-poppins);
     padding-left: 30px;
     max-width: 300px;
     font-weight: 600;
@@ -92,34 +86,6 @@ const RoomStatus = styled.p`
     margin-left: 30px;
 `;
 
-const DropDown = styled.div`
-    display: block;
-    position: absolute;
-    background-color: white;
-    top: 90%;
-    left: 0%;
-    z-index: 2;
-    ul{
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        li{
-            text-decoration: none;
-            button{
-                margin: 0;
-                width:100%;
-                padding: 10px 15px;
-                display: block;
-                border: 1px solid #D4D4D4;
-                font-family: var(--font-poppins);
-                &:hover{
-                    background-color: #EBF1EF;
-                }
-            }
-        }
-    }
-`;
-
 export {
     Row,
     RoomNameContainer,
@@ -130,5 +96,4 @@ export {
     RoomText,
     RoomPrice,
     RoomStatus,
-    DropDown
 }
