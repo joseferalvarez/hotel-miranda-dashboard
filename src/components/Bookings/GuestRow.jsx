@@ -60,6 +60,22 @@ const GuestRow = ({ booking }) => {
         }
     }, [booking]);
 
+    /**Format date from database */
+    const formatDate = (date) => {
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+
+        const newDate = new Date(date);
+        const month = monthNames[newDate.getMonth()];
+        const day = newDate.getDay();
+        const year = newDate.getFullYear();
+        const hours = newDate.getHours();
+        const minutes = String(newDate.getMinutes()).length === 2 ? newDate.getMinutes() : `0${newDate.getMinutes()}`;
+
+        return `${month} ${day}th, ${year} | ${hours}:${minutes}`;
+    }
+
     /**HTML */
     return (
         <Row>
@@ -73,13 +89,13 @@ const GuestRow = ({ booking }) => {
                 </GuestContainer>
             </td>
             <DataContainer className='data-container__text'>
-                <p>{booking.order}</p>
+                <p>{formatDate(booking.order)}</p>
             </DataContainer>
             <DataContainer className='data-container__text'>
-                <p>{booking.checkin}</p>
+                <p>{formatDate(booking.checkin)}</p>
             </DataContainer>
             <DataContainer className='data-container__text'>
-                <p>{booking.checkout}</p>
+                <p>{formatDate(booking.checkout)}</p>
             </DataContainer>
             <td><Button type="notes" text="View Notes" enabled={booking.description}></Button></td>
             <DataContainer className='data-container__text'>
