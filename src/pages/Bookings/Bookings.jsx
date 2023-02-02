@@ -1,37 +1,45 @@
+/**React */
 import React, { useEffect, useState } from 'react';
-import GuestsTable from '../../components/Bookings/GuestsTable';
-import { BookingsContainer } from './BookingsStyled';
-import { FilterTable, FilterButton, TableTools } from '../../components/Blocks/Blocks';
+/**Redux */
 import { useDispatch, useSelector } from 'react-redux';
 import { getApiBookings } from '../../features/sliceBookings';
+/**Components */
+import GuestsTable from '../../components/Bookings/GuestsTable';
+/**Styles */
+import { ViewContainer } from '../../Styles/Common/ViewContainer';
+import { FilterTable, FilterButton, TableTools } from '../../Styles/Common/Table';
 
-
-
+/**Component */
 const Bookings = () => {
+    /**States */
     const dispatch = useDispatch();
     const { bookings } = useSelector((state) => state.bookingsReducer);
     const [bookingList, setBookingList] = useState(bookings);
 
+    /**GET the bookings from backend */
     useEffect(() => {
-        if (bookings.length === 0) {
+        if (!bookings.length) {
             dispatch(getApiBookings());
         }
         setBookingList(bookings);
-    }, [bookings, dispatch]);
+    }, []);
 
+    /**Set state with all bookings */
     const getAllBookings = () => {
         setBookingList(bookings);
     }
 
+    /**Filter bookings by status */
     const filterByType = (type) => {
         setBookingList(bookings.filter(
             (booking) => booking.status === type
         ));
     }
 
+    /**HTML */
     return (
-        <BookingsContainer>
-            <div className='content'>
+        <ViewContainer>
+            <div>
                 <TableTools>
                     <FilterTable>
                         <FilterButton onClick={getAllBookings}>All Bookings</FilterButton>
@@ -42,7 +50,7 @@ const Bookings = () => {
                 </TableTools>
                 <GuestsTable data={bookingList}></GuestsTable>
             </div>
-        </BookingsContainer>
+        </ViewContainer>
     );
 }
 

@@ -22,8 +22,37 @@ const TableButtons = styled.div`
     gap: 20px;
 `;
 
+const TableTools = styled.div`
+    display: flex;
+`;
+
+const FilterTable = styled.div`
+    display: flex;
+    width: 60%;
+    margin-bottom: 50px;
+`;
+
+const FilterButton = styled.button`
+    font-family: var(--font-poppins);
+    color: #6E6E6E;
+    font-weight: 500;
+    padding: 12px 30px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #D4D4D4;
+
+    &:focus{
+        color: #135846;
+        border-bottom: 2px solid #135846;
+        outline: none;
+    }
+`;
+
 export {
     Table,
     HeaderTitle,
-    TableButtons
+    TableButtons,
+    TableTools,
+    FilterTable,
+    FilterButton
 }

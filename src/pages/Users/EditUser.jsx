@@ -1,38 +1,45 @@
+/**React */
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
+
+/**Redux */
+import { useDispatch, useSelector } from 'react-redux';
 import { getOneUser, resetUser } from '../../actions/actions';
-import styled from 'styled-components';
-import LoaderSpinner from '../../components/Blocks/LoaderSpinner';
+
+/**Components */
 import UserForm from '../../components/Users/UserForm';
 
-const FormContainer = styled.div`
-    display: flex;
-    margin-top: 50px;
-`;
+/**Styles */
+import { ViewForm } from '../../Styles/Common/ViewContainer';
 
+/**Components */
 const EditUser = () => {
-    const dispatch = useDispatch();
+
+    /**States */
     const { user } = useSelector((state) => state.usersReducer);
+    const dispatch = useDispatch();
     const params = useParams();
 
+    /**GET the user from back */
     useEffect(() => {
-        resetUser(dispatch);
+        if (user) {
+            resetUser(dispatch);
+        }
         getOneUser(dispatch, params.iduser);
     }, []);
 
+    /**HTML */
     if (user) {
         return (
-            <FormContainer>
+            <ViewForm>
                 <UserForm user={user}></UserForm>
-            </FormContainer>
+            </ViewForm>
         );
     } else {
         return (
-            <LoaderSpinner></LoaderSpinner>
+            <></>
         );
     }
-
 }
 
 export default EditUser;

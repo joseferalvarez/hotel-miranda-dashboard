@@ -1,30 +1,32 @@
+/**React */
 import React, { useState } from 'react';
-import { HiOutlinePhone, HiOutlineMail } from "react-icons/hi";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-
+/**Redux */
+import { useDispatch } from 'react-redux';
+import { deleteOneUser } from '../../actions/actions';
+/**Toast */
+import { toast } from 'react-toastify';
+/**Styles */
 import {
-    Row,
     DataContainer,
     DataContainerButton,
     UserNameContainer,
     UserName,
     UserData,
-    UserStatus,
-    DropDown
-} from "./UsersRowStyled.jsx";
-import { deleteOneUser } from '../../actions/actions';
-import { toast } from 'react-toastify';
+    UserStatus
+} from "../../Styles/Users/UserRow";
+import { Row, DropDown } from '../../Styles/Common/Row';
+import { HiOutlinePhone, HiOutlineMail } from "react-icons/hi";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
-
-
+/**Component */
 const UsersRow = ({ user }) => {
-
+    /**States */
     const [showOptions, setShowOptions] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    /**DELETE an user */
     const eraseUser = () => {
         if (user._id === "63d9240a6862fdb477837201") {
             toast.error("You cannot delete the administrator");
@@ -33,14 +35,17 @@ const UsersRow = ({ user }) => {
         }
     };
 
+    /**Navigate to user form */
     const getUserEdit = () => {
         navigate(`/users/edituser/${user._id}`);
     }
 
+    /**Navigate to user form */
     const getUserDetails = () => {
         navigate(`/users/${user._id}`);
     }
 
+    /**HTML */
     return (
         <Row>
             <td>

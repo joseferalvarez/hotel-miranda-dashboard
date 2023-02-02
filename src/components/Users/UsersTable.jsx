@@ -1,11 +1,14 @@
+/**React */
 import React from 'react';
+/**Components */
+import UsersRow from './UsersRow';
+/**Styles */
 import {
     Table,
     HeaderTitle,
-} from '../Blocks/Blocks';
-import UsersRow from './UsersRow';
-import { Checkbox } from '../Blocks/Blocks';
+} from '../../Styles/Common/Table';
 
+/**Component */
 const UsersTable = ({ data }) => {
     return (
         <div>

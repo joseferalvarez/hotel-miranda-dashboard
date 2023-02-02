@@ -11,26 +11,28 @@ import {
     InputText,
     InputTextArea
 } from "../Blocks/InputText";
+import Button from '../Blocks/Button';
 
 /** Styles */
 import {
     FormContainer,
-    FacilitiesContainer,
-    Facilitie,
     SelectContainer,
     InputContainer,
-} from "../../Styles/Rooms/RoomForm";
+} from "../../Styles/Common/Form";
+import {
+    FacilitiesContainer,
+    Facilitie
+} from "../../Styles/Common/Facilities"
 import { Select } from "../../Styles/Common/Select";
-import Button from '../Blocks/Button';
 
-
-
+/** Component */
 const RoomForm = ({ room }) => {
 
     const amenities = ["Air conditioner", "Breakfast", "Cleaning", "Grocery", "Shop near", "High speed WiFi", "Kitchen", "Shower", "Single bed", "Towels"];
+
+    /** States */
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
     const [roomForm, setRoomForm] = useState({
         numroom: "",
         photos: "",
@@ -42,6 +44,7 @@ const RoomForm = ({ room }) => {
         cancellation: ""
     });
 
+    /** If a room was passed by props, is an edit form*/
     useEffect(() => {
         if (room) {
             setRoomForm({
@@ -57,16 +60,19 @@ const RoomForm = ({ room }) => {
         };
     }, []);
 
+    /** Create the room */
     const createRoom = () => {
         createOneRoom(dispatch, roomForm);
         navigate("/rooms");
     }
 
+    /** Edit the room passed by props*/
     const editRoom = () => {
         updateOneRoom(dispatch, room._id, roomForm);
         navigate("/rooms");
     }
 
+    /** Return true if an amenity exist in the room */
     const getAmenitie = (amenity) => {
         let exist = false;
         roomForm.amenities.forEach((item) => {
@@ -78,15 +84,18 @@ const RoomForm = ({ room }) => {
         return exist;
     }
 
+    /** Add a new amenity*/
     const addAmenity = (amenity) => {
         setRoomForm({ ...roomForm, amenities: [...roomForm.amenities, amenity] });
     }
 
+    /** Delete a exixting amenity */
     const deleteAmenity = (amenity) => {
         let amenities = roomForm.amenities.filter((item) => item !== amenity);
         setRoomForm({ ...roomForm, amenities: amenities });
     }
 
+    /** HTML */
     return (
         <FormContainer>
             <SelectContainer>

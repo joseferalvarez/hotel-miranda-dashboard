@@ -53,6 +53,14 @@ const initialState = {
 export const sliceBookings = createSlice({
     name: "bookings",
     initialState,
+    reducers: {
+        /* Delete the state of a single booking */
+        resetBookingState: (state, action) => {
+            if (state.booking) {
+                state.booking = null;
+            }
+        }
+    },
     extraReducers: (builder) => {
 
         const TOAST_ID = ["GET_ALL_BOOKINGS", "POST_ONE_BOOKING", "DELETE_ONE_BOOKING", "PUT_ONE_BOOKING", "GET_ONE_BOOKING"];
@@ -157,4 +165,7 @@ export const sliceBookings = createSlice({
     }
 });
 
+export const {
+    resetBookingState
+} = sliceBookings.actions;
 export default sliceBookings.reducer;

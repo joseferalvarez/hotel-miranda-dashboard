@@ -1,114 +1,46 @@
+/**React */
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { getOneBooking } from '../../actions/actionsBooking';
-import LoaderSpinner from "../../components/Blocks/LoaderSpinner";
-import styled from 'styled-components';
-
+/**Redux */
+import { useDispatch, useSelector } from 'react-redux';
+import { getOneBooking, resetBooking } from '../../actions/actionsBooking';
+/**Components */
+import PhotoSlider from '../../components/Blocks/PhotoSlider';
+/**Styles */
+import {
+    BookingContainer,
+    BookingCard,
+    Data,
+    User,
+    DateCheck,
+    InfoRoom,
+    DescRoom,
+    FacilitiesRoom,
+    Slider
+} from "../../Styles/Bookings/BookingCard"
+import {
+    FacilitiesContainer,
+    Facilitie
+} from "../../Styles/Common/Facilities"
 import "swiper/css";
 import 'swiper/css/navigation';
-import PhotoSlider from '../../components/Blocks/PhotoSlider';
 
-const BookingContainer = styled.div`
-    padding: 2% 5%;
-    display: flex;
-    justify-content: center;
-`;
-
-const BookingCard = styled.div`
-    background-color: white;
-    border-radius: 20px;
-    display: flex;
-    width: 100%;
-
-    hr{
-        background-color: #EBEBEB;
-        border: none;
-        height: 2px;
-        margin: 5% 10%;
-    }
-`;
-
-const Data = styled.div`
-    width: 100%;
-    font-family: var(--font-poppins);
-`;
-
-const User = styled.div`
-    margin-left: 10%;
-    p:first-child{
-        font-size: 30px;
-        font-weight: 600;
-    }
-    p:nth-child(2n){
-        font-size: 14px;
-        color: #799283;
-    }
-`;
-
-const DateCheck = styled.div`
-    margin-left: 10%;
-    display: flex;
-    gap: 10%;
-
-    p:first-child{
-        font-size: 14px;
-        color: #6E6E6E;
-    }
-`;
-
-const InfoRoom = styled.div`
-    margin-left: 10%;
-    display: flex;
-    gap: 10%;
-
-    p:first-child, span{
-        font-size: 14px;
-        color: #6E6E6E;
-    }
-
-    p:last-child{
-        font-size: 20px;
-    }
-`;
-
-const DescRoom = styled.div`
-    margin-left: 10%;
-    font-size: 14px;
-`;
-const FacilitiesRoom = styled.div`
-    margin: 7% 0 0 10%;
-`;
-
-const FacilitiesContainer = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-`;
-
-const Facilitie = styled.p`
-    font-family: var(--font-poppins);
-    color: #135846;
-    background-color: #EBF1EF;
-    padding: 14px 40px;
-    border-radius: 12px;
-`;
-
-const Slider = styled.div`
-    width: 700px;
-`;
-
-
+/**Component */
 const Booking = () => {
-
+    /**States */
     const { booking } = useSelector((state) => state.bookingsReducer);
     const dispatch = useDispatch();
     const params = useParams();
 
+    /**GET the booking from the backend */
     useEffect(() => {
+        if (booking) {
+            resetBooking(dispatch);
+        }
         getOneBooking(dispatch, params.idbooking);
     }, []);
 
+    /**Format date from database */
     const formatDate = (date) => {
         const monthNames = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
@@ -124,6 +56,7 @@ const Booking = () => {
         return `${month} ${day}th, ${year} | ${hours}:${minutes}`;
     }
 
+    /**HTML */
     if (booking) {
         return (
             <BookingContainer>
@@ -174,7 +107,7 @@ const Booking = () => {
         );
     } else {
         return (
-            <LoaderSpinner></LoaderSpinner>
+            <></>
         );
     }
 }

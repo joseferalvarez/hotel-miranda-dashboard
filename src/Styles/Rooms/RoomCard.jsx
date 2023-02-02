@@ -77,20 +77,6 @@ const RoomType = styled.p`
     font-weight: 500;
 `;
 
-const FacilitiesContainer = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-`;
-
-const Facilitie = styled.p`
-    font-family: var(--font-poppins);
-    color: #135846;
-    background-color: #EBF1EF;
-    padding: 14px 40px;
-    border-radius: 12px;
-`;
-
 const PhotoContainer = styled.div`
     width: 700px;
     img{
@@ -112,7 +98,5 @@ export {
     RoomId,
     RoomState,
     RoomType,
-    FacilitiesContainer,
-    Facilitie,
     PhotoContainer
 }

@@ -17,7 +17,6 @@ import Navegation from './components/Navegation/Navegation';
 import Topbar from './components/Topbar/Topbar';
 import EditRoom from './pages/Rooms/EditRoom';
 import Booking from './pages/Bookings/Booking';
-import NewBooking from './pages/Bookings/NewBooking';
 import { getUserLocal } from './actions/actionsLogin';
 import EditUser from './pages/Users/EditUser';
 import { ToastContainer, Slide } from 'react-toastify';
@@ -52,12 +51,6 @@ function App() {
                 <Bookings />
               </AuthProvider>
             } />
-
-            <Route path='/bookings/newbooking' element={
-              <AuthProvider>
-                <NewBooking />
-              </AuthProvider>}
-            />
 
             <Route path='/bookings/:idbooking' action={({ params }) => { }} element={
               <AuthProvider>

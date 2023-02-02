@@ -1,48 +1,61 @@
+/**React */
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+/**Redux */
 import { useDispatch, useSelector } from 'react-redux';
+import { getAllUsers } from '../../actions/actionsUser';
+
+/**Components */
 import UsersTable from '../../components/Users/UsersTable';
-import { UsersContainer } from './UsersStyled';
 import Button from '../../components/Blocks/Button';
 
+/**Styles */
 import {
     FilterTable,
     FilterButton,
     TableButtons,
     TableTools
-} from '../../components/Blocks/Blocks';
-import { useNavigate } from 'react-router';
-import { getAllUsers } from '../../actions/actionsUser';
-import { ToastContainer, Slide } from 'react-toastify';
+} from '../../Styles/Common/Table';
+import { ViewContainer } from '../../Styles/Common/ViewContainer';
 
+/**Component */
 const Users = () => {
-    const dispatch = useDispatch();
+    /**States */
     const { users } = useSelector((state) => state.usersReducer);
     const [userList, setUserList] = useState(users);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (users.length === 0) {
+        if (!users.length) {
             getAllUsers(dispatch);
         }
-        setUserList(users);
-    }, [users, dispatch]);
+    }, []);
 
+    /**Set the state with all users */
+    useEffect(() => {
+        setUserList(users);
+    }, [users]);
+
+    /**Get all the users from state */
     const showAllUsers = () => {
         setUserList(users);
     }
 
+    /**Filter the users by status */
     const filterByUsers = (type) => {
         setUserList(users.filter(
             (user) => user.status === type
         ))
     }
 
+    /**Navigate to new user form */
     const pageNewUser = () => {
         navigate("/users/newuser");
     }
 
     return (
-        <UsersContainer>
+        <ViewContainer>
             <div className='content'>
                 <TableTools>
                     <FilterTable>
@@ -56,8 +69,7 @@ const Users = () => {
                 </TableTools>
                 <UsersTable data={userList}></UsersTable>
             </div>
-            <ToastContainer position='bottom-right' autoClose={1500} theme='dark' transition={Slide} />
-        </UsersContainer>
+        </ViewContainer>
     );
 }
 

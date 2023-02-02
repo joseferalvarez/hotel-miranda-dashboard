@@ -1,51 +1,59 @@
+/** React */
 import React, { useEffect, useState } from 'react';
-import RoomTable from '../../components/Rooms/RoomTable';
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import { RoomsContainer } from './RoomsStyled';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+/** Redux */
+import { useDispatch, useSelector } from 'react-redux';
 import { getAllRooms } from '../../actions/actions';
+/** Components */
+import RoomTable from '../../components/Rooms/RoomTable';
 
+/** Styles */
 import {
     TableTools,
     FilterTable,
     FilterButton,
     TableButtons
-} from '../../components/Blocks/Blocks';
+} from '../../Styles/Common/Table';
+import { ButtonNew } from "../../Styles/Common/Button";
+import { ViewContainer } from '../../Styles/Common/ViewContainer';
 
-import { ButtonNew } from "../../components/Blocks/LinksStyled";
-
+/** Component */
 const Rooms = () => {
 
+    /** States */
     const dispatch = useDispatch();
     const { rooms } = useSelector((state) => state.roomsReducer);
     const [roomList, setRoomList] = useState(rooms);
 
+    /** If rooms state is not fetched, GET all the rooms */
     useEffect(() => {
-        if (rooms.length === 0) {
+        if (!rooms.length) {
             getAllRooms(dispatch);
         }
     }, []);
 
+    /** When rooms state change, set rooms list with it*/
     useEffect(() => {
         setRoomList(rooms);
     }, [rooms]);
 
+    /** Show all rooms in list*/
     const showAllRooms = () => {
         setRoomList(rooms);
     }
 
+    /** Filter rooms by its status */
     const filterByType = (type) => {
         setRoomList(rooms.filter(
             (room) => room.status === type
         ));
     };
 
+    /** HTML*/
     if (roomList) {
         return (
-            <RoomsContainer>
-                <div className='content'>
+            <ViewContainer>
+                <div>
                     <TableTools>
                         <FilterTable>
                             <FilterButton onClick={showAllRooms}>All Rooms</FilterButton>
@@ -58,11 +66,9 @@ const Rooms = () => {
                             </ButtonNew>
                         </TableButtons>
                     </TableTools>
-                    <DndProvider backend={HTML5Backend}>
-                        <RoomTable data={roomList}></RoomTable>
-                    </DndProvider>
+                    <RoomTable data={roomList}></RoomTable>
                 </div>
-            </RoomsContainer>
+            </ViewContainer>
         );
     } else {
         return (

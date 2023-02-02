@@ -42,7 +42,7 @@ const SwiperContainer = styled.div`
     margin: auto;
     display: flex;
     margin-top: 50px;
-    width: 1400px;
+    width: 1300px;
     overflow: hidden;
     padding: 30px;
     border-radius: 20px;

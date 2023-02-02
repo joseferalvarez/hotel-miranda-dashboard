@@ -3,7 +3,8 @@ import {
     deleteBooking,
     editBooking,
     getApiBookings,
-    getBooking
+    getBooking,
+    resetBookingState
 } from "../features/sliceBookings";
 
 function getAllBookings(dispatch) {
@@ -42,10 +43,15 @@ function deleteOneBooking(dispatch, id) {
     dispatch(deleteBooking(data));
 }
 
+function resetBooking(dispatch) {
+    dispatch(resetBookingState());
+}
+
 export {
     getAllBookings,
     getOneBooking,
     createOneBooking,
     updateOneBooking,
-    deleteOneBooking
+    deleteOneBooking,
+    resetBooking
 }

@@ -1,17 +1,18 @@
+/** React */
 import React from 'react';
+
+/**Components */
 import RoomForm from '../../components/Rooms/RoomForm';
-import styled from 'styled-components';
 
-const FormContainer = styled.div`
-    display: flex;
-    height: 100%;
-`;
+/**Styles */
+import { ViewForm } from '../../Styles/Common/ViewContainer';
 
+/**Component */
 const NewRoom = () => {
     return (
-        <FormContainer>
+        <ViewForm>
             <RoomForm></RoomForm>
-        </FormContainer>
+        </ViewForm>
     );
 }
 

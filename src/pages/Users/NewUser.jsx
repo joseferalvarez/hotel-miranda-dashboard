@@ -1,17 +1,16 @@
+/**React */
 import React from 'react';
+/**Components */
 import UserForm from '../../components/Users/UserForm';
-import styled from 'styled-components';
+/**Styles */
+import { ViewForm } from '../../Styles/Common/ViewContainer';
 
-const FormContainer = styled.div`
-    display: flex;
-    margin-top: 50px;
-`;
-
+/**Components */
 const NewUser = () => {
     return (
-        <FormContainer>
+        <ViewForm>
             <UserForm></UserForm>
-        </FormContainer>
+        </ViewForm>
     );
 }
 

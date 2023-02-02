@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { HeaderTitle, Table } from '../Blocks/Blocks';
+/**React */
+import React from 'react';
+/**Components */
 import ContactRow from './ContactRow';
+/**Styles */
+import {
+    HeaderTitle,
+    Table
+} from '../../Styles/Common/Table';
 
+/**Components */
 const ContactTable = ({ contacts }) => {
-
-    const [contactList, setContactList] = useState(contacts);
-
-    useEffect(() => {
-        setContactList(contacts);
-    }, [contacts]);
-
     return (
         <div>
             <Table>
@@ -23,7 +23,7 @@ const ContactTable = ({ contacts }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {contactList.map((item, index) => (
+                    {contacts.map((item, index) => (
                         <ContactRow key={index} contact={item}></ContactRow>
                     ))}
                 </tbody>
