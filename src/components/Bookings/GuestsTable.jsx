@@ -1,8 +1,11 @@
+/**React */
 import React from 'react';
-import { Table, HeaderTitle } from '../Blocks/Blocks';
+/**Component */
 import GuestRow from './GuestRow';
-import { Checkbox } from '../Blocks/Blocks';
+/**Styles */
+import { Table, HeaderTitle } from '../../Styles/Common/Table';
 
+/**Component */
 const GuestsTable = ({ data }) => {
     return (
         <Table>

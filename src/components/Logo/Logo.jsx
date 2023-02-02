@@ -1,11 +1,13 @@
+/**React */
 import React from 'react';
+/**Component */
+import WordMark from './WordMark';
+/**Styles */
 import {
     LogoStyled,
     LogoIcon,
     LogoLetter
-} from './LogoStyled';
-
-import WordMark from './WordMark';
+} from '../../Styles/Logo/Logo';
 
 const Logo = () => {
     return (

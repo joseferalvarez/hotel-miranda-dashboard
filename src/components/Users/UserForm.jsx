@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 /**Redux */
-import { createOneUser, resetUser, updateOneUser } from '../../actions/actionsUser';
+import { createOneUser, updateOneUser } from '../../actions/actionsUser';
 import { useDispatch } from 'react-redux';
 /**Components */
-import { InputText, InputTextArea } from "../Blocks/InputText";
+import { InputText, InputTextArea } from "../../Styles/Common/InputText";
 import Button from '../Blocks/Button';
 /**Toast */
 import { toast } from 'react-toastify';

@@ -1,19 +1,34 @@
-import React, { useEffect, useRef, useState } from 'react';
+/**React */
+import React,
+{
+    useEffect,
+    useRef,
+    useState
+} from 'react';
+/**Redux */
+import { useSelector } from 'react-redux';
+/**D3 */
 import { scaleLinear, select, axisBottom, scaleBand, scaleOrdinal } from 'd3';
 import { axisLeft } from 'd3';
 import { axisRight } from 'd3';
+/**Styles */
 import {
     FilterContainer,
     StatsContainer,
     Stat,
     Square
-} from "./StatisticsStyled.jsx"
-import { useSelector } from 'react-redux';
-import { getTotalSales, getOccupancyPercentage, getMaxSales } from '../../helpers/graph.js';
+} from "../../Styles/Dashboard/d3";
+/**Helpers */
+import {
+    getTotalSales,
+    getOccupancyPercentage,
+    getMaxSales
+} from '../../helpers/graph.js';
 
-
+/**Component */
 const Statistics = ({ stats }) => {
 
+    /**Stats */
     const graphWidth = 450;
     const [data, setData] = useState(null);
     const { bookings } = useSelector((state) => state.bookingsReducer);
@@ -34,6 +49,7 @@ const Statistics = ({ stats }) => {
     const days = stats.map((day) => DAYS_WEEK[new Date(day.date).getDay()]);
     const subgroups = ["money", "percentage"];
 
+    /**Reload the graph when stats change */
     useEffect(() => {
         const stData = stats.map((day) => {
             return {
@@ -159,6 +175,7 @@ const Statistics = ({ stats }) => {
             })
     }
 
+    /**HTML */
     if (data) {
         return (
             <div>

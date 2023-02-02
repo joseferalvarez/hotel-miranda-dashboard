@@ -1,15 +1,5 @@
 import styled, { css } from 'styled-components';
 
-const Row = styled.tr`
-    border-bottom: 1px solid #D4D4D4;
-    border-top: 1px solid #D4D4D4;
-    transition: box-shadow 0.2s;
-
-    &:hover{
-        box-shadow: 0px 4px 30px #00000014;
-    }
-`;
-
 const GuestContainer = styled.div`
     display: flex;
     align-items: center;
@@ -22,10 +12,6 @@ const GuestContainer = styled.div`
         height: 45px;
         object-fit: cover;
     }
-`;
-
-const CheckboxContainer = styled.div`
-    padding-left: 30px;
 `;
 
 const GuestName = styled.p`
@@ -72,10 +58,6 @@ const DataContainerButton = styled.div`
     }
 `;
 
-const DataContainerCheckbox = styled.td`
-    vertical-align: middle;
-`;
-
 const Status = styled.p`
 
     ${(props) => {
@@ -109,43 +91,11 @@ const Status = styled.p`
     margin-left: 30px;
 `;
 
-const DropDown = styled.div`
-    display: block;
-    position: absolute;
-    background-color: white;
-    top: 90%;
-    left: 0%;
-    z-index: 2;
-    ul{
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        li{
-            text-decoration: none;
-            button{
-                margin: 0;
-                width:100%;
-                padding: 10px 15px;
-                display: block;
-                border: 1px solid #D4D4D4;
-                font-family: var(--font-poppins);
-                &:hover{
-                    background-color: #EBF1EF;
-                }
-            }
-        }
-    }
-`;
-
 export {
-    Row,
     GuestContainer,
-    CheckboxContainer,
     GuestName,
     GuestId,
     DataContainer,
     DataContainerButton,
-    DataContainerCheckbox,
-    Status,
-    DropDown
+    Status
 };

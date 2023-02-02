@@ -1,39 +1,50 @@
+/**React */
 import React, { useState, useEffect } from 'react';
-import { AiOutlineMail } from "react-icons/ai";
 import { useLocation, useNavigate } from 'react-router';
-import { FiLogOut } from "react-icons/fi";
-
+/**Redux */
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../actions/actionsLogin';
+import { getAllContacts } from '../../actions/actionsContact';
+/**Styles */
 import {
     TopbarContainer,
     TopbarTitle,
     IconContainer,
     Icon
-} from "./TopbarStyled";
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../actions/actionsLogin';
-import { getAllContacts } from '../../actions/actionsContact';
+} from "../../Styles/Navegation/Topbar";
+import { AiOutlineMail } from "react-icons/ai";
+import { FiLogOut } from "react-icons/fi";
 
+/**Component */
 const Topbar = () => {
-    let location = useLocation();
+
+    /**States */
+    const { contacts } = useSelector((state) => state.contactReducer)
     const [title, setTitle] = useState("");
+    const [messages, setMessages] = useState(0);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { contacts } = useSelector((state) => state.contactReducer)
-    const [messages, setMessages] = useState(0);
+    let location = useLocation();
 
+    /**Logout*/
     const doLogout = () => {
         logout(dispatch);
         navigate("/");
     }
 
+    /**GET all the contacts */
     useEffect(() => {
-        getAllContacts(dispatch);
+        if (!contacts) {
+            getAllContacts(dispatch);
+        }
     }, []);
 
+    /**Count the unarchived contacts */
     useEffect(() => {
         setMessages(contacts.reduce((count, contact) => contact.archived ? count + 1 : count + 0, 0));
     }, [contacts]);
 
+    /**Get the name of the route */
     useEffect(() => {
         switch (location.pathname) {
             case "/":
@@ -56,10 +67,12 @@ const Topbar = () => {
         }
     }, [location]);
 
+    /**Navigate to contacts view */
     const navigateContacts = () => {
         navigate("/contact");
     };
 
+    /**HTML */
     return (
         <TopbarContainer>
             <TopbarTitle>

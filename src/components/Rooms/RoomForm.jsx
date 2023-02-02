@@ -10,7 +10,7 @@ import { createOneRoom, updateOneRoom } from '../../actions/actions';
 import {
     InputText,
     InputTextArea
-} from "../Blocks/InputText";
+} from "../../Styles/Common/InputText";
 import Button from '../Blocks/Button';
 
 /** Styles */

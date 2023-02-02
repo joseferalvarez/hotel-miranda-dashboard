@@ -1,31 +1,17 @@
+/**React */
 import React from 'react';
 import { Link } from "react-router-dom";
-
+/**Styles */
 import {
     Card,
     UserName,
     UserEmail
-} from './LoguedUserStyled';
-import styled from 'styled-components';
+} from '../../Styles/Navegation/LoguedUser';
+import {
+    LinkButton
+} from '../../Styles/Common/Button';
 
-const LinkButton = styled.div`
-    background-color: #EBF1EF;
-    border: none;
-    border-radius: 8px;
-    width: 160px;
-    height: 50px;
-    a{
-        text-align: center;
-        font-family: var(--font-poppins);
-        text-decoration: none;
-        color: #135846;
-        font-size: 14px;
-        font-weight: 600;
-        display: block;
-        padding: 15px;
-    }
-`;
-
+/**Component */
 const LoguedUser = ({ user }) => {
     return (
         <Card>
@@ -38,6 +24,5 @@ const LoguedUser = ({ user }) => {
         </Card>
     );
 }
-
 
 export default LoguedUser;

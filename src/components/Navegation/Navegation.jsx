@@ -1,8 +1,13 @@
+/**React */
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+/**Redux */
+import { useDispatch, useSelector } from 'react-redux';
+import { getActualUser } from '../../actions/actions';
+/**Components */
 import LoguedUser from './LoguedUser';
 import Logo from '../Logo/Logo';
-
+/**Styles */
 import {
     NavContainer,
     LogoContainer,
@@ -13,35 +18,41 @@ import {
     NavigationRights,
     NavigationAuthor,
     Link
-} from "./NavegationStyled"
-
+} from "../../Styles/Navegation/Navegation";
 import { BiKey } from "react-icons/bi";
 import { BsCalendarCheck } from "react-icons/bs";
-import { FaUserFriends, FaArrowsAltH } from "react-icons/fa";
-import { AiFillHome, AiFillContacts, AiFillHeart } from "react-icons/ai";
-import { useDispatch, useSelector } from 'react-redux';
-import { getActualUser } from '../../actions/actions';
-import LoaderSpinner from '../Blocks/LoaderSpinner';
+import {
+    FaUserFriends,
+    FaArrowsAltH
+} from "react-icons/fa";
+import {
+    AiFillHome,
+    AiFillContacts,
+    AiFillHeart
+} from "react-icons/ai";
 
-
-
+/**Components */
 const Navegation = () => {
-
+    /**States */
     const { userdata } = useSelector((state) => state.loginReducer);
+    const [display, setDisplay] = useState(0);
     const dispatch = useDispatch();
     const localUser = JSON.parse(localStorage.getItem("auth"));
-
-    const [display, setDisplay] = useState(0);
     const location = useLocation();
 
+    /**GET the actual user data */
     useEffect(() => {
-        getActualUser(dispatch, localUser.user._id);
+        if (!userdata) {
+            getActualUser(dispatch, localUser.user._id);
+        }
     }, []);
 
+    /**Show menu */
     const displayMenu = () => {
         setDisplay(!display)
     }
 
+    /**HTML */
     return (
         <NavContainer display={display ? "500px" : "0px"}>
             <ArrowButton onClick={displayMenu}><FaArrowsAltH className='arrow' /></ArrowButton>

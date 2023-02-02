@@ -21,8 +21,12 @@ const Bookings = () => {
         if (!bookings.length) {
             dispatch(getApiBookings());
         }
-        setBookingList(bookings);
     }, []);
+
+    /**Set bookings state when bookings redux change */
+    useEffect(() => {
+        setBookingList(bookings);
+    }, [bookings]);
 
     /**Set state with all bookings */
     const getAllBookings = () => {

@@ -1,8 +1,12 @@
-import FullCalendar from '@fullcalendar/react';
+/**React */
 import React from 'react';
+/**Components */
+import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import { CalendarContainer } from "./CalendarStyled"
+/**Styles */
+import { CalendarContainer } from "../../Styles/Dashboard/Calendar"
 
+/**Component */
 const Calendar = ({ events }) => {
     return (
         <CalendarContainer>

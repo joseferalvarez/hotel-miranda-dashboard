@@ -1,46 +1,48 @@
+/**React */
 import React, { useState, useEffect } from 'react';
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { Checkbox } from '../Blocks/Blocks';
 import { useNavigate } from 'react-router';
+/**Redux */
 import { useDispatch } from 'react-redux';
-import { deleteBooking } from "../../features/sliceBookings.js";
-
+import { deleteOneBooking } from '../../actions/actionsBooking';
+/**Component */
 import Button from "../Blocks/Button";
-
+/**Styles */
 import {
-    Row,
-    DataContainer,
-    CheckboxContainer,
-    DataContainerButton,
-    DataContainerCheckbox,
     GuestContainer,
     GuestName,
     GuestId,
-    Status,
+    DataContainer,
+    DataContainerButton,
+    Status
+} from "../../Styles/Bookings/BookingRow";
+import {
+    Row,
     DropDown
-} from "./GuestRowStyled";
+} from "../../Styles/Common/Row.jsx";
+import {
+    BsThreeDotsVertical
+} from "react-icons/bs";
 
+/**Component */
 const GuestRow = ({ booking }) => {
 
+    /**States */
     const [showOptions, setShowOptions] = useState(false);
+    const [status, setStatus] = useState(0);
     const navigate = useNavigate();
-
     const dispatch = useDispatch();
 
+    /**DELETE the booking */
     const eraseBooking = () => {
-        dispatch(deleteBooking(booking._id));
+        deleteOneBooking(dispatch, booking._id)
     }
 
-    const getBookingEdit = () => {
-        navigate("/bookings/editbooking/" + booking._id);
-    }
-
+    /**Navigate to details booking view */
     const getBookingDetails = () => {
         navigate("/bookings/" + booking._id);
     }
 
-    const [status, setStatus] = useState(0);
-
+    /**Status style changer */
     useEffect(() => {
         switch (booking.status) {
             case 0:
@@ -56,8 +58,9 @@ const GuestRow = ({ booking }) => {
                 setStatus("CHECK OUT");
                 break;
         }
-    }, []);
+    }, [booking]);
 
+    /**HTML */
     return (
         <Row>
             <td>

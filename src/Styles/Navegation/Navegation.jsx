@@ -80,7 +80,7 @@ const Link = styled.li`
         } else {
             return "#FFFFFF";
         }
-    }};;
+    }};
         border-radius: 0 8px 8px 0;
     }
 

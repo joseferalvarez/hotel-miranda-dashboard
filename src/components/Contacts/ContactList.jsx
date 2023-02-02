@@ -1,8 +1,12 @@
+/**React */
 import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
+/**Components */
 import ContactCard from './ContactCard';
+import { Swiper, SwiperSlide } from 'swiper/react';
+/**Styles */
+import 'swiper/css';
 
+/**Component */
 const ContactList = ({ contacts }) => {
     if (contacts) {
         return (
