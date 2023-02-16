@@ -1,5 +1,7 @@
 {
   "version": "0.1.0",
+  "homepage": "https://kind-ground-061bb3003.2.azurestaticapps.net",
+  "name": "hotel-miranda-front",
   "private": true,
   "dependencies": {
     "@fullcalendar/daygrid": "^5.11.3",
